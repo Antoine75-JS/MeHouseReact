@@ -1,0 +1,40 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "title": "Home",
+      "picto": "public/icons/home.svg",
+      "url": "/home"
+    },
+    {
+      "id": 2,
+      "title": "Courses",
+      "picto": "public/icons/shopping-cart.svg",
+      "url": "/shopping"
+    },
+    {
+      "id": 3,
+      "title": "Animaux",
+      "picto": "public/icons/gitlab.svg",
+      "url": "/animals"
+    },
+    {
+      "id": 4,
+      "title": "Factures",
+      "picto": "public/icons/dollar-sign.svg",
+      "url": "/bills"
+    },
+    {
+      "id": 5,
+      "title": "Plants",
+      "picto": "public/icons/cloud-rain.svg",
+      "url": "/plants"
+    },
+    {
+      "id": 6,
+      "title": "Events",
+      "picto": "public/icons/music.svg",
+      "url": "/events"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+.categories {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 1rem;
+  gap: 1rem;
+
+  &-category {
+    border-radius: .5rem;
+    display: flex;
+    align-content: center;
+    padding: 1rem;
+
+    &--title {
+      color: white;
+      margin-left: 1rem;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+  }
+
+  &-home {
+    background: lightblue;
+  }
+  &-shopping {
+    background: khaki;
+  }
+  &-animals {
+    background: lightsalmon;
+  }
+  &-bills {
+    background: pink;
+  }
+  &-plants {
+    background: palegreen;
+  }
+  &-events {
+    background: tan;
+  }
+}

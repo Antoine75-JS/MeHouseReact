@@ -1,0 +1,17 @@
+.header {
+  display: flex;
+  // position: fixed;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1rem;
+  background: darkorchid;
+  margin-bottom: 1rem;
+
+  &-title {
+    font-weight: bold;
+    letter-spacing: .2rem;
+    color: white;
+    text-transform: uppercase;
+    text-align: center;
+  }
+}
