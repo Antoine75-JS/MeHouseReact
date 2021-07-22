@@ -2,22 +2,40 @@
 import React from 'react';
 import { Switch, Route } from 'react-router';
 
-// == Import
+// == Import Components
+import Header from 'src/components/Header';
+
 import Homepage from 'src/components/HomePage';
+import CatHouse from 'src/components/CatHouse';
+import CatAnimals from 'src/components/CatAnimals';
+
+/* Create pictograms library */
+import { library } from '@fortawesome/fontawesome-svg-core';
+import {
+  faCat,
+  faDog,
+  faFish,
+  faPaw
+} from '@fortawesome/free-solid-svg-icons';
+
+library.add(faCat, faDog, faFish, faPaw);
+
+/* Styles */
 import './styles.css';
 
 // == Composant
 const App = () => (
   <div className="app">
+    <Header />
     <Switch>
       <Route path="/" exact>
         <Homepage />
       </Route>
-      <Route path="/categories/home" exact>
-        <Homepage />
+      <Route path="/categories/house" exact>
+        <CatHouse />
       </Route>
       <Route path="/categories/animals" exact>
-        <Homepage />
+        <CatAnimals />
       </Route>
       <Route path="/categories/shopping" exact>
         <Homepage />

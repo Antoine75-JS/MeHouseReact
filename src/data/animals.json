@@ -1,0 +1,60 @@
+{
+  "animals": [
+    {
+      "id": 1,
+      "title": "Hobbes",
+      "type": "cat",
+      "todos": [
+        {
+          "name": "litière",
+          "date": "25/07/2021",
+          "todo": true,
+          "repeat": true,
+          "repeat_frequency": 5
+        },
+        {
+          "name": "Clean litière",
+          "date": "25/07/2021",
+          "todo": true,
+          "repeat": true,
+          "repeat_frequency": 14
+        },
+        {
+          "name": "Rdv Veto",
+          "date": "01/09/2021",
+          "todo": true,
+          "repeat": false,
+          "repeat_frequency": null
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Calvin",
+      "type": "dog",
+      "todos": [
+        {
+          "name": "litière",
+          "date": "25/07/2021",
+          "todo": true,
+          "repeat": true,
+          "repeat_frequency": 5
+        },
+        {
+          "name": "Clean litière",
+          "date": "25/07/2021",
+          "todo": true,
+          "repeat": true,
+          "repeat_frequency": 14
+        },
+        {
+          "name": "Rdv Veto",
+          "date": "01/09/2021",
+          "todo": true,
+          "repeat": false,
+          "repeat_frequency": null
+        }
+      ]
+    }
+  ]
+}

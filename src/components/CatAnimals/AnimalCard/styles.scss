@@ -1,0 +1,20 @@
+@import 'src/styles/_vars';
+
+.animalCard {
+  width: calc(50% - 2rem);
+  border-radius: .5rem;
+  height: 130px;
+  background: $animalColor;
+  padding: 1rem;
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+
+  &-title {
+    margin-top: 1rem;
+    font-size: 1.3rem;
+    color: white;
+  }
+}

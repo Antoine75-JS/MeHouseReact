@@ -14,52 +14,51 @@ import {
   FiDollarSign,
   FiGitlab,
   FiMusic,
-  FiShoppingCart
+  FiShoppingCart,
 } from 'react-icons/fi';
 
 const CategoriesList = () => {
   const isEmpty = true;
-  console.log(categoriesData);
 
   return (
     <div className="categories">
 
-      <Link to="/categories/home" exact>
+      <Link to="/categories/house">
         <div className="categories-category categories-home">
           <FiHome color="white" />
           <h2 className="categories-category--title">Home</h2>
         </div>
       </Link>
 
-      <Link to="/categories/shopping" exact>
+      <Link to="/categories/shopping">
         <div className="categories-category categories-shopping">
           <FiShoppingCart color="white" />
           <h2 className="categories-category--title">Courses</h2>
         </div>
       </Link>
 
-      <Link to="/categories/animals" exact>
+      <Link to="/categories/animals">
         <div className="categories-category categories-animals">
           <FiGitlab color="white" />
           <h2 className="categories-category--title">El Gato</h2>
         </div>
       </Link>
 
-      <Link to="/categories/bills" exact>
+      <Link to="/categories/bills">
         <div className="categories-category categories-bills">
           <FiDollarSign color="white" />
           <h2 className="categories-category--title">Factures</h2>
         </div>
       </Link>
 
-      <Link to="/categories/plants" exact>
+      <Link to="/categories/plants">
         <div className="categories-category categories-plants">
           <FiCloudRain color="white" />
           <h2 className="categories-category--title">Plantes</h2>
         </div>
       </Link>
 
-      <Link to="/categories/events" exact>
+      <Link to="/categories/events">
         <div className="categories-category categories-events">
           <FiMusic color="white" />
           <h2 className="categories-category--title">Events</h2>

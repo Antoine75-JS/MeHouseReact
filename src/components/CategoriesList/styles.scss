@@ -1,3 +1,5 @@
+@import 'src/styles/_vars';
+
 .categories {
   display: flex;
   flex-direction: column;
@@ -20,21 +22,21 @@
   }
 
   &-home {
-    background: lightblue;
+    background: $homeColor;
   }
   &-shopping {
-    background: khaki;
+    background: $shoppingColor;
   }
   &-animals {
-    background: lightsalmon;
+    background: $animalColor;
   }
   &-bills {
-    background: pink;
+    background: $billsColor
   }
   &-plants {
-    background: palegreen;
+    background: $plantsColor;
   }
   &-events {
-    background: tan;
+    background: $eventsColor;
   }
 }
