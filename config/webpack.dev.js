@@ -41,6 +41,10 @@ module.exports = merge(common, {
   },
 
   devServer: {
+    host: '0.0.0.0', //To test on mobile
+    proxy: {
+      '/api': 'http://localhost:3000',
+    },
     historyApiFallback: true,
     contentBase: paths.build,
     clientLogLevel: 'warn',
