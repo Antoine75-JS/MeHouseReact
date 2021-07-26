@@ -8,6 +8,7 @@ import Header from 'src/components/Header';
 import Homepage from 'src/components/HomePage';
 import CatHouse from 'src/components/CatHouse';
 import CatAnimals from 'src/components/CatAnimals';
+import AnimalComponent from 'src/components/CatComponents/AnimalComponent';
 
 /* Create pictograms library */
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -15,7 +16,7 @@ import {
   faCat,
   faDog,
   faFish,
-  faPaw
+  faPaw,
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(faCat, faDog, faFish, faPaw);
@@ -36,6 +37,9 @@ const App = () => (
       </Route>
       <Route path="/categories/animals" exact>
         <CatAnimals />
+      </Route>
+      <Route path="/categories/animals/:id" exact>
+        <AnimalComponent />
       </Route>
       <Route path="/categories/shopping" exact>
         <Homepage />

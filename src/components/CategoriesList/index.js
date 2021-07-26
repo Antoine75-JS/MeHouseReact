@@ -40,7 +40,7 @@ const CategoriesList = () => {
       <Link to="/categories/animals">
         <div className="categories-category categories-animals">
           <FiGitlab color="white" />
-          <h2 className="categories-category--title">El Gato</h2>
+          <h2 className="categories-category--title">Animaux</h2>
         </div>
       </Link>
 
