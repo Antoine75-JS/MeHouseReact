@@ -1,0 +1,49 @@
+@import 'src/styles/_vars';
+
+.signup {
+  padding: 1rem;
+
+  &-title {
+    padding-bottom: 2rem;
+    font-weight: bold;
+  }
+  
+  &-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    &--errors {
+      font-size: .7rem;
+      color: red;
+    }
+    
+    &--input {
+      border: solid 1px #ccc;
+      height: 2rem;
+      border-radius: .3rem;
+      padding: 1.2rem 1rem;
+      margin: .3rem 0 .5rem;
+      width: 100%;
+
+    }
+    
+    &--btn {
+      width: 100%;
+      height: 2rem;
+      padding: .5rem;
+      background: $mainColor;
+      border-radius: .3rem;
+      color: white;
+      border: none;
+
+      &:active {
+        font-size: .7rem;
+      }
+
+      &:focus {
+        border: 1px solid black;
+      }
+    }
+  }
+}

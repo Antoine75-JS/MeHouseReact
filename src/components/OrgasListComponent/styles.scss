@@ -1,0 +1,25 @@
+.organisations{
+  width: 100%;
+  display: flex;
+  padding: 1rem;
+  align-items: center;
+  justify-content: space-evenly;
+
+  &-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    width: calc(50%-2rem);
+    padding: 1rem;
+    height: 200px;
+    background: coral;
+    border-radius: 1rem;
+
+    &--title {
+      font-weight: bold;
+      color: white;
+      
+    }
+  }
+}

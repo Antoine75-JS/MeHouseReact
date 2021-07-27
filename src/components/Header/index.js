@@ -16,13 +16,19 @@ const Header = () => {
   };
 
   return (
-    <Link to="/">
-      <div className="header">
-        <FiMenu color="white" />
+    <div className="header">
+      <FiMenu color="white" />
+      <Link to="/">
         <h1 className="header-title">MeHouse</h1>
-        {isLogged ? <FiLogOut onClick={handleLogin} color="white" /> : <FiLogIn onClick={handleLogin} color="white" />}
-      </div>
-    </Link>
+      </Link>
+      {isLogged ? (
+        <FiLogOut onClick={handleLogin} color="white" />
+      ) : (
+        <Link to="/login">
+          <FiLogIn onClick={handleLogin} color="white" />
+        </Link>
+      )}
+    </div>
   );
 };
 

@@ -1,7 +1,7 @@
 import React from 'react';
 
 /* Components */
-import CategoriesList from 'src/components/CategoriesList';
+import OrgasListComponent from 'src/components/OrgasListComponent';
 
 import './styles.scss';
 
@@ -10,7 +10,7 @@ const Homepage = () => {
 
   return (
     <div className="homepage">
-      <CategoriesList />
+      <OrgasListComponent />
     </div>
   );
 };

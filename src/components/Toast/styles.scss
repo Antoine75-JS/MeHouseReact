@@ -1,0 +1,40 @@
+@import 'src/styles/_vars';
+
+.toastComponent {
+  background: $errorsColor;
+  color: white;
+  padding: 1rem;
+  font-size: .8rem;
+  width: fit-content;
+  position: fixed;
+  bottom: 1rem;
+  margin: 0 auto;
+  border-radius: 5px;
+  z-index: 99999;
+  left: 1rem;
+  right: 1rem;
+}
+
+.toast-in {
+  animation: toast-in .1s ease-in-out forwards;
+}
+
+.toast-out {
+  animation: toast-out .1s ease-in-out forwards;
+}
+
+@keyframes toast-in {
+  from {
+    transform: translateY(120%);
+  } to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes toast-out {
+  from {
+    transform: translateY(0);
+  } to {
+    transform: translateY(200%);
+  }
+}

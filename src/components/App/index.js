@@ -14,6 +14,8 @@ import Homepage from 'src/components/HomePage';
 import CatHouse from 'src/components/CatHouse';
 import CatAnimals from 'src/components/CatAnimals';
 import AnimalComponent from 'src/components/CatComponents/AnimalComponent';
+import LoginForm from 'src/components/LoginForm';
+import SignupForm from 'src/components/SignupForm';
 
 /* Create pictograms library */
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -28,15 +30,7 @@ library.add(faCat, faDog, faFish, faPaw);
 
 // == Composant
 const App = () => {
-  useEffect(() => {
-    api.get('/orgas/')
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((err) => {
-        console.trace(err);
-      });
-  });
+  const istrue = false;
 
   return (
     <div className="app">
@@ -67,13 +61,13 @@ const App = () => {
           <Homepage />
         </Route>
         <Route path="/login" exact>
+          <LoginForm />
+        </Route>
+        <Route path="/logout" exact>
           <Homepage />
         </Route>
-        <Route path="logout" exact>
-          <Homepage />
-        </Route>
-        <Route path="signin" exact>
-          <Homepage />
+        <Route path="/signup" exact>
+          <SignupForm />
         </Route>
       </Switch>
     </div>
