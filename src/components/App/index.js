@@ -15,7 +15,9 @@ import CatHouse from 'src/components/CatHouse';
 import CatAnimals from 'src/components/CatAnimals';
 import AnimalComponent from 'src/components/CatComponents/AnimalComponent';
 import LoginForm from 'src/components/LoginForm';
-import SignupForm from 'src/components/SignupForm';
+
+// Import Pages
+import SignupPage from 'src/containers/SignupPage';
 
 /* Create pictograms library */
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -67,7 +69,7 @@ const App = () => {
           <Homepage />
         </Route>
         <Route path="/signup" exact>
-          <SignupForm />
+          <SignupPage />
         </Route>
       </Switch>
     </div>

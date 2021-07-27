@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { useForm, Controller } from 'react-hook-form';
-
-// API
-import api from 'src/api';
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { useForm } from 'react-hook-form';
 
 // Validation props
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
 // Components
-import Toast from 'src/components/Toast';
+import Toast from 'src/containers/Toast';
+import Loading from 'src/components/Loading';
 
 // Styles
 import './styles.scss';
@@ -21,63 +20,44 @@ const userSchema = yup.object().shape({
   repeat_password: yup.string().required().matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,30}$/),
 });
 
-const SignupForm = () => {
-  // state
-  const [loading, setLoading] = useState(false);
-  const [hasErrors, setHasErrors] = useState(false);
-  const [toastMessage, setToastMessage] = useState('');
-
+const SignupForm = ({
+  signupUser,
+  setErrMessage,
+  open,
+  toastMessage,
+  isLoading,
+}) => {
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(userSchema),
   });
 
+  // Check if passwords match before signup method
   const handleSignup = (data) => {
     console.log(data);
-    setLoading(true);
     if (data.password !== data.repeat_password) {
-      setHasErrors(true);
-      setToastMessage('Les mots de passe ne correspondent pas');
+      setErrMessage('Les mots de passe ne correspondent pas');
     }
     else {
-      api.post('/users/', {
-        username: data.username,
-        email: data.email,
-        password: data.password,
-        repeat_password: data.repeat_password,
-      })
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((err) => {
-          // Handle email if already exists
-          if (err.response.status === 422) {
-            console.log(err.response.data.message);
-            setHasErrors(true);
-            setToastMessage(err.response.data.message);
-          }
-        })
-        .finally(() => {
-          setLoading(false);
-        });
+      signupUser(data, toastMessage);
     }
   };
 
   // Handle error message in Toast
   useEffect(() => {
-    console.log(errors);
     if (errors.email) {
-      setHasErrors(true);
-      setToastMessage('Une adresse email au format correct est requise');
+      setErrMessage('Une adresse email au format correct est requise');
     }
     if (errors.username) {
-      setHasErrors(true);
-      setToastMessage('Un nom d\'utilisateur entre 3 et 30 caractères est requis');
+      setErrMessage('Un nom d\'utilisateur entre 3 et 30 caractères est requis');
+    }
+    if (errors.password) {
+      setErrMessage('Le mot de passe doit contenir au moins une lettre minuscule, majuscule et un chiffre');
     }
   }, [errors]);
 
   return (
-    <div className="signup">
-      <h1 className="signup-title">Créer un compte</h1>
+    <>
+      {isLoading && <Loading />}
       <form onSubmit={handleSubmit(handleSignup)} className="signup-form">
         <label htmlFor='username'>Nom d'utilisateur</label>
         <input {...register('username')} name="username" className="signup-form--input" />
@@ -98,9 +78,21 @@ const SignupForm = () => {
         <input type="submit" value="S'inscrire" className="signup-form--btn" />
       </form>
 
-      {hasErrors && <Toast errors={toastMessage} hasErrors={hasErrors} />}
-    </div>
+      {open && <Toast />}
+    </>
   );
+};
+
+SignupForm.propTypes = {
+  signupUser: PropTypes.func.isRequired,
+  setErrMessage: PropTypes.func.isRequired,
+  open: PropTypes.bool.isRequired,
+  toastMessage: PropTypes.string,
+  isLoading: PropTypes.bool.isRequired,
+};
+
+SignupForm.defaultProps = {
+  toastMessage: '',
 };
 
 export default SignupForm;
