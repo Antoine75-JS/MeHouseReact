@@ -49,11 +49,15 @@ const SignupForm = () => {
           console.log(response);
         })
         .catch((err) => {
-          console.trace(err);
+          // Handle email if already exists
+          if (err.response.status === 422) {
+            console.log(err.response.data.message);
+            setHasErrors(true);
+            setToastMessage(err.response.data.message);
+          }
         })
         .finally(() => {
           setLoading(false);
-          setHasErrors(false);
         });
     }
   };
