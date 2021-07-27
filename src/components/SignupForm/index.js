@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 
 // API
@@ -15,7 +15,7 @@ import Toast from 'src/components/Toast';
 import './styles.scss';
 
 const userSchema = yup.object().shape({
-  username: yup.string().required().matches(/^[a-zA-Z0-9]{3,30}$/),
+  username: yup.string().required().typeError("Le nom d'utilisateur doit contenir entre 3 et 30 caractères alphanumériques").matches(/^[a-zA-Z0-9]{3,30}$/),
   email: yup.string().email().required().matches(/^([a-zA-Z0-9-]+.)*[a-zA-Z0-9-]+@([a-zA-Z0-9_-])+([.])+([a-z]{2,8})$/),
   password: yup.string().required().matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,30}$/),
   repeat_password: yup.string().required().matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,30}$/),
@@ -61,6 +61,19 @@ const SignupForm = () => {
         });
     }
   };
+
+  // Handle error message in Toast
+  useEffect(() => {
+    console.log(errors);
+    if (errors.email) {
+      setHasErrors(true);
+      setToastMessage('Une adresse email au format correct est requise');
+    }
+    if (errors.username) {
+      setHasErrors(true);
+      setToastMessage('Un nom d\'utilisateur entre 3 et 30 caractères est requis');
+    }
+  }, [errors]);
 
   return (
     <div className="signup">
