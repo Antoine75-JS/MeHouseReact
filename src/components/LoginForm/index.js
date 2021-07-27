@@ -7,6 +7,7 @@ const LoginForm = () => {
   return (
     <div className="login">
       <h1>Connectez vous</h1>
+
       <Link to="/signup">Créer un compte</Link>
     </div>
   );

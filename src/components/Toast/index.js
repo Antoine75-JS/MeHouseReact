@@ -1,39 +1,42 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import './styles.scss';
 
-const ToastComponent = ({ errors, hasErrors }) => {
-  console.log(errors, hasErrors);
-  const [errorMessage, setErrorMessage] = useState('');
-  const [isTrue, setIsTrue] = useState(hasErrors);
-  const [isVisible, setIsVisible] = useState(isTrue);
-
-  useEffect(() => {
-    console.log(errors);
-    setErrorMessage(errors);
-  }, [errors]);
-
+const ToastComponent = ({
+  unsetErrMessage,
+  message,
+  open,
+}) => {
   useEffect(() => {
     const interval = setInterval(() => {
-      setIsTrue(false);
-      setIsVisible(false);
+      unsetErrMessage();
     }, 3000);
     return () => {
       clearInterval(interval);
     };
-  }, [errorMessage]);
+  }, [message]);
+
+  const handleClickToast = () => {
+    unsetErrMessage();
+  };
 
   return (
-    <div className={isVisible ? 'toastComponent toast-in' : 'toastComponent toast-out'}>
-      <p>{errorMessage}</p>
+    <div className={open ? 'toastComponent toast-in' : 'toastComponent toast-out'} onClick={handleClickToast}>
+      <p className="toastComponent-message">{message}</p>
     </div>
   );
 };
 
 ToastComponent.propTypes = {
-  errors: PropTypes.string.isRequired,
-  hasErrors: PropTypes.bool.isRequired,
+  unsetErrMessage: PropTypes.func.isRequired,
+  message: PropTypes.string,
+  open: PropTypes.bool,
+};
+
+ToastComponent.defaultProps = {
+  message: '',
+  open: false,
 };
 
 export default ToastComponent;
