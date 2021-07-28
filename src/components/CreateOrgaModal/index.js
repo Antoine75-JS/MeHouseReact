@@ -13,7 +13,6 @@ import Toast from 'src/containers/Toast';
 import Loading from 'src/components/Loading';
 
 import './styles.scss';
-import axios from 'axios';
 
 // Yup validation schema
 const orgaSchema = yup.object().shape({
@@ -40,6 +39,13 @@ const CreateOrgaModal = ({ isLoading, open, toastMessage, setErrMessage, closeMo
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(orgaSchema),
   });
+
+  // Handle error message in form
+  useEffect(() => {
+    if (errors.orgName) {
+      setErrMessage('Le nom de l\'organisation ne doit pas contenir d\'espaces');
+    }
+  }, [errors]);
 
   const handleCreateOrga = (data) => {
     console.log(data);
@@ -96,7 +102,6 @@ const CreateOrgaModal = ({ isLoading, open, toastMessage, setErrMessage, closeMo
             <label htmlFor='orgName' className="createOrga-form--title">Nom de l'organisation</label>
             <input {...register('orgName')} type="text" name="orgName" className="createOrga-form--input" />
             <input type="submit" value="Créer" className="createOrga-form--btn" />
-            <p className="createOrga-form--errors">{errors.orgName?.message}</p>
           </form>
         </div>
       )}

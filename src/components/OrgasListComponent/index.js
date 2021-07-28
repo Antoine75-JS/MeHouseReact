@@ -5,9 +5,13 @@ import CreateOrgaModal from 'src/containers/CreateOrgaModal';
 
 // Components
 import OrgaCard from 'src/components/OrgaCard';
+import Loading from 'src/components/Loading';
+import Toast from 'src/containers/Toast';
 import './styles.scss';
 
 const OrgasListComponent = ({
+  loadOrgas,
+  orgasList,
   isModalOpen,
   openModal,
   isLoading,
@@ -15,24 +19,13 @@ const OrgasListComponent = ({
   toastMessage,
   setErrmessage,
 }) => {
-  console.log(isModalOpen, openModal, isLoading, open, toastMessage, setErrmessage);
+  console.log(orgasList);
   /* State temp */
   const [loading, setLoading] = useState(false);
   const [organisations, setOrganisations] = useState([]);
 
   useEffect(() => {
-    setLoading(true);
-    api.get('/orgas')
-      .then((response) => {
-        console.log(response);
-        setOrganisations(response.data);
-      })
-      .catch((err) => {
-        console.trace(err);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    loadOrgas();
   }, []);
 
   const handleAddOrganization = () => {
@@ -43,8 +36,9 @@ const OrgasListComponent = ({
   return (
     <>
       <div className="organisations">
-        {!loading && organisations.length > 0 ? (
-          organisations.map((organisation) => (
+        {isLoading && <Loading />}
+        {!loading && orgasList.length > 0 ? (
+          orgasList.map((organisation) => (
             <OrgaCard key={organisation._id} name={organisation.orgName} categories={organisation.categories} />
           ))
         ) : (
@@ -54,8 +48,10 @@ const OrgasListComponent = ({
           {!isModalOpen && <p>+</p>}
         </div>
       </div>
+      {open && <Toast />}
       {isModalOpen && <CreateOrgaModal />}
     </>
+
   );
 };
 
