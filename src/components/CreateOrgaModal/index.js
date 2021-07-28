@@ -5,11 +5,15 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
+// API
+import api from 'src/api';
+
 // Components
 import Toast from 'src/containers/Toast';
 import Loading from 'src/components/Loading';
 
 import './styles.scss';
+import axios from 'axios';
 
 // Yup validation schema
 const orgaSchema = yup.object().shape({
@@ -26,7 +30,7 @@ const CreateOrgaModal = ({ isLoading, open, toastMessage, setErrMessage, closeMo
   useEffect(() => {
     const interval = setInterval(() => {
       setIsOpen(true);
-    }, 600);
+    }, 300);
     return () => {
       clearInterval(interval);
     };
@@ -39,6 +43,20 @@ const CreateOrgaModal = ({ isLoading, open, toastMessage, setErrMessage, closeMo
 
   const handleCreateOrga = (data) => {
     console.log(data);
+    api.post('/orgas/', {
+      orgName: data.orgName,
+    })
+      .then((response) => {
+        console.log(response);
+        if (response.status === 201) {
+          closeModal();
+          setErrMessage('Organisation créee !');
+        }
+      })
+      .catch((err) => {
+        console.trace(err);
+      }).finally(() => {
+      });
   };
 
   // Handle button close modal
@@ -82,6 +100,7 @@ const CreateOrgaModal = ({ isLoading, open, toastMessage, setErrMessage, closeMo
           </form>
         </div>
       )}
+      {open && <Toast />}
     </>
   );
 };

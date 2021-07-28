@@ -4,6 +4,7 @@ import api from 'src/api';
 import CreateOrgaModal from 'src/containers/CreateOrgaModal';
 
 // Components
+import OrgaCard from 'src/components/OrgaCard';
 import './styles.scss';
 
 const OrgasListComponent = ({
@@ -36,7 +37,7 @@ const OrgasListComponent = ({
 
   const handleAddOrganization = () => {
     openModal();
-    console.log('Adding Organization');
+    window.scroll(0, 0);
   };
 
   return (
@@ -44,14 +45,7 @@ const OrgasListComponent = ({
       <div className="organisations">
         {!loading && organisations.length > 0 ? (
           organisations.map((organisation) => (
-            <div className="organisations-card" key={organisation._id}>
-              <h2 className="organisations-card--title">
-                {organisation.orgName}
-              </h2>
-              <h3 className="organisations-card--nbCat">
-                {organisation.orgCategories?.length} catégories
-              </h3>
-            </div>
+            <OrgaCard key={organisation._id} name={organisation.orgName} categories={organisation.categories} />
           ))
         ) : (
           <h2>No organisations</h2>
