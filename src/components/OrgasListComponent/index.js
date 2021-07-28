@@ -1,12 +1,20 @@
 import React, { useEffect, useState } from 'react';
 
 import api from 'src/api';
-import CreateOrgaModal from 'src/components/CreateOrgaModal';
+import CreateOrgaModal from 'src/containers/CreateOrgaModal';
 
 // Components
 import './styles.scss';
 
-const OrgasListComponent = () => {
+const OrgasListComponent = ({
+  isModalOpen,
+  openModal,
+  isLoading,
+  open,
+  toastMessage,
+  setErrmessage,
+}) => {
+  console.log(isModalOpen, openModal, isLoading, open, toastMessage, setErrmessage);
   /* State temp */
   const [loading, setLoading] = useState(false);
   const [organisations, setOrganisations] = useState([]);
@@ -27,6 +35,7 @@ const OrgasListComponent = () => {
   }, []);
 
   const handleAddOrganization = () => {
+    openModal();
     console.log('Adding Organization');
   };
 
@@ -49,7 +58,7 @@ const OrgasListComponent = () => {
         )}
         <div className="addOrganizationBtn" onClick={handleAddOrganization}>+</div>
       </div>
-      <CreateOrgaModal />
+      {isModalOpen && <CreateOrgaModal />}
     </>
   );
 };

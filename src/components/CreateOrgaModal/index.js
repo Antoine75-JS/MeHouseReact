@@ -17,7 +17,8 @@ const orgaSchema = yup.object().shape({
 });
 
 // Component
-const CreateOrgaModal = () => {
+const CreateOrgaModal = ({ isLoading, open, toastMessage, setErrMessage, closeModal }) => {
+  console.log(isLoading, open, toastMessage);
   // Temp local state
   const [isOpen, setIsOpen] = useState(true);
 
@@ -31,14 +32,14 @@ const CreateOrgaModal = () => {
 
   // Handle button close modal
   const handleCloseModal = () => {
-    setIsOpen(false);
+    closeModal();
   };
 
   // Handle listener esc key
   useEffect(() => {
     const handleEsc = (event) => {
       if (event.keyCode === 27) {
-        setIsOpen(false);
+        closeModal();
       }
     };
     window.addEventListener('keydown', handleEsc);
@@ -57,19 +58,17 @@ const CreateOrgaModal = () => {
 
   return (
     <>
-      {isOpen && (
-        <div className="createOrga">
-          <div className="createOrga-closeModal" onClick={handleCloseModal}>
-            <p className="createOrga-closeModal--cross">+</p>
-          </div>
-          <form onSubmit={handleSubmit(handleCreateOrga)} className="createOrga-form">
-            <label htmlFor='orgName' className="createOrga-form--title">Nom de l'organisation</label>
-            <input {...register('orgName')} type="text" name="orgName" className="createOrga-form--input" />
-            <input type="submit" value="Créer" className="createOrga-form--btn" />
-            <p className="createOrga-form--errors">{errors.orgName?.message}</p>
-          </form>
+      <div className="createOrga">
+        <div className="createOrga-closeModal" onClick={handleCloseModal}>
+          <p className="createOrga-closeModal--cross">+</p>
         </div>
-      )}
+        <form onSubmit={handleSubmit(handleCreateOrga)} className="createOrga-form">
+          <label htmlFor='orgName' className="createOrga-form--title">Nom de l'organisation</label>
+          <input {...register('orgName')} type="text" name="orgName" className="createOrga-form--input" />
+          <input type="submit" value="Créer" className="createOrga-form--btn" />
+          <p className="createOrga-form--errors">{errors.orgName?.message}</p>
+        </form>
+      </div>
     </>
   );
 };

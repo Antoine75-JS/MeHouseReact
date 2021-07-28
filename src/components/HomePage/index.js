@@ -1,7 +1,7 @@
 import React from 'react';
 
 /* Components */
-import OrgasListComponent from 'src/components/OrgasListComponent';
+import OrgasList from 'src/containers/OrgasList';
 
 import './styles.scss';
 
@@ -10,7 +10,7 @@ const Homepage = () => {
 
   return (
     <div className="homepage">
-      <OrgasListComponent />
+      <OrgasList />
     </div>
   );
 };
