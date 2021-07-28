@@ -1,46 +1,57 @@
 import React, { useEffect, useState } from 'react';
 
 import api from 'src/api';
+import CreateOrgaModal from 'src/containers/CreateOrgaModal';
 
+// Components
+import OrgaCard from 'src/components/OrgaCard';
+import Loading from 'src/components/Loading';
+import Toast from 'src/containers/Toast';
 import './styles.scss';
 
-const OrgasListComponent = () => {
+const OrgasListComponent = ({
+  loadOrgas,
+  orgasList,
+  isModalOpen,
+  openModal,
+  isLoading,
+  open,
+  toastMessage,
+  setErrmessage,
+}) => {
+  console.log(orgasList);
   /* State temp */
   const [loading, setLoading] = useState(false);
   const [organisations, setOrganisations] = useState([]);
 
   useEffect(() => {
-    setLoading(true);
-    api.get('/orgas')
-      .then((response) => {
-        console.log(response);
-        setOrganisations(response.data);
-      })
-      .catch((err) => {
-        console.trace(err);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    loadOrgas();
   }, []);
 
+  const handleAddOrganization = () => {
+    openModal();
+    window.scroll(0, 0);
+  };
+
   return (
-    <div className="organisations">
-      {!loading && organisations.length > 0 ? (
-        organisations.map((organisation) => (
-          <div className="organisations-card" key={organisation._id}>
-            <h2 className="organisations-card--title">
-              {organisation.orgName}
-            </h2>
-            <h3 className="organisations-card--nbCat">
-              {organisation.orgCategories?.length} catégories
-            </h3>
-          </div>
-        ))
-      ) : (
-        <h2>No organisations</h2>
-      )}
-    </div>
+    <>
+      <div className="organisations">
+        {isLoading && <Loading />}
+        {!loading && orgasList.length > 0 ? (
+          orgasList.map((organisation) => (
+            <OrgaCard key={organisation._id} name={organisation.orgName} categories={organisation.categories} />
+          ))
+        ) : (
+          <h2>No organisations</h2>
+        )}
+        <div className={isModalOpen ? 'addOrganizationBtn-open' : 'addOrganizationBtn'} onClick={handleAddOrganization}>
+          {!isModalOpen && <p>+</p>}
+        </div>
+      </div>
+      {open && <Toast />}
+      {isModalOpen && <CreateOrgaModal />}
+    </>
+
   );
 };
 
