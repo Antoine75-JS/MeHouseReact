@@ -10,7 +10,6 @@
   width: 100vw;
   height: 100vh;
   padding: 1rem;
-  background: rgba(100, 93, 93, 0.5);
 
   &-closeModal {
     position: absolute;
@@ -18,7 +17,7 @@
     right: 2rem;
     font-size: 3rem;
     font-weight: bold;
-    color: $mainColor;
+    color: white;
     
     &--cross {
       transform: rotate(45deg);

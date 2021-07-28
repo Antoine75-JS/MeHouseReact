@@ -17,11 +17,22 @@ const orgaSchema = yup.object().shape({
 });
 
 // Component
-const CreateOrgaModal = ({ isLoading, open, toastMessage, setErrMessage, closeModal }) => {
+const CreateOrgaModal = ({ isLoading, open, toastMessage, setErrMessage, closeModal, openModal }) => {
   console.log(isLoading, open, toastMessage);
-  // Temp local state
-  const [isOpen, setIsOpen] = useState(true);
+  // Local state for css animation
+  const [isOpen, setIsOpen] = useState(false);
 
+  // Delay for css animation
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIsOpen(true);
+    }, 600);
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+
+  // RHF controlled components
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(orgaSchema),
   });
@@ -58,17 +69,19 @@ const CreateOrgaModal = ({ isLoading, open, toastMessage, setErrMessage, closeMo
 
   return (
     <>
-      <div className="createOrga">
-        <div className="createOrga-closeModal" onClick={handleCloseModal}>
-          <p className="createOrga-closeModal--cross">+</p>
+      {isOpen && (
+        <div className="createOrga">
+          <div className="createOrga-closeModal" onClick={handleCloseModal}>
+            <p className="createOrga-closeModal--cross">+</p>
+          </div>
+          <form onSubmit={handleSubmit(handleCreateOrga)} className="createOrga-form">
+            <label htmlFor='orgName' className="createOrga-form--title">Nom de l'organisation</label>
+            <input {...register('orgName')} type="text" name="orgName" className="createOrga-form--input" />
+            <input type="submit" value="Créer" className="createOrga-form--btn" />
+            <p className="createOrga-form--errors">{errors.orgName?.message}</p>
+          </form>
         </div>
-        <form onSubmit={handleSubmit(handleCreateOrga)} className="createOrga-form">
-          <label htmlFor='orgName' className="createOrga-form--title">Nom de l'organisation</label>
-          <input {...register('orgName')} type="text" name="orgName" className="createOrga-form--input" />
-          <input type="submit" value="Créer" className="createOrga-form--btn" />
-          <p className="createOrga-form--errors">{errors.orgName?.message}</p>
-        </form>
-      </div>
+      )}
     </>
   );
 };

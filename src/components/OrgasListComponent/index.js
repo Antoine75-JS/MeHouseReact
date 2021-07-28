@@ -56,7 +56,9 @@ const OrgasListComponent = ({
         ) : (
           <h2>No organisations</h2>
         )}
-        <div className="addOrganizationBtn" onClick={handleAddOrganization}>+</div>
+        <div className={isModalOpen ? 'addOrganizationBtn-open' : 'addOrganizationBtn'} onClick={handleAddOrganization}>
+          {!isModalOpen && <p>+</p>}
+        </div>
       </div>
       {isModalOpen && <CreateOrgaModal />}
     </>
