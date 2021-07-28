@@ -20,14 +20,13 @@ const OrgasListComponent = ({
   setErrmessage,
 }) => {
   console.log(orgasList);
-  /* State temp */
-  const [loading, setLoading] = useState(false);
-  const [organisations, setOrganisations] = useState([]);
 
+  // Load organizations on first load
   useEffect(() => {
     loadOrgas();
   }, []);
 
+  // Open form for Adding Orga
   const handleAddOrganization = () => {
     openModal();
     window.scroll(0, 0);
@@ -37,16 +36,21 @@ const OrgasListComponent = ({
     <>
       <div className="organisations">
         {isLoading && <Loading />}
-        {!loading && orgasList.length > 0 ? (
+        {!isLoading && orgasList.length > 0 ? (
           orgasList.map((organisation) => (
-            <OrgaCard key={organisation._id} name={organisation.orgName} categories={organisation.categories} />
+            <OrgaCard
+              id={organisation._id}
+              key={organisation._id}
+              name={organisation.orgName}
+              categories={organisation.categories}
+            />
           ))
         ) : (
           <h2>No organisations</h2>
         )}
-        <div className={isModalOpen ? 'addOrganizationBtn-open' : 'addOrganizationBtn'} onClick={handleAddOrganization}>
-          {!isModalOpen && <p>+</p>}
-        </div>
+      </div>
+      <div className={isModalOpen ? 'addOrganizationBtn-open' : 'addOrganizationBtn'} onClick={handleAddOrganization}>
+        {!isModalOpen && <p>+</p>}
       </div>
       {open && <Toast />}
       {isModalOpen && <CreateOrgaModal />}

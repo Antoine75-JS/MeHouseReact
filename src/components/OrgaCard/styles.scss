@@ -4,10 +4,16 @@
     justify-content: center;
     margin-bottom: 1rem;
     width: calc(50% - 2rem);
+    max-width: 200px;
     padding: 1rem;
     height: 200px;
     background: coral;
     border-radius: 1rem;
+    transition: 100ms ease-in-out;
+
+    &:hover {
+      transform: scale(1.05)
+    }
 
     &--title {
       font-weight: bold;

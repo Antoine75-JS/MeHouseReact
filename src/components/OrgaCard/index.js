@@ -1,19 +1,22 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import './styles.scss';
 
-const OrgaCard = ({ name, categories }) => {
+const OrgaCard = ({ name, categories, id }) => {
   const isEmpty = true;
 
   return (
-    <div className="organisationsCard">
-      <h2 className="organisationsCard--title">
-        {name}
-      </h2>
-      <h3 className="organisationsCard--nbCat">
-        {categories?.length} catégories
-      </h3>
-    </div>
+    <>
+      <Link to={`/orgas/${id}`} className="organisationsCard">
+        <h2 className="organisationsCard--title">
+          {name}
+        </h2>
+        <h3 className="organisationsCard--nbCat">
+          {categories?.length} catégories
+        </h3>
+      </Link>
+    </>
   );
 };
 
