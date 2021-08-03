@@ -10,8 +10,6 @@ import Toast from 'src/containers/Toast';
 import './styles.scss';
 
 const OrgasListComponent = ({
-  loadOrgas,
-  orgasList,
   isModalOpen,
   openModal,
   isLoading,
@@ -23,12 +21,8 @@ const OrgasListComponent = ({
   toastMessage,
   setErrmessage,
 }) => {
-  console.log(orgasList);
-
-  // Load organizations on first load
-  useEffect(() => {
-    loadOrgas();
-  }, []);
+  console.log(userId, username, userOrgas);
+  // Local states
 
   // Open form for Adding Orga
   const handleAddOrganization = () => {
@@ -40,8 +34,8 @@ const OrgasListComponent = ({
     <>
       <div className="organisations">
         {isLoading && <Loading />}
-        {!isLoading && orgasList.length > 1 ? (
-          orgasList.map((organisation) => (
+        {!isLoading && userOrgas?.length > 1 ? (
+          userOrgas.map((organisation) => (
             <OrgaCard
               id={organisation._id}
               key={organisation._id}
@@ -50,12 +44,16 @@ const OrgasListComponent = ({
             />
           ))
         ) : (
-          <h2>No organisations</h2>
+          <h2>Connectez vous pour accéder à vos organisations</h2>
         )}
       </div>
-      <div className={isModalOpen ? 'addOrganizationBtn-open' : 'addOrganizationBtn'} onClick={handleAddOrganization}>
-        {!isModalOpen && <p>+</p>}
-      </div>
+      {/* Check if user is logged to display button */}
+      {isLogged && (
+        <div className={isModalOpen ? 'addOrganizationBtn-open' : 'addOrganizationBtn'} onClick={handleAddOrganization}>
+          {!isModalOpen && <p>+</p>}
+        </div>
+      )}
+      {/* Modal for errors & messages */}
       {open && <Toast />}
       {isModalOpen && <CreateOrgaModal />}
     </>

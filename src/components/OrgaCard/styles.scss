@@ -15,10 +15,17 @@
       transform: scale(1.05)
     }
 
-    &--title {
+    &-title {
       font-weight: bold;
       color: white;
       padding-bottom: 1rem;
-      
+    }
+    
+    &-nbCat {
+      font-size: .9rem;
+
+      &--bold {
+        font-weight: bold;
+      }
     }
   }

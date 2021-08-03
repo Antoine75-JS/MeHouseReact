@@ -4,6 +4,7 @@ import { openToast } from 'src/actions/toast';
 import { openModal, closeModal } from 'src/actions/modal';
 
 const mapStateToProps = (state) => ({
+  userId: state.user.userId,
   isModalOpen: state.modal.isModalOpen,
   isLoading: state.loading.isLoading,
   open: state.toast.open,
