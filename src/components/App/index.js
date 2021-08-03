@@ -8,15 +8,15 @@ import api from 'src/api';
 /* Styles */
 import './styles.css';
 
-// == Import Components
-import Header from 'src/components/Header';
+// == Import from Components
 import Homepage from 'src/components/HomePage';
 import CatHouse from 'src/components/CatHouse';
 import CatAnimals from 'src/components/CatAnimals';
 import AnimalComponent from 'src/components/CatComponents/AnimalComponent';
-import LoginForm from 'src/components/LoginForm';
 
-// Import Pages
+// Import from Containers
+import Header from 'src/containers/Header';
+import LoginForm from 'src/containers/LoginForm';
 import SignupPage from 'src/containers/SignupPage';
 
 /* Create pictograms library */

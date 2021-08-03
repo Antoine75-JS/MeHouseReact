@@ -1,14 +1,15 @@
 import api from 'src/api';
 
-import { SIGNUP } from 'src/actions/user';
+import { SIGNUP, SUBMIT_LOGIN, loginUser } from 'src/actions/user';
 import { openToast } from 'src/actions/toast';
 import { startLoading, stopLoading } from 'src/actions/loading';
 
 const signupMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
+    // SIGNUP
     case SIGNUP: {
       store.dispatch(startLoading());
-      api.post('/users/', {
+      api.post('/users/signup', {
         username: action.payload.username,
         email: action.payload.email.toLowerCase(),
         password: action.payload.password,
@@ -25,6 +26,36 @@ const signupMiddleware = (store) => (next) => (action) => {
           // Handle email if already exists
           if (err.response.status === 422) {
             console.log(err.response.data.message);
+            store.dispatch(openToast(err.response.data.message));
+          }
+          else {
+            store.dispatch(openToast('Une erreur est survenue'));
+          }
+        })
+        .finally(() => {
+          store.dispatch(stopLoading());
+        });
+      break;
+    }
+    // LOGIN
+    case SUBMIT_LOGIN: {
+      store.dispatch(startLoading());
+      api.post('/auth/login', {
+        email: action.payload.email,
+        password: action.payload.password,
+        repeat_password: action.payload.repeat_password,
+      })
+        .then((response) => {
+          if (response.status === 200) {
+            store.dispatch(loginUser(response.data.user));
+            store.dispatch(openToast('Vous êtes bien connecté'));
+            next(action);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          if (err.response.status === 401) {
+            console.trace(err.response.data.message);
             store.dispatch(openToast(err.response.data.message));
           }
           else {

@@ -42,7 +42,7 @@ const OrgasListComponent = ({
               id={organisation._id}
               key={organisation._id}
               name={organisation.orgName}
-              categories={organisation.categories}
+              categories={organisation.orgCategories}
             />
           ))
         ) : (

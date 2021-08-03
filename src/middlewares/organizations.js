@@ -9,7 +9,7 @@ const orgasMiddleware = (store) => (next) => (action) => {
     case LOAD_ORGAS: {
       store.dispatch(startLoading());
       console.log('ok middleware');
-      api.get('/orgas/')
+      api.get('/orgas/organizations')
         .then((response) => {
           console.log(response);
           if (response.status === 200) {
