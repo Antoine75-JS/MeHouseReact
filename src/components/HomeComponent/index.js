@@ -5,7 +5,7 @@ import OrgasList from 'src/containers/OrgasList';
 
 import './styles.scss';
 
-const Homepage = () => {
+const HomeComponent = () => {
   const isEmpty = true;
 
   return (
@@ -15,4 +15,4 @@ const Homepage = () => {
   );
 };
 
-export default Homepage;
+export default HomeComponent;

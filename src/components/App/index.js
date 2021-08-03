@@ -9,14 +9,14 @@ import api from 'src/api';
 import './styles.css';
 
 // == Import from Components
-import Homepage from 'src/components/HomePage';
+import OrgaHome from 'src/components/OrgaHome';
 import CatHouse from 'src/components/CatHouse';
 import CatAnimals from 'src/components/CatAnimals';
 import AnimalComponent from 'src/components/CatComponents/AnimalComponent';
 
 // Import from Containers
-import Header from 'src/containers/Header';
-import LoginForm from 'src/containers/LoginForm';
+import HomePage from 'src/containers/HomePage';
+import LoginPage from 'src/containers/LoginPage';
 import SignupPage from 'src/containers/SignupPage';
 
 /* Create pictograms library */
@@ -36,10 +36,13 @@ const App = () => {
 
   return (
     <div className="app">
-      <Header />
+      {/* <Header /> */}
       <Switch>
         <Route path="/" exact>
-          <Homepage />
+          <HomePage />
+        </Route>
+        <Route path="/orgas/:id" exact>
+          <OrgaHome />
         </Route>
         <Route path="/categories/house" exact>
           <CatHouse />
@@ -51,22 +54,22 @@ const App = () => {
           <AnimalComponent />
         </Route>
         <Route path="/categories/shopping" exact>
-          <Homepage />
+          <HomePage />
         </Route>
         <Route path="/categories/bills" exact>
-          <Homepage />
+          <HomePage />
         </Route>
         <Route path="/categories/plants" exact>
-          <Homepage />
+          <HomePage />
         </Route>
         <Route path="/categories/events" exact>
-          <Homepage />
+          <HomePage />
         </Route>
         <Route path="/login" exact>
-          <LoginForm />
+          <LoginPage />
         </Route>
         <Route path="/logout" exact>
-          <Homepage />
+          <HomePage />
         </Route>
         <Route path="/signup" exact>
           <SignupPage />

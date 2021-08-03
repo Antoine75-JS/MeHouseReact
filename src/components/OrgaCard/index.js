@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import './styles.scss';
 
 const OrgaCard = ({ name, categories, id }) => {
-  console.log(categories);
+  console.log('OrgaCard Props:', name, categories, id);
   return (
     <>
       <Link to={`/orgas/${id}`} className="organisationsCard">

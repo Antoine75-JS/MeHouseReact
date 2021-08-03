@@ -53,31 +53,33 @@ const LoginForm = ({
   };
 
   return (
-    <div className="login">
-      {isLoading && <Loading />}
-      <form onSubmit={handleSubmit(handleLogin)} className="login-form">
-        <label htmlFor='email'>Adresse Email</label>
-        <input {...register('email')} name="email" className="login-form--input" />
-        <p className="login-form--errors">{errors.email?.message}</p>
+    <>
+      <div className="login">
+        {isLoading && <Loading />}
+        <form onSubmit={handleSubmit(handleLogin)} className="login-form">
+          <label htmlFor='email'>Adresse Email</label>
+          <input {...register('email')} name="email" className="login-form--input" />
+          <p className="login-form--errors">{errors.email?.message}</p>
 
-        <label htmlFor='password'>Mot de passe</label>
-        <input {...register('password')} name="password" type="password" className="login-form--input" />
-        <p className="login-form--errors">{errors.password?.message}</p>
+          <label htmlFor='password'>Mot de passe</label>
+          <input {...register('password')} name="password" type="password" className="login-form--input" />
+          <p className="login-form--errors">{errors.password?.message}</p>
 
-        <label htmlFor='repeat_password'>Répétez le mot de passe</label>
-        <input {...register('repeat_password')} name="repeat_password" type="password" className="login-form--input" />
-        <p className="login-form--errors">{errors.repeat_password?.message}</p>
+          <label htmlFor='repeat_password'>Répétez le mot de passe</label>
+          <input {...register('repeat_password')} name="repeat_password" type="password" className="login-form--input" />
+          <p className="login-form--errors">{errors.repeat_password?.message}</p>
 
-        <input type="submit" value="S'inscrire" className="login-form--btn" />
-      </form>
+          <input type="submit" value="S'inscrire" className="login-form--btn" />
+        </form>
 
-      {toastOpen && <Toast />}
-      <Link to="/signup">
-        <h3 className="login-link">Pas de compte ?
-          <span className="login-link--link"> Créer un compte</span>
-        </h3>
-      </Link>
-    </div>
+        {toastOpen && <Toast />}
+        <Link to="/signup">
+          <h3 className="login-link">Pas de compte ?
+            <span className="login-link--link"> Créer un compte</span>
+          </h3>
+        </Link>
+      </div>
+    </>
   );
 };
 

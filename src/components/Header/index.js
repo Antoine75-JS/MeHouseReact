@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Link, Redirect } from 'react-router-dom';
 import { FiMenu, FiLogIn, FiLogOut } from 'react-icons/fi';
 
 // Components & styles
-import Toast from 'src/containers/Toast';
 import './styles.scss';
 
 const Header = ({ username, isLogged, submitLogout }) => {
-  console.log(username, isLogged);
   const handleLogout = () => {
     submitLogout();
     console.log(isLogged);
@@ -29,6 +28,17 @@ const Header = ({ username, isLogged, submitLogout }) => {
       )}
     </div>
   );
+};
+
+Header.propTypes = {
+  username: PropTypes.string,
+  isLogged: PropTypes.bool,
+  submitLogout: PropTypes.func.isRequired,
+};
+
+Header.defaultProps = {
+  username: '',
+  isLogged: false,
 };
 
 export default Header;

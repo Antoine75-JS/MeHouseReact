@@ -10,9 +10,14 @@ const mapStateToProps = (state) => ({
   isLoading: state.loading.isLoading,
   open: state.toast.open,
   toastMessage: state.toast.message,
+  isLogged: state.user.isLogged,
+  userId: state.user.userId,
+  username: state.user.username,
+  userOrgas: state.user.userOrgas,
 });
 
 const mapDispatchToProps = (dispatch) => ({
+  // CHECK IF USED SOMEWHERE !!!
   // createOrga: (newUser, errMessage) => {
   //   dispatch(signupNewUser(newUser, errMessage));
   // },

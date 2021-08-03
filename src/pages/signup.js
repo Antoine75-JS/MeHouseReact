@@ -3,16 +3,16 @@ import PropTypes from 'prop-types';
 import { Redirect } from 'react-router';
 
 import SignupForm from 'src/containers/SignupForm';
+import Header from 'src/containers/Header';
 
-const SignupPage = ({ isLogged, isSigned }) => {
-  console.log(isLogged, isSigned);
-
+const SignupPage = ({ isSigned }) => {
   if (isSigned) {
     return <Redirect to="/login" />;
   }
 
   return (
     <div className="">
+      <Header />
       <div className="signup">
         <h1 className="signup-title">Créer un compte</h1>
         <SignupForm />
@@ -22,12 +22,10 @@ const SignupPage = ({ isLogged, isSigned }) => {
 };
 
 SignupPage.propTypes = {
-  isLogged: PropTypes.bool,
   isSigned: PropTypes.bool,
 };
 
 SignupPage.defaultProps = {
-  isLogged: false,
   isSigned: false,
 };
 

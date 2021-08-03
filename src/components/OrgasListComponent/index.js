@@ -16,6 +16,10 @@ const OrgasListComponent = ({
   openModal,
   isLoading,
   open,
+  isLogged,
+  userId,
+  username,
+  userOrgas,
   toastMessage,
   setErrmessage,
 }) => {
@@ -36,7 +40,7 @@ const OrgasListComponent = ({
     <>
       <div className="organisations">
         {isLoading && <Loading />}
-        {!isLoading && orgasList.length > 0 ? (
+        {!isLoading && orgasList.length > 1 ? (
           orgasList.map((organisation) => (
             <OrgaCard
               id={organisation._id}
