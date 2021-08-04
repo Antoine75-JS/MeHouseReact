@@ -6,14 +6,12 @@ import { Link } from 'react-router-dom';
 import './styles.scss';
 
 const OrgaCard = ({ name, categories, id }) => {
-  console.log('OrgaCard Props:', name, categories, id);
   const [tasks, setTasks] = useState([]);
 
   // Set tasks count
   useEffect(() => {
     const taskList = [];
     categories.forEach((category) => {
-      console.log(category);
       if (category.catTasks.length > 0) {
         const task = category.catTasks;
         taskList.push(task);

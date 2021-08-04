@@ -1,32 +1,32 @@
 import api from 'src/api';
 
-import { CREATE_ORGA } from 'src/actions/organizations';
+import { CREATE_ORGA, GET_ORGA_DETAILS, setOrgaDetails } from 'src/actions/organizations';
 import { openToast } from 'src/actions/toast';
 import { startLoading, stopLoading } from 'src/actions/loading';
 
 const orgasMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
-    // case LOAD_ORGAS: {
-    //   store.dispatch(startLoading());
-    //   console.log('ok middleware');
-    //   api.get('/orgas/organizations')
-    //     .then((response) => {
-    //       console.log(response);
-    //       if (response.status === 200) {
-    //         store.dispatch(saveListOrgas(response.data));
-    //         openToast('Organisation créée !');
-    //         next(action);
-    //       }
-    //     })
-    //     .catch((err) => {
-    //       console.log(err);
-    //       store.dispatch(openToast('Une erreur est survenue'));
-    //     })
-    //     .finally(() => {
-    //       store.dispatch(stopLoading());
-    //     });
-    //   break;
-    // }
+    case GET_ORGA_DETAILS: {
+      store.dispatch(startLoading());
+      console.log('ok middleware');
+      api.get(`/orgas/${action.orgId}`)
+        .then((response) => {
+          console.log(response);
+          if (response.status === 200) {
+            store.dispatch(setOrgaDetails(response.data));
+            openToast(`Bienvenue à ${response.data.orgName}`);
+            next(action);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          store.dispatch(openToast('Une erreur est survenue'));
+        })
+        .finally(() => {
+          store.dispatch(stopLoading());
+        });
+      break;
+    }
     default: next(action);
   }
 };

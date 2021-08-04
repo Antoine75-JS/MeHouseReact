@@ -21,7 +21,6 @@ const OrgasListComponent = ({
   toastMessage,
   setErrmessage,
 }) => {
-  console.log(userId, username, userOrgas);
   // Local states
 
   // Open form for Adding Orga

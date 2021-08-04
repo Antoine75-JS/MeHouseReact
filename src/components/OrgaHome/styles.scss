@@ -1,0 +1,81 @@
+@import 'src/styles/_vars';
+
+.open {
+  display: block;
+}
+
+.close {
+  display: none;
+}
+
+.orgaHome {
+  padding: 1rem;
+  
+  &-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    letter-spacing: .1rem;
+    text-transform: uppercase;
+    color: $mainColor;
+    margin-bottom: 1rem;
+  }
+  
+  &-taskCpt {
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  
+  &-taskCard {
+
+    &--details {
+      background: white;
+      padding: 1rem;
+      text-align: left;
+      
+      &_detail {
+        display: flex;
+        align-items: center;
+
+        &-taskName {
+          line-height: 2rem;
+        }
+      }
+
+    }
+  }
+
+  &-categories {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 1rem;
+    
+    &-category {
+      border-radius: .5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding: 1rem;
+      background: $animalColor;
+      margin-bottom: 1rem;
+      gap: .5rem;
+      transition: 200ms ease-in-out;
+      
+      &:hover {
+        transform: scale(1.03);
+      }
+  
+      &--title {
+        color: white;
+        text-transform: uppercase;
+        font-weight: 500;
+      }
+
+      &--tasks {
+        color: white;
+        text-transform: uppercase;
+        font-weight: 500;
+      }
+    }
+  }
+}

@@ -9,7 +9,6 @@ import api from 'src/api';
 import './styles.css';
 
 // == Import from Components
-import OrgaHome from 'src/components/OrgaHome';
 import CatHouse from 'src/components/CatHouse';
 import CatAnimals from 'src/components/CatAnimals';
 import AnimalComponent from 'src/components/CatComponents/AnimalComponent';
@@ -18,6 +17,7 @@ import AnimalComponent from 'src/components/CatComponents/AnimalComponent';
 import HomePage from 'src/containers/HomePage';
 import LoginPage from 'src/containers/LoginPage';
 import SignupPage from 'src/containers/SignupPage';
+import OrgaHome from 'src/containers/OrgaHome';
 
 /* Create pictograms library */
 import { library } from '@fortawesome/fontawesome-svg-core';
