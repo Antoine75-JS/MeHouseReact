@@ -1,6 +1,8 @@
+@import 'src/styles/_vars';
+
 .expirationChip {
   margin-left: .5rem;
-  background: crimson;
+  background: $darkRedColor;
   color: white;
   border-radius: 2rem;
   padding: .4rem;

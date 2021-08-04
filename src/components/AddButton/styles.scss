@@ -1,0 +1,27 @@
+@import 'src/styles/_vars';
+
+.addTaskBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  border: 5px solid $mainColor;
+  border-radius: 50%;
+  font-size: 3rem;
+  font-weight: bold;
+  color: $mainColor;
+  margin: 0 auto;
+  transition: 300ms ease-in-out;
+  
+  &-open {
+    animation: 300ms ease-in-out forwards open_modal alternate;
+    transform-origin: center;
+    position: absolute;
+  }
+
+  &:hover {
+    transform: rotate(270deg) scale(1.1);
+    border: 5px solid $mainColor;
+  }
+}

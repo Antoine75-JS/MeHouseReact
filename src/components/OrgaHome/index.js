@@ -14,9 +14,10 @@ const OrgaHome = ({
   isLoading,
   orgName,
   orgUsers,
+  orgaId,
   orgCategories,
 }) => {
-  console.log('name:', orgName, 'categories:', orgCategories, 'users:', orgUsers);
+  console.log('ID', orgaId, 'name:', orgName, 'categories:', orgCategories, 'users:', orgUsers);
 
   // Local states
   const [tasksCpt, setTasksCpt] = useState(null);
@@ -53,7 +54,7 @@ const OrgaHome = ({
             {/* Cards */}
             {orgCategories?.map((category, cpt) => (
               <Link
-                to={`/cat/${category._id}`}
+                to={`/orgas/cat/${category._id}`}
                 className="orgaHome-categories-category"
                 key={category._id}
               >
@@ -64,10 +65,9 @@ const OrgaHome = ({
                 </div>
                 <div className="orgaHome-taskCard--details">
                   {category.catTasks?.map((task) => (
-                    <div className="orgaHome-taskCard--details_detail">
+                    <div className="orgaHome-taskCard--details_detail" key={task._id}>
                       <div className="orgaHome-taskCard--details_detail-taskName">{task.taskName} :</div>
                       <ExpirationChip creationDate={task.creationDate} />
-                      {/* <div className="orgaHome-taskCard--details_detail-creationDate">{task.creationDate}</div> */}
                     </div>
                   ))}
                 </div>

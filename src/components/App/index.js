@@ -9,11 +9,10 @@ import api from 'src/api';
 import './styles.css';
 
 // == Import from Components
-import CatHouse from 'src/components/CatHouse';
-import CatAnimals from 'src/components/CatAnimals';
 import AnimalComponent from 'src/components/CatComponents/AnimalComponent';
 
 // Import from Containers
+import CatDetails from 'src/containers/CatDetails';
 import HomePage from 'src/containers/HomePage';
 import LoginPage from 'src/containers/LoginPage';
 import SignupPage from 'src/containers/SignupPage';
@@ -44,26 +43,8 @@ const App = () => {
         <Route path="/orgas/:id" exact>
           <OrgaHome />
         </Route>
-        <Route path="/categories/house" exact>
-          <CatHouse />
-        </Route>
-        <Route path="/categories/animals" exact>
-          <CatAnimals />
-        </Route>
-        <Route path="/categories/animals/:id" exact>
-          <AnimalComponent />
-        </Route>
-        <Route path="/categories/shopping" exact>
-          <HomePage />
-        </Route>
-        <Route path="/categories/bills" exact>
-          <HomePage />
-        </Route>
-        <Route path="/categories/plants" exact>
-          <HomePage />
-        </Route>
-        <Route path="/categories/events" exact>
-          <HomePage />
+        <Route path="/orgas/cat/:id" exact>
+          <CatDetails />
         </Route>
         <Route path="/login" exact>
           <LoginPage />

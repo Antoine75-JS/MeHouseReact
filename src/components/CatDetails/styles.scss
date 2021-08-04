@@ -1,0 +1,61 @@
+@import 'src/styles/_vars';
+
+.catDetails {
+  padding: 1rem;
+
+  &-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    letter-spacing: .1rem;
+    text-transform: uppercase;
+    color: $mainColor;
+    margin-bottom: 1rem;
+  }
+
+  &-tasks {
+    &--task {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #ccc;
+
+      &_taskName {
+        text-align: left;
+        flex-grow: 1;
+      }
+
+      &_icons {
+        display: flex;
+        gap: .5rem;
+      }
+    }
+  }
+}
+
+.addTaskBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  border: 5px solid $mainColor;
+  border-radius: 50%;
+  font-size: 3rem;
+  font-weight: bold;
+  color: $mainColor;
+  margin: 0 auto;
+  transition: 300ms ease-in-out;
+  
+  &-open {
+    animation: 300ms ease-in-out forwards open_modal alternate;
+    transform-origin: center;
+    position: absolute;
+  }
+
+  &:hover {
+    transform: rotate(270deg) scale(1.1);
+    border: 5px solid $mainColor;
+  }
+}

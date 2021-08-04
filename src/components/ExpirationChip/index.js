@@ -14,7 +14,6 @@ dayjs.locale('fr');
 const ExpirationChip = ({ creationDate }) => {
   const formatedDate = dayjs(creationDate);
   const expiresIn = formatedDate.fromNow(true);
-  console.log(creationDate, 'formated:', formatedDate);
 
   return (
     <div className="expirationChip">
