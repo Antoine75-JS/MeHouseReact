@@ -1,14 +1,15 @@
-export const LOAD_ORGAS = 'LOAD_ORGAS';
-export const SAVE_LIST_ORGAS = 'SAVE_LIST_ORGAS';
 export const CREATE_ORGA = 'CREATE_ORGA';
+export const GET_ORGA_DETAILS = 'GET_ORGA_DETAILS';
+export const SET_ORGA_DETAILS = 'SET_ORGA_DETAILS';
 
-export const loadOrgas = () => ({
-  type: LOAD_ORGAS,
+export const setOrgaDetails = (payload) => ({
+  type: SET_ORGA_DETAILS,
+  payload,
 });
 
-export const saveListOrgas = (organizations) => ({
-  type: SAVE_LIST_ORGAS,
-  organizations,
+export const getOrgaDetails = (orgId) => ({
+  type: GET_ORGA_DETAILS,
+  orgId,
 });
 
 export const createOrga = (payload) => ({

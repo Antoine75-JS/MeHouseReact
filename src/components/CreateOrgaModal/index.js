@@ -20,7 +20,15 @@ const orgaSchema = yup.object().shape({
 });
 
 // Component
-const CreateOrgaModal = ({ isLoading, open, toastMessage, setErrMessage, closeModal, openModal }) => {
+const CreateOrgaModal = ({
+  isLoading,
+  open,
+  toastMessage,
+  setErrMessage,
+  closeModal,
+  openModal,
+  userId,
+}) => {
   console.log(isLoading, open, toastMessage);
   // Local state for css animation
   const [isOpen, setIsOpen] = useState(false);
@@ -49,7 +57,7 @@ const CreateOrgaModal = ({ isLoading, open, toastMessage, setErrMessage, closeMo
 
   const handleCreateOrga = (data) => {
     console.log(data);
-    api.post('/orgas/', {
+    api.post(`/orgas/${userId}`, {
       orgName: data.orgName,
     })
       .then((response) => {

@@ -1,20 +1,20 @@
 import api from 'src/api';
 
-import { LOAD_ORGAS, saveListOrgas } from 'src/actions/organizations';
+import { CREATE_ORGA, GET_ORGA_DETAILS, setOrgaDetails } from 'src/actions/organizations';
 import { openToast } from 'src/actions/toast';
 import { startLoading, stopLoading } from 'src/actions/loading';
 
 const orgasMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
-    case LOAD_ORGAS: {
+    case GET_ORGA_DETAILS: {
       store.dispatch(startLoading());
       console.log('ok middleware');
-      api.get('/orgas/organizations')
+      api.get(`/orgas/${action.orgId}`)
         .then((response) => {
           console.log(response);
           if (response.status === 200) {
-            store.dispatch(saveListOrgas(response.data));
-            openToast('Organisation créée !');
+            store.dispatch(setOrgaDetails(response.data));
+            openToast(`Bienvenue à ${response.data.orgName}`);
             next(action);
           }
         })

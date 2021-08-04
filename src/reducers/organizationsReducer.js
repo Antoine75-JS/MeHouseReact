@@ -1,17 +1,26 @@
-import {
-  SAVE_LIST_ORGAS,
-} from 'src/actions/organizations';
+import { GET_ORGA_DETAILS, SET_ORGA_DETAILS } from 'src/actions/organizations';
 
 export const initialState = {
-  orgasList: [],
+  orgCategories: [],
+  orgTasks: [],
+  orgaId: null,
+  orgUsers: [],
+  orgName: '',
 };
 
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
-    case SAVE_LIST_ORGAS:
+    case GET_ORGA_DETAILS:
       return {
         ...state,
-        orgasList: action.organizations,
+        orgaId: action.payload.id,
+      };
+    case SET_ORGA_DETAILS:
+      return {
+        ...state,
+        orgCategories: action.payload.orgCategories,
+        orgName: action.payload.orgName,
+        orgUsers: action.payload.orgUsers,
       };
     default:
       return state;
