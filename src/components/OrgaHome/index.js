@@ -14,9 +14,10 @@ const OrgaHome = ({
   isLoading,
   orgName,
   orgUsers,
+  orgaId,
   orgCategories,
 }) => {
-  console.log('name:', orgName, 'categories:', orgCategories, 'users:', orgUsers);
+  console.log('ID', orgaId, 'name:', orgName, 'categories:', orgCategories, 'users:', orgUsers);
 
   // Local states
   const [tasksCpt, setTasksCpt] = useState(null);

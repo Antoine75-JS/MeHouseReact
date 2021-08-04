@@ -9,10 +9,10 @@ import api from 'src/api';
 import './styles.css';
 
 // == Import from Components
-import CatDetails from 'src/components/CatDetails';
 import AnimalComponent from 'src/components/CatComponents/AnimalComponent';
 
 // Import from Containers
+import CatDetails from 'src/containers/CatDetails';
 import HomePage from 'src/containers/HomePage';
 import LoginPage from 'src/containers/LoginPage';
 import SignupPage from 'src/containers/SignupPage';

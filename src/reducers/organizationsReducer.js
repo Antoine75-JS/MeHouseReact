@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import { GET_ORGA_DETAILS, SET_ORGA_DETAILS } from 'src/actions/organizations';
 
 export const initialState = {
@@ -21,6 +22,7 @@ const reducer = (state = initialState, action = {}) => {
         orgCategories: action.payload.orgCategories,
         orgName: action.payload.orgName,
         orgUsers: action.payload.orgUsers,
+        orgaId: action.payload._id,
       };
     default:
       return state;

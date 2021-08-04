@@ -26,7 +26,6 @@ const CreateOrgaModal = ({
   toastMessage,
   setErrMessage,
   closeModal,
-  openModal,
   userId,
 }) => {
   console.log(isLoading, open, toastMessage);
@@ -92,13 +91,6 @@ const CreateOrgaModal = ({
     };
   }, []);
 
-  // Handle error message in Toast
-  useEffect(() => {
-    if (errors.orgName) {
-      console.log(errors);
-    }
-  }, [errors]);
-
   return (
     <>
       {isOpen && (
@@ -107,8 +99,9 @@ const CreateOrgaModal = ({
             <p className="createOrga-closeModal--cross">+</p>
           </div>
           <form onSubmit={handleSubmit(handleCreateOrga)} className="createOrga-form">
-            <label htmlFor='orgName' className="createOrga-form--title">Nom de l'organisation</label>
-            <input {...register('orgName')} type="text" name="orgName" className="createOrga-form--input" />
+            <label htmlFor="orgName" className="createOrga-form--title">Nom de l'organisation
+              <input {...register('orgName')} type="text" name="orgName" className="createOrga-form--input" />
+            </label>
             <input type="submit" value="Créer" className="createOrga-form--btn" />
           </form>
         </div>

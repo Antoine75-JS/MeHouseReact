@@ -10,23 +10,35 @@ import {
 // Components
 import Header from 'src/containers/Header';
 import Loading from 'src/components/Loading';
+import Toast from 'src/containers/Toast';
 import ExpirationChip from 'src/components/ExpirationChip';
+import CreateTaskModal from 'src/containers/CreateTaskModal';
 
 import './styles.scss';
 
 // API
 import api from 'src/api';
 
-const CatDetails = () => {
+const CatDetails = ({
+  isModalOpen,
+  isLoading,
+  open,
+  toastMessage,
+  isLogged,
+  openModal,
+  closeModal,
+  setErrMessage,
+  deleteTask,
+}) => {
   const { id } = useParams();
 
   // Local state
-  const [isLoading, setLoading] = useState(false);
+  // const [isModalOpen, setModalOpen] = useState(false);
+  // const [isLoading, setLoading] = useState(false);
   const [catName, setCatName] = useState(null);
   const [catTasks, setCatTasks] = useState([]);
 
   useEffect(() => {
-    setLoading(true);
     api.get(`/categories/${id}`)
       .then((response) => {
         console.log(response);
@@ -34,11 +46,14 @@ const CatDetails = () => {
         setCatTasks(response.data.catTasks);
       })
       .catch((err) => console.trace(err))
-      .finally(() => setLoading(false));
+      .finally(() => {
+
+      });
   }, []);
 
-  const handleAddOrganization = () => {
-    console.log('clicked');
+  const handleAddTask = () => {
+    openModal();
+    window.scroll(0, 0);
   };
 
   return (
@@ -55,16 +70,18 @@ const CatDetails = () => {
                 <ExpirationChip className="catDetails-tasks--task_expirationDate" creationDate={task.creationDate} />
                 <div className="catDetails-tasks--task_icons">
                   <FiRotateCw color="#1dab35" size="25px" strokeWidth="2.5px" />
-                  <FiTrash color="#dc143c" size="25px" strokeWidth="2.5px" />
+                  <FiTrash color="#dc143c" size="25px" strokeWidth="2.5px" onClick={() => deleteTask(task._id)} />
                 </div>
               </div>
             ))}
           </div>
         )}
-        <div className="addTaskBtn" onClick={handleAddOrganization}>
-          <p>+</p>
+        <div className={isModalOpen ? 'addTaskBtn-open' : 'addTaskBtn'} onClick={handleAddTask}>
+          {!isModalOpen && <p>+</p>}
         </div>
       </div>
+      {isModalOpen && <CreateTaskModal />}
+      {open && <Toast />}
     </>
   );
 };
