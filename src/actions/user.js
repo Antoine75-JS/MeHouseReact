@@ -3,6 +3,11 @@ export const SIGNUP = 'SIGNUP';
 export const SUBMIT_LOGIN = 'SUBMIT_LOGIN';
 export const SUBMIT_LOGOUT = 'SUBMIT_LOGOUT';
 export const LOGIN_USER = 'LOGIN';
+export const CHECK_LOGGED = 'CHECK_LOGGED';
+
+export const checkLogged = () => ({
+  type: CHECK_LOGGED,
+});
 
 // Action creator
 export const signupNewUser = (payload, errMessage) => ({

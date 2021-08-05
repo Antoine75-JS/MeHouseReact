@@ -1,5 +1,6 @@
 // == Import npm
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { Switch, Route } from 'react-router';
 
 /* Styles */
@@ -24,8 +25,11 @@ import {
 library.add(faCat, faDog, faFish, faPaw);
 
 // == Composant
-const App = () => {
-  const istrue = false;
+const MeHouse = ({ checkLogged }) => {
+  // Check if user is logged
+  useEffect(() => {
+    checkLogged();
+  }, []);
 
   return (
     <div className="app">
@@ -54,5 +58,9 @@ const App = () => {
   );
 };
 
+MeHouse.propTypes = {
+  checkLogged: PropTypes.func.isRequired,
+};
+
 // == Export
-export default App;
+export default MeHouse;

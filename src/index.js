@@ -4,12 +4,12 @@ import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import store from 'src/store';
 
-import App from 'src/components/App';
+import MeHouse from 'src/containers/MeHouse';
 
 const rootReactElement = (
   <Provider store={store}>
     <Router>
-      <App />
+      <MeHouse />
     </Router>
   </Provider>
 );
