@@ -18,7 +18,7 @@ const mapDispatchToProps = (dispatch) => ({
   openModal: () => dispatch(openModal()),
   closeModal: () => dispatch(closeModal()),
 
-  deleteTask: (taskId) => dispatch(deleteTask(taskId)),
+  deleteTask: (catId, taskId) => dispatch(deleteTask(catId, taskId)),
   getCatTasks: (catId) => dispatch(getCatTasks(catId)),
 
   setErrMessage: (message) => {

@@ -13,8 +13,9 @@ export const getCatTasks = (catId) => ({
   catId,
 });
 
-export const deleteTask = (taskId) => ({
+export const deleteTask = (catId, taskId) => ({
   type: DELETE_TASK,
+  catId,
   taskId,
 });
 

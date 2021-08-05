@@ -19,11 +19,6 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         orgaId: action.payload.id,
       };
-    case GET_CATEGORY_TASKS:
-      return {
-        ...state,
-        catId: action.payload.id,
-      };
     case SET_ORGA_DETAILS:
       return {
         ...state,
@@ -31,6 +26,11 @@ const reducer = (state = initialState, action = {}) => {
         orgName: action.payload.orgName,
         orgUsers: action.payload.orgUsers,
         orgaId: action.payload._id,
+      };
+    case GET_CATEGORY_TASKS:
+      return {
+        ...state,
+        catId: action.payload.id,
       };
     case SET_CATEGORY_TASKS:
       return {

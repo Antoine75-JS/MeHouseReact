@@ -1,9 +1,15 @@
 import api from 'src/api';
 
-import { CREATE_TASK, DELETE_TASK, GET_CATEGORY_TASKS, setCatTasks } from 'src/actions/tasks';
+import {
+  CREATE_TASK,
+  DELETE_TASK,
+  GET_CATEGORY_TASKS,
+  setCatTasks,
+} from 'src/actions/tasks';
 import { openToast } from 'src/actions/toast';
 import { closeModal } from 'src/actions/modal';
 import { startLoading, stopLoading } from 'src/actions/loading';
+import { getCatTasks } from '../actions/tasks';
 
 const tasksMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
@@ -12,10 +18,13 @@ const tasksMiddleware = (store) => (next) => (action) => {
       api.get(`/categories/${action.catId}`)
         .then((response) => {
           console.log(response);
-          if (response.status === 200) {
-            console.log('We got tasks', response.data);
+          if (response.status === 200 && response.data.catTasks.length > 0) {
             store.dispatch(setCatTasks(response.data));
             next(action);
+          }
+          else {
+            store.dispatch(setCatTasks(response.data));
+            store.dispatch(openToast('Aucune tâche trouvée'));
           }
           next(action);
         })
@@ -39,6 +48,7 @@ const tasksMiddleware = (store) => (next) => (action) => {
           if (response.status === 201) {
             console.log(response.data);
             store.dispatch(openToast('Tâche ajoutée à l\'organisation'));
+            store.dispatch(getCatTasks(response.data.updatedCategory._id));
             store.dispatch(closeModal());
             next(action);
           }
@@ -59,6 +69,7 @@ const tasksMiddleware = (store) => (next) => (action) => {
           console.log(response);
           if (response.status === 200) {
             store.dispatch(openToast('Tâche supprimée'));
+            store.dispatch(getCatTasks(action.catId));
             next(action);
           }
         })

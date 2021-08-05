@@ -7,6 +7,7 @@ import userReducer from './userReducer';
 import modalReducer from './modalReducer';
 import orgasListReducer from './orgasListReducer';
 import organizationReducer from './organizationsReducer';
+import tasksReducer from './tasksReducer';
 
 const rootReducer = combineReducers({
   user: userReducer,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   modal: modalReducer,
   orgasList: orgasListReducer,
   organizations: organizationReducer,
+  tasks: tasksReducer,
 });
 
 export default rootReducer;

@@ -10,7 +10,7 @@ const orgasMiddleware = (store) => (next) => (action) => {
       store.dispatch(startLoading());
       api.get(`/orgas/${action.orgId}`)
         .then((response) => {
-          console.log(response);
+          console.log('Orgafound:', response);
           if (response.status === 200) {
             store.dispatch(setOrgaDetails(response.data));
             openToast(`Bienvenue à ${response.data.orgName}`);

@@ -23,11 +23,8 @@ const CatDetails = ({
   isModalOpen,
   isLoading,
   open,
-  toastMessage,
   isLogged,
   openModal,
-  closeModal,
-  setErrMessage,
   deleteTask,
   getCatTasks,
   catTasks,
@@ -36,25 +33,8 @@ const CatDetails = ({
   // Get category Id
   const { id } = useParams();
 
-  // Local state
-  // const [isModalOpen, setModalOpen] = useState(false);
-  // const [isLoading, setLoading] = useState(false);
-  // const [catName, setCatName] = useState(null);
-  // const [catTasks, setCatTasks] = useState([]);
-
   useEffect(() => {
     getCatTasks(id);
-    console.log(id, catTasks);
-    // api.get(`/categories/${id}`)
-    //   .then((response) => {
-    //     console.log(response);
-    //     setCatName(response.data.catName);
-    //     setCatTasks(response.data.catTasks);
-    //   })
-    //   .catch((err) => console.trace(err))
-    //   .finally(() => {
-
-    //   });
   }, []);
 
   const handleAddTask = () => {
@@ -76,7 +56,7 @@ const CatDetails = ({
                 <ExpirationChip className="catDetails-tasks--task_expirationDate" creationDate={task.creationDate} />
                 <div className="catDetails-tasks--task_icons">
                   <FiRotateCw color="#1dab35" size="25px" strokeWidth="2.5px" />
-                  <FiTrash color="#dc143c" size="25px" strokeWidth="2.5px" onClick={() => deleteTask(task._id)} />
+                  <FiTrash color="#dc143c" size="25px" strokeWidth="2.5px" onClick={() => deleteTask(id, task._id)} />
                 </div>
               </div>
             ))}
