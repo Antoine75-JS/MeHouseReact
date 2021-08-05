@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import api from 'src/api';
 import CreateOrgaModal from 'src/containers/CreateOrgaModal';
@@ -43,7 +44,10 @@ const OrgasListComponent = ({
             />
           ))
         ) : (
-          <h2>Connectez vous pour accéder à vos organisations</h2>
+          <div>
+            <h2>Connectez vous pour accéder à vos organisations</h2>
+            <Link to="/login">Connexion</Link>
+          </div>
         )}
       </div>
       {/* Check if user is logged to display button */}

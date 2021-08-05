@@ -1,6 +1,11 @@
 import api from 'src/api';
 
-import { SIGNUP, SUBMIT_LOGIN, loginUser } from 'src/actions/user';
+import {
+  SIGNUP,
+  SUBMIT_LOGIN,
+  CHECK_LOGGED,
+  loginUser,
+} from 'src/actions/user';
 import { openToast } from 'src/actions/toast';
 import { startLoading, stopLoading } from 'src/actions/loading';
 
@@ -37,10 +42,25 @@ const signupMiddleware = (store) => (next) => (action) => {
         });
       break;
     }
+    // Check Logged
+    case CHECK_LOGGED: {
+      api.get('/checklogged')
+        .then((response) => {
+          console.log("Checklogged response", response);
+          if (response.status === 200) {
+            const payload = response.data.user;
+            store.dispatch(loginUser(payload));
+          }
+        })
+        .catch((err) => {
+          console.trace(err);
+        });
+      return next(action);
+    }
     // LOGIN
     case SUBMIT_LOGIN: {
       store.dispatch(startLoading());
-      api.post('/auth/login', {
+      api.post('/login', {
         email: action.payload.email,
         password: action.payload.password,
         repeat_password: action.payload.repeat_password,
