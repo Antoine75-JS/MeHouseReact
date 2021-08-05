@@ -1,12 +1,30 @@
 import api from 'src/api';
 
-import { CREATE_TASK, DELETE_TASK } from 'src/actions/tasks';
+import { CREATE_TASK, DELETE_TASK, GET_CATEGORY_TASKS, setCatTasks } from 'src/actions/tasks';
 import { openToast } from 'src/actions/toast';
 import { closeModal } from 'src/actions/modal';
 import { startLoading, stopLoading } from 'src/actions/loading';
 
 const tasksMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
+    case GET_CATEGORY_TASKS: {
+      store.dispatch(startLoading());
+      api.get(`/categories/${action.catId}`)
+        .then((response) => {
+          console.log(response);
+          if (response.status === 200) {
+            console.log('We got tasks', response.data);
+            store.dispatch(setCatTasks(response.data));
+            next(action);
+          }
+          next(action);
+        })
+        .catch((err) => console.trace(err))
+        .finally(() => {
+          store.dispatch(stopLoading());
+        });
+      break;
+    }
     case CREATE_TASK: {
       store.dispatch(startLoading());
       console.log('Creating task');

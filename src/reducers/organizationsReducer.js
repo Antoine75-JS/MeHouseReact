@@ -1,10 +1,13 @@
 /* eslint-disable no-underscore-dangle */
 import { GET_ORGA_DETAILS, SET_ORGA_DETAILS } from 'src/actions/organizations';
+import { GET_CATEGORY_TASKS, SET_CATEGORY_TASKS } from 'src/actions/tasks';
 
 export const initialState = {
   orgCategories: [],
-  orgTasks: [],
+  catTasks: [],
   orgaId: null,
+  catId: null,
+  catName: '',
   orgUsers: [],
   orgName: '',
 };
@@ -16,6 +19,11 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         orgaId: action.payload.id,
       };
+    case GET_CATEGORY_TASKS:
+      return {
+        ...state,
+        catId: action.payload.id,
+      };
     case SET_ORGA_DETAILS:
       return {
         ...state,
@@ -23,6 +31,12 @@ const reducer = (state = initialState, action = {}) => {
         orgName: action.payload.orgName,
         orgUsers: action.payload.orgUsers,
         orgaId: action.payload._id,
+      };
+    case SET_CATEGORY_TASKS:
+      return {
+        ...state,
+        catName: action.payload.catName,
+        catTasks: action.payload.catTasks,
       };
     default:
       return state;

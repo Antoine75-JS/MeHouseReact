@@ -8,7 +8,6 @@ const orgasMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
     case GET_ORGA_DETAILS: {
       store.dispatch(startLoading());
-      console.log('ok middleware');
       api.get(`/orgas/${action.orgId}`)
         .then((response) => {
           console.log(response);
@@ -20,7 +19,6 @@ const orgasMiddleware = (store) => (next) => (action) => {
         })
         .catch((err) => {
           console.log(err);
-          store.dispatch(openToast('Une erreur est survenue'));
         })
         .finally(() => {
           store.dispatch(stopLoading());

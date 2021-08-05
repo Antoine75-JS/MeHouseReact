@@ -29,26 +29,32 @@ const CatDetails = ({
   closeModal,
   setErrMessage,
   deleteTask,
+  getCatTasks,
+  catTasks,
+  catName,
 }) => {
+  // Get category Id
   const { id } = useParams();
 
   // Local state
   // const [isModalOpen, setModalOpen] = useState(false);
   // const [isLoading, setLoading] = useState(false);
-  const [catName, setCatName] = useState(null);
-  const [catTasks, setCatTasks] = useState([]);
+  // const [catName, setCatName] = useState(null);
+  // const [catTasks, setCatTasks] = useState([]);
 
   useEffect(() => {
-    api.get(`/categories/${id}`)
-      .then((response) => {
-        console.log(response);
-        setCatName(response.data.catName);
-        setCatTasks(response.data.catTasks);
-      })
-      .catch((err) => console.trace(err))
-      .finally(() => {
+    getCatTasks(id);
+    console.log(id, catTasks);
+    // api.get(`/categories/${id}`)
+    //   .then((response) => {
+    //     console.log(response);
+    //     setCatName(response.data.catName);
+    //     setCatTasks(response.data.catTasks);
+    //   })
+    //   .catch((err) => console.trace(err))
+    //   .finally(() => {
 
-      });
+    //   });
   }, []);
 
   const handleAddTask = () => {
