@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 
 // Validation props
@@ -93,6 +94,7 @@ const CreateOrgaModal = ({
 
   return (
     <>
+      {isLoading && <Loading />}
       {isOpen && (
         <div className="createOrga">
           <div className="createOrga-closeModal" onClick={handleCloseModal}>
@@ -109,6 +111,19 @@ const CreateOrgaModal = ({
       {open && <Toast />}
     </>
   );
+};
+
+CreateOrgaModal.propTypes = {
+  isLoading: PropTypes.bool.isRequired,
+  open: PropTypes.bool.isRequired,
+  toastMessage: PropTypes.string,
+  setErrMessage: PropTypes.func.isRequired,
+  closeModal: PropTypes.func.isRequired,
+  userId: PropTypes.string.isRequired,
+};
+
+CreateOrgaModal.defaultProps = {
+  toastMessage: '',
 };
 
 export default CreateOrgaModal;

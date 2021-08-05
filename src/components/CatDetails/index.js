@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+/* eslint-disable no-underscore-dangle */
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { useParams, Redirect } from 'react-router-dom';
 
 // Icons
 import {
@@ -16,9 +18,6 @@ import CreateTaskModal from 'src/containers/CreateTaskModal';
 
 import './styles.scss';
 
-// API
-import api from 'src/api';
-
 const CatDetails = ({
   isModalOpen,
   isLoading,
@@ -30,6 +29,10 @@ const CatDetails = ({
   catTasks,
   catName,
 }) => {
+  if (!isLogged) {
+    return <Redirect to="/login" />;
+  }
+
   // Get category Id
   const { id } = useParams();
 
@@ -70,6 +73,25 @@ const CatDetails = ({
       {open && <Toast />}
     </>
   );
+};
+
+CatDetails.propTypes = {
+  isModalOpen: PropTypes.bool,
+  isLoading: PropTypes.bool,
+  open: PropTypes.bool,
+  isLogged: PropTypes.bool,
+  openModal: PropTypes.func.isRequired,
+  deleteTask: PropTypes.func.isRequired,
+  getCatTasks: PropTypes.func.isRequired,
+  catTasks: PropTypes.array.isRequired,
+  catName: PropTypes.string.isRequired,
+};
+
+CatDetails.defaultProps = {
+  isModalOpen: false,
+  isLoading: false,
+  open: false,
+  isLogged: false,
 };
 
 export default CatDetails;

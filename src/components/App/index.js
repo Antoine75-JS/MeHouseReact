@@ -2,14 +2,8 @@
 import React, { useEffect } from 'react';
 import { Switch, Route } from 'react-router';
 
-/* API */
-import api from 'src/api';
-
 /* Styles */
 import './styles.css';
-
-// == Import from Components
-import AnimalComponent from 'src/components/CatComponents/AnimalComponent';
 
 // Import from Containers
 import CatDetails from 'src/containers/CatDetails';

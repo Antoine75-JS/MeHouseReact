@@ -1,6 +1,6 @@
 import api from 'src/api';
 
-import { CREATE_ORGA, GET_ORGA_DETAILS, setOrgaDetails } from 'src/actions/organizations';
+import { GET_ORGA_DETAILS, setOrgaDetails } from 'src/actions/organizations';
 import { openToast } from 'src/actions/toast';
 import { startLoading, stopLoading } from 'src/actions/loading';
 

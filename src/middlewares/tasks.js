@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import api from 'src/api';
 
 import {
@@ -5,11 +6,11 @@ import {
   DELETE_TASK,
   GET_CATEGORY_TASKS,
   setCatTasks,
+  getCatTasks,
 } from 'src/actions/tasks';
 import { openToast } from 'src/actions/toast';
 import { closeModal } from 'src/actions/modal';
 import { startLoading, stopLoading } from 'src/actions/loading';
-import { getCatTasks } from '../actions/tasks';
 
 const tasksMiddleware = (store) => (next) => (action) => {
   switch (action.type) {

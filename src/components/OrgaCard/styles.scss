@@ -1,3 +1,5 @@
+@import 'src/styles/_vars';
+
 .organisationsCard {
     display: flex;
     flex-direction: column;
@@ -7,7 +9,7 @@
     max-width: 200px;
     padding: 1rem;
     height: 200px;
-    background: coral;
+    border: 1rem solid $mainColor;
     border-radius: 1rem;
     transition: 100ms ease-in-out;
 
@@ -17,7 +19,7 @@
 
     &-title {
       font-weight: bold;
-      color: white;
+      color: $mainColor;
       padding-bottom: 1rem;
     }
     

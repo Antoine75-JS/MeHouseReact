@@ -1,13 +1,14 @@
+// For flex purposes
+/* eslint-disable jsx-a11y/label-has-associated-control */
+
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
 // Validation props
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-
-// API
-import api from 'src/api';
 
 // Components
 import Toast from 'src/containers/Toast';
@@ -17,17 +18,16 @@ import './styles.scss';
 
 // Yup validation schema
 const orgaSchema = yup.object().shape({
-  taskName: yup.string().required().typeError("Le nom de l'organisation doit contenir entre 3 et 30 caractères alphanumériques"),
+  // eslint-disable-next-line newline-per-chained-call
+  taskName: yup.string().required().typeError("Le nom de l'organisation doit contenir entre 3 et 30 caractères alphanumériques").min(3).max(30),
   taskRepeat: yup.bool(),
-  repeatFrequency: yup.number(),
+  repeatFrequency: yup.number().max(365),
 });
 
 const CreateTaskModal = ({
   orgaId,
   isLoading,
   open,
-  isModalOpen,
-  toastMessage,
   setErrMessage,
   closeModal,
   createTask,
@@ -95,7 +95,7 @@ const CreateTaskModal = ({
   // Handle error message in Toast
   useEffect(() => {
     if (errors.taskName) {
-      setErrMessage('Entrez un nom valide pour la tâche');
+      setErrMessage("Le nom de l'organisation doit contenir entre 3 et 30 caractères alphanumériques");
     }
     if (errors.taskRepeat) {
       setErrMessage('La répétition de la tâche rencontre un problème');
@@ -107,6 +107,7 @@ const CreateTaskModal = ({
 
   return (
     <>
+      {isLoading && <Loading />}
       {isOpen && (
         <div className="createTask">
           <div className="createTask-closeModal" onClick={handleCloseModal}>
@@ -132,6 +133,15 @@ const CreateTaskModal = ({
       )}
     </>
   );
+};
+
+CreateTaskModal.propTypes = {
+  orgaId: PropTypes.string.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  open: PropTypes.bool.isRequired,
+  setErrMessage: PropTypes.func.isRequired,
+  closeModal: PropTypes.func.isRequired,
+  createTask: PropTypes.func.isRequired,
 };
 
 export default CreateTaskModal;
