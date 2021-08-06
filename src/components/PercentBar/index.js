@@ -15,11 +15,7 @@ dayjs.locale('fr');
 const PercentBar = ({ creationDate, expireDate }) => {
   const today = dayjs();
   const created = dayjs(creationDate);
-  // const createdTest = dayjs(creationDate).subtract(3, 'days');
   const expire = dayjs(expireDate);
-  const expiresIn = expire.diff(created, 'hours');
-  const fromCreation = created.diff(today, 'hours');
-  // console.log('expiresin:', expiresIn, 'created', fromCreation);
 
   console.log('percent value:', Math.round(((today - created) / (expire - created)) * 100), '%');
   const percent = Math.round(((today - created) / (expire - created)) * 100);

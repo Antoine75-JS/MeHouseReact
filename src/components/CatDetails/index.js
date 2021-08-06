@@ -65,8 +65,8 @@ const CatDetails = ({
                   </>
                 )}
                 <div className="catDetails-tasks--task_icons">
-                  <FiRotateCw color="#1dab35" size="25px" strokeWidth="2.5px" onClick={() => resetTask(id, task._id)} />
-                  <FiTrash color="#dc143c" size="25px" strokeWidth="2.5px" onClick={() => deleteTask(id, task._id)} />
+                  <FiRotateCw className="catDetails-tasks--task_icons-icon" color="#1dab35" size="25px" strokeWidth="2.5px" onClick={() => resetTask(id, task._id)} />
+                  <FiTrash className="catDetails-tasks--task_icons-icon" color="#dc143c" size="25px" strokeWidth="2.5px" onClick={() => deleteTask(id, task._id)} />
                 </div>
               </div>
             ))}

@@ -29,6 +29,15 @@
       &_icons {
         display: flex;
         gap: .5rem;
+
+        &-icon {
+          transition: 100ms ease-in-out;
+
+          &:hover {
+            transform: scale(1.05);
+          }
+        }
+        
       }
     }
   }
