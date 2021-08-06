@@ -46,7 +46,6 @@ const signupMiddleware = (store) => (next) => (action) => {
     case CHECK_LOGGED: {
       api.get('/checklogged')
         .then((response) => {
-          console.log("Checklogged response", response);
           if (response.status === 200) {
             const payload = response.data.user;
             store.dispatch(loginUser(payload));

@@ -4,6 +4,7 @@ import api from 'src/api';
 import {
   CREATE_TASK,
   DELETE_TASK,
+  RESET_TASK,
   GET_CATEGORY_TASKS,
   setCatTasks,
   getCatTasks,
@@ -18,7 +19,7 @@ const tasksMiddleware = (store) => (next) => (action) => {
       store.dispatch(startLoading());
       api.get(`/categories/${action.catId}`)
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           if (response.status === 200 && response.data.catTasks.length > 0) {
             store.dispatch(setCatTasks(response.data));
             next(action);
@@ -33,6 +34,21 @@ const tasksMiddleware = (store) => (next) => (action) => {
         .finally(() => {
           store.dispatch(stopLoading());
         });
+      break;
+    }
+    case RESET_TASK: {
+      store.dispatch(startLoading());
+      console.log('Reseting task');
+      api.patch(`/tasks/${action.taskId}/reset`, {})
+        .then((response) => {
+          if (response.status === 200) {
+            console.log(response);
+            store.dispatch(openToast('Tâche remise à zéro'));
+            store.dispatch(getCatTasks(response.data._id));
+          }
+        })
+        .catch((err) => console.trace(err))
+        .finally(() => store.dispatch(stopLoading()));
       break;
     }
     case CREATE_TASK: {

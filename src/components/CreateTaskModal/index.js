@@ -21,7 +21,7 @@ const orgaSchema = yup.object().shape({
   // eslint-disable-next-line newline-per-chained-call
   taskName: yup.string().required().typeError("Le nom de l'organisation doit contenir entre 3 et 30 caractères alphanumériques").min(3).max(30),
   taskRepeat: yup.bool(),
-  repeatFrequency: yup.number().max(365),
+  repeatFrequency: yup.number().required(false).max(365),
 });
 
 const CreateTaskModal = ({
@@ -37,6 +37,7 @@ const CreateTaskModal = ({
 
   // Local state for css animation
   const [isOpen, setIsOpen] = useState(false);
+  const [defaultFreq, setDefaultFreq] = useState(undefined);
 
   // Delay for css animation
   useEffect(() => {
@@ -101,6 +102,10 @@ const CreateTaskModal = ({
       setErrMessage('La répétition de la tâche rencontre un problème');
     }
     if (errors.repeatFrequency) {
+      // if (errors.repeatFrequency.type === "typeError") {
+      //   req.body.repeatFrequency = 0;
+      // }
+      // console.log(errors.repeatFrequency);
       setErrMessage('La fréquence maximale est de 365 jours');
     }
   }, [errors]);
@@ -124,7 +129,7 @@ const CreateTaskModal = ({
             </div>
             <div className="createTask-form--input">
               <label htmlFor="repeatFrequency" className="createTask-form--input_title">Fréquence</label>
-              <input {...register('repeatFrequency')} type="number" name="repeatFrequency" className="createTask-form--input_field" min="0" placeholder="7" />
+              <input {...register('repeatFrequency')} type="number" name="repeatFrequency" className="createTask-form--input_field" min="0" placeholder="7" value={defaultFreq} />
             </div>
             <input type="submit" value="Créer" className="createOrga-form--btn" />
           </form>

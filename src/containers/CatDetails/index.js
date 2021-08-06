@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import CatDetails from 'src/components/CatDetails';
 import { openToast } from 'src/actions/toast';
-import { deleteTask, getCatTasks } from 'src/actions/tasks';
+import { deleteTask, getCatTasks, resetTask } from 'src/actions/tasks';
 import { openModal, closeModal } from 'src/actions/modal';
 
 const mapStateToProps = (state) => ({
@@ -19,6 +19,7 @@ const mapDispatchToProps = (dispatch) => ({
   closeModal: () => dispatch(closeModal()),
 
   deleteTask: (catId, taskId) => dispatch(deleteTask(catId, taskId)),
+  resetTask: (catId, taskId) => dispatch(resetTask(catId, taskId)),
   getCatTasks: (catId) => dispatch(getCatTasks(catId)),
 
   setErrMessage: (message) => {

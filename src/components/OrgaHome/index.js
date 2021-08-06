@@ -19,7 +19,7 @@ const OrgaHome = ({
   orgaId,
   orgCategories,
 }) => {
-  console.log('ID', orgaId, 'name:', orgName, 'categories:', orgCategories, 'users:', orgUsers);
+  // console.log('ID', orgaId, 'name:', orgName, 'categories:', orgCategories, 'users:', orgUsers);
 
   // Local states
   const [tasksCpt, setTasksCpt] = useState(null);
@@ -75,7 +75,9 @@ const OrgaHome = ({
                       category.catTasks?.map((task) => (
                         <div className="orgaHome-taskCard--details_detail" key={task._id}>
                           <div className="orgaHome-taskCard--details_detail-taskName">{task.taskName} :</div>
-                          <ExpirationChip creationDate={task.creationDate} />
+                          {task.repeat && (
+                            <ExpirationChip expireDate={task.expireDate} />
+                          )}
                         </div>
                       ))
                     ) : (
@@ -116,13 +118,14 @@ OrgaHome.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   orgName: PropTypes.string.isRequired,
   orgUsers: PropTypes.array,
-  orgaId: PropTypes.string.isRequired,
+  orgaId: PropTypes.string,
   orgCategories: PropTypes.array.isRequired,
 };
 
 OrgaHome.defaultProps = {
   isLogged: false,
   orgUsers: null,
+  orgaId: null,
 };
 
 export default OrgaHome;

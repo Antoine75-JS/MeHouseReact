@@ -1,7 +1,7 @@
 import api from 'src/api';
 
+// import { openToast } from 'src/actions/toast';
 import { GET_ORGA_DETAILS, setOrgaDetails } from 'src/actions/organizations';
-import { openToast } from 'src/actions/toast';
 import { startLoading, stopLoading } from 'src/actions/loading';
 
 const orgasMiddleware = (store) => (next) => (action) => {
@@ -13,7 +13,7 @@ const orgasMiddleware = (store) => (next) => (action) => {
           console.log('Orgafound:', response);
           if (response.status === 200) {
             store.dispatch(setOrgaDetails(response.data));
-            openToast(`Bienvenue à ${response.data.orgName}`);
+            // openToast(`Bienvenue à ${response.data.orgName}`);
             next(action);
           }
         })

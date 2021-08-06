@@ -14,6 +14,7 @@ import Header from 'src/containers/Header';
 import Loading from 'src/components/Loading';
 import Toast from 'src/containers/Toast';
 import ExpirationChip from 'src/components/ExpirationChip';
+import PercentBar from 'src/components/PercentBar';
 import CreateTaskModal from 'src/containers/CreateTaskModal';
 
 import './styles.scss';
@@ -25,6 +26,7 @@ const CatDetails = ({
   isLogged,
   openModal,
   deleteTask,
+  resetTask,
   getCatTasks,
   catTasks,
   catName,
@@ -56,9 +58,14 @@ const CatDetails = ({
             {catTasks?.map((task) => (
               <div className="catDetails-tasks--task" key={task._id}>
                 <div className="catDetails-tasks--task_taskName">{task.taskName}</div>
-                <ExpirationChip className="catDetails-tasks--task_expirationDate" creationDate={task.creationDate} />
+                {task.repeat && (
+                  <>
+                    <PercentBar className="catDetails-tasks--task_percentBar" creationDate={task.creationDate} expireDate={task.expireDate} />
+                    <ExpirationChip className="catDetails-tasks--task_expirationDate" expireDate={task.expireDate} />
+                  </>
+                )}
                 <div className="catDetails-tasks--task_icons">
-                  <FiRotateCw color="#1dab35" size="25px" strokeWidth="2.5px" />
+                  <FiRotateCw color="#1dab35" size="25px" strokeWidth="2.5px" onClick={() => resetTask(id, task._id)} />
                   <FiTrash color="#dc143c" size="25px" strokeWidth="2.5px" onClick={() => deleteTask(id, task._id)} />
                 </div>
               </div>
