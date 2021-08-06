@@ -10,5 +10,15 @@
   &-percent {
     background: $mainColor;
     height: .75rem;
+    animation: slideIn 1s ease-in-out forwards;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-120%)
+  }
+  to {
+    transform: translateX(0%)
   }
 }

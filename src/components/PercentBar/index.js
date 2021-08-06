@@ -22,7 +22,7 @@ const PercentBar = ({ creationDate, expireDate }) => {
 
   return (
     <div className="percentBar">
-      <div className="percentBar-percent" style={{ width: `${percent}%` }} />
+      <div className="percentBar-percent" style={{ width: `${99 - percent}%` }} />
       <div className="percentBar-background" />
     </div>
   );
