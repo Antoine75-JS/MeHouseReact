@@ -16,11 +16,8 @@ const OrgaHome = ({
   isLoading,
   orgName,
   orgUsers,
-  orgaId,
   orgCategories,
 }) => {
-  // console.log('ID', orgaId, 'name:', orgName, 'categories:', orgCategories, 'users:', orgUsers);
-
   // Local states
   const [tasksCpt, setTasksCpt] = useState(null);
   // const [isOpen, setIsOpen] = useState(false);
@@ -37,15 +34,16 @@ const OrgaHome = ({
     getOrgaDetails(id);
   }, []);
 
+  // Set number of tasks
   useEffect(() => {
     let cpt = 0;
-    orgCategories?.forEach((category) => {
+    orgCategories.forEach((category) => {
       if (category.catTasks.length > 0) {
         cpt += category.catTasks.length;
       }
     });
     setTasksCpt(cpt);
-  }, []);
+  }, [orgCategories]);
 
   return (
     <>
@@ -118,14 +116,12 @@ OrgaHome.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   orgName: PropTypes.string.isRequired,
   orgUsers: PropTypes.array,
-  orgaId: PropTypes.string,
   orgCategories: PropTypes.array.isRequired,
 };
 
 OrgaHome.defaultProps = {
   isLogged: false,
   orgUsers: null,
-  orgaId: null,
 };
 
 export default OrgaHome;

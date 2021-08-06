@@ -6,19 +6,18 @@ import { Link } from 'react-router-dom';
 import './styles.scss';
 
 const OrgaCard = ({ name, categories, id }) => {
-  const [tasks, setTasks] = useState([]);
+  const [tasksCpt, setTasksCpt] = useState(null);
 
-  // Set tasks count
+  // Set number of tasks
   useEffect(() => {
-    const taskList = [];
+    let cpt = 0;
     categories.forEach((category) => {
       if (category.catTasks.length > 0) {
-        const task = category.catTasks;
-        taskList.push(task);
+        cpt += category.catTasks.length;
       }
     });
-    setTasks(taskList);
-  }, []);
+    setTasksCpt(cpt);
+  }, [categories]);
 
   return (
     <>
@@ -27,7 +26,7 @@ const OrgaCard = ({ name, categories, id }) => {
           {name}
         </h2>
         <h3 className="organisationsCard-nbCat">
-          <span className="organisationsCard-nbCat--bold">{tasks?.length}</span> tâches enregistées
+          <span className="organisationsCard-nbCat--bold">{tasksCpt}</span> tâches enregistées
         </h3>
       </Link>
     </>
