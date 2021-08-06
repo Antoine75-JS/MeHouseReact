@@ -1,7 +1,7 @@
 @import 'src/styles/_vars';
 
 .percentBar {
-  width: 3.5rem;
+  width: 4rem;
   height: .75rem;
   border-radius: 1rem;
   overflow: hidden;
@@ -11,6 +11,7 @@
     background: $mainColor;
     height: .75rem;
     animation: slideIn 1s ease-in-out forwards;
+    border-radius: 1rem;
   }
 }
 
