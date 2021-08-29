@@ -1,19 +1,28 @@
 @import 'src/styles/_vars';
 
 .header {
+  z-index: 9999;
   display: flex;
-  // position: fixed;
+  position: fixed;
+  clear: both;
   justify-content: space-between;
   width: 100%;
   padding: 1rem;
   background: $mainColor;
-  margin-bottom: 1rem;
-
+  margin-bottom: 4rem;
+  font-size: 2rem;
+  
   &-title {
+    padding-top: .5rem;
+    font-size: 1.5rem;
     font-weight: bold;
     letter-spacing: .2rem;
     color: white;
     text-transform: uppercase;
     text-align: center;
+  }
+  
+  &-menuClose {
+    transform: rotate(45deg);
   }
 }

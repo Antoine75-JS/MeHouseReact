@@ -9,12 +9,12 @@
 }
 
 .orgaHome {
-  padding: 1rem;
+  padding: 6rem 1rem 0;
   
   &-title {
     font-size: 1.5rem;
-    font-weight: bold;
-    letter-spacing: .1rem;
+    font-weight: 900;
+    letter-spacing: .05rem;
     text-transform: uppercase;
     color: $mainColor;
     margin-bottom: 1rem;
@@ -62,7 +62,7 @@
       transition: 200ms ease-in-out;
       
       &:hover {
-        transform: scale(1.03);
+        transform: scale(1.01);
       }
   
       &--title {
@@ -73,7 +73,6 @@
 
       &--tasks {
         color: white;
-        text-transform: uppercase;
         font-weight: 500;
       }
     }

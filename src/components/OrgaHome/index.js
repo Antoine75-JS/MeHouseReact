@@ -65,7 +65,7 @@ const OrgaHome = ({
                 >
 
                   <div className="orgaHome-taskCard--header">
-                    <span className="orgaHome-categories-category--title">{category.catName} :</span>
+                    <span className="orgaHome-categories-category--title">{category.catName} : </span>
                     <span className="orgaHome-categories-category--tasks">{category.catTasks.length} tâches enregistées</span>
                   </div>
                   <div className="orgaHome-taskCard--details">

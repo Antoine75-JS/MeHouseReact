@@ -1,28 +1,44 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { FiMenu, FiLogIn, FiLogOut } from 'react-icons/fi';
+import { FiMenu, FiLogIn, FiLogOut, FiPlus } from 'react-icons/fi';
 
 // Components & styles
 import './styles.scss';
 
-const Header = ({ isLogged, submitLogout }) => {
+const Header = ({ isLogged, submitLogout, openMenu, closeMenu, isMenuOpen }) => {
   const handleLogout = () => {
     submitLogout();
     console.log(isLogged);
   };
 
+  const handleOpenMenu = () => {
+    openMenu();
+    console.log('menu state: ', isMenuOpen);
+  };
+
+  const handleCloseMenu = () => {
+    closeMenu();
+    console.log('menu state: ', isMenuOpen);
+  };
+
   return (
     <div className="header">
-      <FiMenu color="white" />
+      {isMenuOpen ? (
+        <FiPlus color="white" onClick={handleCloseMenu} className="header-menuClose" />
+      ) : (
+        <FiMenu color="white" onClick={handleOpenMenu} className="header-menu" />
+      )}
       <Link to="/">
         <h1 className="header-title">MeHouse</h1>
       </Link>
       {isLogged ? (
-        <FiLogOut onClick={handleLogout} color="white" />
+        <Link to="/logout">
+          <FiLogOut onClick={handleLogout} color="white" className="header-logout" />
+        </Link>
       ) : (
         <Link to="/login">
-          <FiLogIn color="white" />
+          <FiLogIn color="white" className="header-login" />
         </Link>
       )}
     </div>

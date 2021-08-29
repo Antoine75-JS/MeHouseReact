@@ -1,9 +1,25 @@
 @use 'reset';
-@use 'vars';
+@import 'src/styles/_vars';
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,400;0,600;0,700;0,900;1,200;1,400;1,600;1,700;1,900&display=swap');
 
 body {
-  font-family: sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
+
+// custom scrollbar
+html::-webkit-scrollbar {
+  width: 2vw;
+}
+
+html::-webkit-scrollbar-thumb {
+  background-color: $mainColorTransp;
+  border-radius: 1rem;
+}
+
+html::-webkit-scrollbar-track {
+  background-color: rgba(153,50,204,.2);
+}
+
 
 /* 
   // or you can import your own font

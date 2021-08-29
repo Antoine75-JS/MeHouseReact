@@ -88,6 +88,7 @@ CatDetails.propTypes = {
   open: PropTypes.bool,
   isLogged: PropTypes.bool,
   openModal: PropTypes.func.isRequired,
+  resetTask: PropTypes.func.isRequired,
   deleteTask: PropTypes.func.isRequired,
   getCatTasks: PropTypes.func.isRequired,
   catTasks: PropTypes.array.isRequired,
