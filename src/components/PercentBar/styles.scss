@@ -15,6 +15,10 @@
   }
 }
 
+.expired {
+  font-size: .9rem;
+}
+
 @keyframes slideIn {
   from {
     transform: translateX(-120%)

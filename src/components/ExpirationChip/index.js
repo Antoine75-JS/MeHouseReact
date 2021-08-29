@@ -20,7 +20,7 @@ const ExpirationChip = ({ expireDate }) => {
   const expiresIn = expire.fromNow(true);
 
   return (
-    <div className={expireDiff > 24 ? ('expirationChip') : ('expirationChip urgent')}>
+    <div className={expireDiff > 24 ? ('expirationChip') : (expireDiff < 0 ? ('expirationChip expiredColor') : ('expirationChip urgent'))}>
       <h1>{expiresIn}</h1>
     </div>
   );
