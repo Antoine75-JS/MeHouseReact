@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { FiMenu, FiLogIn, FiLogOut, FiPlus } from 'react-icons/fi';
+import { FiMenu, FiLogIn, FiUser, FiPlus } from 'react-icons/fi';
 
 // Components & styles
 import './styles.scss';
@@ -33,8 +33,8 @@ const Header = ({ isLogged, submitLogout, openMenu, closeMenu, isMenuOpen }) => 
         <h1 className="header-title">MeHouse</h1>
       </Link>
       {isLogged ? (
-        <Link to="/logout">
-          <FiLogOut onClick={handleLogout} color="white" className="header-logout" />
+        <Link to="/profile">
+          <FiUser onClick={handleLogout} color="white" className="header-logout" />
         </Link>
       ) : (
         <Link to="/login">

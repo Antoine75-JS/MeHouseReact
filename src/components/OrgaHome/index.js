@@ -87,18 +87,14 @@ const OrgaHome = ({
               {/* Members */}
               <div className="orgaHome-users">
                 {orgUsers.length === 1 ? (
-                  <span className="orgaHome-users--title">
-                    {orgUsers.length} membre
-                  </span>
+                  <span className="orgaHome-users--title">{orgUsers.length} membre</span>
                 ) : (
-                  <span className="orgaHome-users--title">
-                    {orgUsers.length} membres
-                  </span>
+                  <span className="orgaHome-users--title">{orgUsers.length} membres</span>
                 )}
                 <div className="orgaHome-users--user">
-                  {/* Member */}
                   {orgUsers?.map((user) => (
-                    <span className="orgaHome-users--user_username" key={user._id}>{user.username}</span>
+                    // Set first 2 letters of user
+                    <span className="orgaHome-users--user_username" key={user._id}>{user.username.slice(0, 2)}</span>
                   ))}
                 </div>
               </div>
