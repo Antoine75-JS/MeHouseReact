@@ -11,7 +11,7 @@ import * as yup from 'yup';
 
 // Components
 import Toast from 'src/containers/Toast';
-import Loading from 'src/components/Loading';
+import Loading from 'src/components/Utils/Loading';
 
 // Styles
 import './styles.scss';

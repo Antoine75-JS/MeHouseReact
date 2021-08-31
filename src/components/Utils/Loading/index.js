@@ -6,8 +6,7 @@ const Loading = () => {
   const isEmpty = true;
 
   return (
-    <div className="loadingIcon">
-    </div>
+    <div className="loadingIcon" />
   );
 };
 

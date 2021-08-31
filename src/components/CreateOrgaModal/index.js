@@ -11,7 +11,7 @@ import api from 'src/api';
 
 // Components
 import Toast from 'src/containers/Toast';
-import Loading from 'src/components/Loading';
+import Loading from 'src/components/Utils/Loading';
 
 import './styles.scss';
 

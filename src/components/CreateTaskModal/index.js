@@ -12,7 +12,7 @@ import * as yup from 'yup';
 
 // Components
 import Toast from 'src/containers/Toast';
-import Loading from 'src/components/Loading';
+import Loading from 'src/components/Utils/Loading';
 
 import './styles.scss';
 
@@ -53,20 +53,6 @@ const CreateTaskModal = ({
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(orgaSchema),
   });
-
-  // Handle listener esc key
-  useEffect(() => {
-    const handleEsc = (event) => {
-      if (event.keyCode === 27) {
-        setIsOpen(false);
-      }
-    };
-    window.addEventListener('keydown', handleEsc);
-
-    return () => {
-      window.removeEventListener('keydown', handleEsc);
-    };
-  }, []);
 
   // Handle button close modal
   const handleCloseModal = () => {

@@ -11,7 +11,7 @@ import {
 
 // Components
 import Header from 'src/containers/Header';
-import Loading from 'src/components/Loading';
+import Loading from 'src/components/Utils/Loading';
 import Toast from 'src/containers/Toast';
 import ExpirationChip from 'src/components/ExpirationChip';
 import PercentBar from 'src/components/PercentBar';

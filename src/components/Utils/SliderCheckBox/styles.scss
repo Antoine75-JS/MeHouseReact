@@ -1,0 +1,36 @@
+@import 'src/styles/_vars';
+
+
+.sliderCheckbox {
+  display: flex;
+  
+  & input {
+    opacity: 0;
+  }
+
+  &-slider--default {
+    position: absolute;
+    background-color: $mainColor;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    margin-left: 20px;
+  }
+
+  &-slider--selected {
+    position: absolute;
+    background-color: $mainColor;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    margin-left: 4rem;
+  }
+  
+  &-background {
+    padding: 0 2rem;
+    border-radius: 500px;
+    height: 20px;
+    background-color: $mainColorTransp;
+  }
+  
+}

@@ -5,7 +5,7 @@ import CreateOrgaModal from 'src/containers/CreateOrgaModal';
 
 // Components
 import OrgaCard from 'src/components/OrgaCard';
-import Loading from 'src/components/Loading';
+import Loading from 'src/components/Utils/Loading';
 import Toast from 'src/containers/Toast';
 import './styles.scss';
 

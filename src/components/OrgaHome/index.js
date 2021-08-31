@@ -5,7 +5,8 @@ import { Link, useParams, Redirect } from 'react-router-dom';
 
 // Components & styles
 import Header from 'src/containers/Header';
-import Loading from 'src/components/Loading';
+import Loading from 'src/components/Utils/Loading';
+import ShoppingList from 'src/components/ShoppingList';
 import ExpirationChip from 'src/components/ExpirationChip';
 
 import './styles.scss';
@@ -55,8 +56,9 @@ const OrgaHome = ({
             <div>
               {/* Name */}
               <h1 className="orgaHome-title">{orgName}</h1>
+              {/* Tasks cpt */}
               <div className="orgaHome-taskCpt">{tasksCpt} tâches enregistées</div>
-              {/* Cards */}
+              {/* Cards tasks */}
               {orgCategories?.map((category) => (
                 <Link
                   to={`/orgas/cat/${category._id}`}
@@ -84,6 +86,8 @@ const OrgaHome = ({
                   </div>
                 </Link>
               ))}
+              {/* Shopping List */}
+              <ShoppingList />
               {/* Members */}
               <div className="orgaHome-users">
                 {orgUsers.length === 1 ? (

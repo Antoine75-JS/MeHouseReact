@@ -2,7 +2,7 @@ import React from 'react';
 
 import HomeComponent from 'src/containers/HomeComponent';
 import Header from 'src/containers/Header';
-import Loading from 'src/components/Loading';
+import Loading from 'src/components/Utils/Loading';
 
 const HomePage = ({ isLoading }) => {
   const isEmpty = true;

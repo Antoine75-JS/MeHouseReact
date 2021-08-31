@@ -1,0 +1,90 @@
+@import 'src/styles/_vars';
+
+.shoppingComponent {
+  margin-bottom: 2rem;
+
+  &-title {
+    margin: 2rem 0 1rem;
+    font-weight: 900;
+  }
+  
+  &-form {
+    display: flex;
+    
+    &--input {
+      padding: .5rem 1rem;
+      border: 3px solid $mainColor;
+      border-radius: .5rem;
+      width: 100%;
+    }
+  
+    &--btn {
+      min-width: 60px;
+      min-height: 60px;
+      border-radius: 100%;
+      background: $mainColor;
+      border: none;
+      color: white;
+      font-size: 2rem;
+      font-weight: 900;
+      margin-left: 1rem;
+      line-height: 0;
+      transition: 300ms ease-in-out;
+  
+      &:hover {
+        transform: rotate(270deg);
+        transform-origin: center;
+      }
+    }
+  }
+  
+  &-list {
+    display: flex;
+    flex-direction: column;
+    
+    &--item {
+      width: 100%;
+      
+      &_card {
+        display: flex;
+        align-items: center;
+        gap: 5rem;
+        max-width: 600px;
+        margin: 1rem auto 0;
+        padding: 1rem;
+        border: 3px solid $mainColor;
+        border-radius: 500px;
+  
+        &-icon--star {
+          font-size: 1.5rem;
+          color: $mainColor;
+  
+          &:hover {
+            clip-path: polygon(12px 2px, 15.09px 8.26px, 22px 9.27px, 17px 14.14px, 18.18px 21.02px, 12px 17.77px, 5.82px 21.02px, 7px 14.14px, 2px 9.27px, 8.91px 8.26px, 12px 2px);
+            background-color: $mainColor;
+            border: 3px solid $mainColor, 
+          }
+        }
+  
+        &-icon--trash {
+          font-size: 1.5rem;
+          color: $mainColor;
+        }
+  
+        &-title {
+          display: flex;
+          flex-grow: 4;
+          gap: 1rem;
+          align-items: center;
+  
+          &_favorite {
+            width: 20px;
+            height: 20px;
+            border-radius: 100%;
+            border: 3px solid $mainColor;
+          }
+        }
+      }
+    }
+  }
+}
