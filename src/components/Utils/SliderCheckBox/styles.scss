@@ -3,34 +3,38 @@
 
 .sliderCheckbox {
   display: flex;
+  align-items: center;
   
   & input {
     opacity: 0;
   }
-
-  &-slider--default {
+  
+  &-slider {
+    transition: 150ms ease-in-out;
     position: absolute;
     background-color: $mainColor;
     width: 20px;
     height: 20px;
     border-radius: 100%;
-    margin-left: 20px;
+    margin-left: 23px;
   }
-
-  &-slider--selected {
-    position: absolute;
-    background-color: $mainColor;
-    width: 20px;
-    height: 20px;
-    border-radius: 100%;
-    margin-left: 4rem;
-  }
+  
   
   &-background {
     padding: 0 2rem;
     border-radius: 500px;
-    height: 20px;
+    height: 26px;
     background-color: $mainColorTransp;
   }
   
+}
+
+.selected {
+ transition: 150ms ease-in-out;
+ position: absolute;
+ background-color: $mainColor;
+ width: 20px;
+ height: 20px;
+ border-radius: 100%;
+ margin-left: calc(4rem - 3px);
 }
