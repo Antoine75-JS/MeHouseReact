@@ -29,9 +29,6 @@
   }  
 }
 
-
-
-
 .selected {
   transition: 150ms ease-in-out;
   position: absolute;
@@ -40,15 +37,4 @@
   height: 20px;
   border-radius: 100%;
   margin-left: calc(4rem - 3px);
-
-  // &::before {
-  //   padding: 1.5rem 18rem;
-  //   background: #f00;
-  //   opacity: .5;
-  //   content: "";
-  //   position: relative;
-  //   top: 5px;
-  //   left: -26rem;
-  //   z-index: 9999999;
-  // }
 }
