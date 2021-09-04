@@ -52,7 +52,7 @@ const ShoppingComponent = ({
         {orgShoppingList && orgShoppingList.map((shopItem) => (
 
           <li key={shopItem._id} className="shoppingComponent-list--item">
-            <div className="shoppingComponent-list--item_card">
+            <div className={shopItem.isShopItemSelected ? "shoppingComponent-list--item_card-selected" : "shoppingComponent-list--item_card"}>
               <div className="shoppingComponent-list--item_card-title">
                 <p>{shopItem.shopItemName}</p>
                 <FiStar className="shoppingComponent-list--item_card-icon--star" />

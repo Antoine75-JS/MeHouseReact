@@ -25,16 +25,30 @@
     border-radius: 500px;
     height: 26px;
     background-color: $mainColorTransp;
-  }
-  
+    width: 60px;
+  }  
 }
 
+
+
+
 .selected {
- transition: 150ms ease-in-out;
- position: absolute;
- background-color: $mainColor;
- width: 20px;
- height: 20px;
- border-radius: 100%;
- margin-left: calc(4rem - 3px);
+  transition: 150ms ease-in-out;
+  position: absolute;
+  background-color: $mainColor;
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  margin-left: calc(4rem - 3px);
+
+  // &::before {
+  //   padding: 1.5rem 18rem;
+  //   background: #f00;
+  //   opacity: .5;
+  //   content: "";
+  //   position: relative;
+  //   top: 5px;
+  //   left: -26rem;
+  //   z-index: 9999999;
+  // }
 }
