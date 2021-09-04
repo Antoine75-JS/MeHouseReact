@@ -5,8 +5,8 @@ import { Link, useParams, Redirect } from 'react-router-dom';
 
 // Components & styles
 import Header from 'src/containers/Header';
+import ShoppingList from 'src/containers/ShoppingList';
 import Loading from 'src/components/Utils/Loading';
-import ShoppingList from 'src/components/ShoppingList';
 import ExpirationChip from 'src/components/ExpirationChip';
 
 import './styles.scss';
@@ -18,12 +18,13 @@ const OrgaHome = ({
   orgName,
   orgUsers,
   orgCategories,
+  orgShoppingList,
 }) => {
   // Local states
   const [tasksCpt, setTasksCpt] = useState(null);
   // const [isOpen, setIsOpen] = useState(false);
 
-  // Get id from url params
+  // Get orga id from url params
   const { id } = useParams();
 
   if (!isLogged) {
@@ -87,7 +88,7 @@ const OrgaHome = ({
                 </Link>
               ))}
               {/* Shopping List */}
-              <ShoppingList />
+              <ShoppingList orgShoppingList={orgShoppingList} orgaId={id} />
               {/* Members */}
               <div className="orgaHome-users">
                 {orgUsers.length === 1 ? (
@@ -116,6 +117,7 @@ OrgaHome.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   orgName: PropTypes.string.isRequired,
   orgUsers: PropTypes.array,
+  orgShoppingList: PropTypes.array.isRequired,
   orgCategories: PropTypes.array.isRequired,
 };
 

@@ -9,6 +9,8 @@ import orgasListReducer from './orgasListReducer';
 import organizationReducer from './organizationsReducer';
 import tasksReducer from './tasksReducer';
 import menuReducer from './menuReducer';
+import shoppingReducer from './shoppingReducer';
+import sliderReducer from './sliderReducer';
 
 const rootReducer = combineReducers({
   user: userReducer,
@@ -19,6 +21,8 @@ const rootReducer = combineReducers({
   organizations: organizationReducer,
   tasks: tasksReducer,
   menu: menuReducer,
+  shopping: shoppingReducer,
+  slider: sliderReducer,
 });
 
 export default rootReducer;

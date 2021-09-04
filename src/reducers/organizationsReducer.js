@@ -5,10 +5,11 @@ import { GET_CATEGORY_TASKS, SET_CATEGORY_TASKS } from 'src/actions/tasks';
 export const initialState = {
   orgCategories: [],
   catTasks: [],
+  orgShoppingList: [],
+  orgUsers: [],
   orgaId: null,
   catId: null,
   catName: '',
-  orgUsers: [],
   orgName: '',
 };
 
@@ -26,6 +27,7 @@ const reducer = (state = initialState, action = {}) => {
         orgName: action.payload.orgName,
         orgUsers: action.payload.orgUsers,
         orgaId: action.payload._id,
+        orgShoppingList: action.payload.orgShoppingList,
       };
     case GET_CATEGORY_TASKS:
       return {

@@ -54,6 +54,21 @@
         padding: 1rem;
         border: 3px solid $mainColor;
         border-radius: 500px;
+        opacity: 0.5;
+
+        &-selected {
+          display: flex;
+          align-items: center;
+          gap: 5rem;
+          max-width: 600px;
+          margin: 1rem auto 0;
+          padding: 1rem;
+          border: 3px solid $mainColor;
+          border-radius: 500px;
+          opacity: 1;
+          // background: #9932cc4d;
+          background: $mainColorTransp30;
+        }
   
         &-icon--star {
           font-size: 1.5rem;
