@@ -8,7 +8,6 @@ const SliderCheckbox = ({
   deselectShopItem,
   itemId,
 }) => {
-  console.log('item :', itemId, 'item is :', isItemSelected);
   const [selected, setSelected] = useState(false);
 
   const sliderRef = useRef(null);
@@ -24,13 +23,11 @@ const SliderCheckbox = ({
       selectShopItem(itemId);
       slider.className = 'slidrCheckbox-slider selected';
       slider.closest('li > div').className = 'shoppingComponent-list--item_card-selected';
-      console.log('selected', slider.closest('li > div'));
     }
     else {
       deselectShopItem(itemId);
       slider.className = 'sliderCheckbox-slider';
       slider.closest('li > div').className = 'shoppingComponent-list--item_card';
-      console.log('deselected', slider.closest('li > div'));
     }
   };
 

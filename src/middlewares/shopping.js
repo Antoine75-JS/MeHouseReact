@@ -11,7 +11,6 @@ import {
 import { getOrgaDetails } from 'src/actions/organizations';
 // Utils
 import { openToast } from 'src/actions/toast';
-import { closeModal } from 'src/actions/modal';
 import { startLoading, stopLoading } from 'src/actions/loading';
 
 const shoppingMiddleware = (store) => (next) => (action) => {
@@ -38,42 +37,30 @@ const shoppingMiddleware = (store) => (next) => (action) => {
       break;
     }
     case SELECT_SHOP_ITEM: {
-      // store.dispatch(startLoading());
       api.patch(`/shopping/${action.shopItemId}`, {
         isShopItemSelected: true,
       })
         .then((response) => {
           if (response.status === 200) {
-            console.log(response);
-            // store.dispatch(setSliderOn());
             next(action);
           }
         })
         .catch((err) => {
           console.trace(err);
-        })
-        .finally(() => {
-          // store.dispatch(stopLoading());
         });
       break;
     }
     case DESELECT_SHOP_ITEM: {
-      // store.dispatch(startLoading());
       api.patch(`/shopping/${action.shopItemId}`, {
         isShopItemSelected: false,
       })
         .then((response) => {
           if (response.status === 200) {
-            console.log(response);
-            // store.dispatch(setSliderOff());
             next(action);
           }
         })
         .catch((err) => {
           console.trace(err);
-        })
-        .finally(() => {
-          // store.dispatch(stopLoading());
         });
       break;
     }

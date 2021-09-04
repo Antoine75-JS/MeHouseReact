@@ -28,7 +28,6 @@ const ShoppingComponent = ({
   deleteItemShopList,
   createItemShopList,
 }) => {
-  console.log(orgaId, orgShoppingList);
   // RHF controlled components
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(shoppingItemSchema),

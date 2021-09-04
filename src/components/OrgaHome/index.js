@@ -8,6 +8,7 @@ import Header from 'src/containers/Header';
 import ShoppingList from 'src/containers/ShoppingList';
 import Loading from 'src/components/Utils/Loading';
 import ExpirationChip from 'src/components/ExpirationChip';
+import Toast from 'src/containers/Toast';
 
 import './styles.scss';
 
@@ -19,6 +20,7 @@ const OrgaHome = ({
   orgUsers,
   orgCategories,
   orgShoppingList,
+  isToastOpen,
 }) => {
   // Local states
   const [tasksCpt, setTasksCpt] = useState(null);
@@ -107,6 +109,8 @@ const OrgaHome = ({
           )}
         </div>
       )}
+      {/* Toast & Co */}
+      {isToastOpen && <Toast />}
     </>
   );
 };

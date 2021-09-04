@@ -4,6 +4,7 @@ import { getOrgaDetails } from 'src/actions/organizations';
 import { openToast } from 'src/actions/toast';
 
 const mapStateToProps = (state) => ({
+  isToastOpen: state.toast.open,
   isLoading: state.loading.isLoading,
   isLogged: state.user.isLogged,
   orgName: state.organizations.orgName,
