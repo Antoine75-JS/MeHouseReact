@@ -3,12 +3,15 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link, useParams, Redirect } from 'react-router-dom';
 
-// Components & styles
+// Containers
 import Header from 'src/containers/Header';
 import ShoppingList from 'src/containers/ShoppingList';
+import Toast from 'src/containers/Toast';
+
+// Components
 import Loading from 'src/components/Utils/Loading';
 import ExpirationChip from 'src/components/ExpirationChip';
-import Toast from 'src/containers/Toast';
+import EventsComponent from 'src/components/EventsComponent';
 
 import './styles.scss';
 
@@ -89,6 +92,8 @@ const OrgaHome = ({
                   </div>
                 </Link>
               ))}
+              {/* Events */}
+              <EventsComponent />
               {/* Shopping List */}
               <ShoppingList orgShoppingList={orgShoppingList} orgaId={id} />
               {/* Members */}
