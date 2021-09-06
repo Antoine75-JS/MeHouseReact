@@ -3,11 +3,53 @@
 .eventsComponent {
   display: flex;
   flex-direction: column;
-  padding: 1rem;
 
   &-title {
     font-weight: 900;
+    margin: 1rem 0;
+  }
+
+  &-addEventForm {
     margin-bottom: 1rem;
+    
+    &-form {
+      display: flex;
+      align-items: center;
+
+      &_input {
+        padding: 1rem;
+        border: 3px solid $mainColor;
+        border-radius: .5rem;
+        width: 100%;
+      }
+  
+      &_date {
+        padding: 1rem;
+        border: 3px solid $mainColor;
+        border-radius: .5rem;
+      }
+
+      &_btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 60px;
+        min-height: 60px;
+        border: none;
+        border-radius: 100%;
+        background: $mainColor;
+        color: white;
+        font-size: 2rem;
+        font-weight: 700;
+        margin-left: 1rem;
+        transition: 300ms ease-in-out;
+      
+        &:hover {
+          transform: rotate(270deg);
+          transform-origin: center;
+        }
+      }
+    }
   }
 
   &-events{
