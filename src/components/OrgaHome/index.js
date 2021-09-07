@@ -6,12 +6,12 @@ import { Link, useParams, Redirect } from 'react-router-dom';
 // Containers
 import Header from 'src/containers/Header';
 import ShoppingList from 'src/containers/ShoppingList';
+import EventsComponent from 'src/containers/EventsComponent';
 import Toast from 'src/containers/Toast';
 
 // Components
 import Loading from 'src/components/Utils/Loading';
 import ExpirationChip from 'src/components/ExpirationChip';
-import EventsComponent from 'src/components/EventsComponent';
 
 import './styles.scss';
 
@@ -24,7 +24,7 @@ const OrgaHome = ({
   orgCategories,
   orgShoppingList,
   orgEvents,
-  isToastOpen
+  isToastOpen,
 }) => {
   // console.log(orgEvents);
   // Local states

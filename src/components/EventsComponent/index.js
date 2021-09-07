@@ -20,7 +20,6 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 // Components
 import ExpirationChip from 'src/components/ExpirationChip';
-import AddButtonFilled from 'src/components/Utils/AddButtonFilled';
 
 import {
   FiTrash,
@@ -40,8 +39,8 @@ dayjs.extend(relativeTime);
 dayjs.extend(duration);
 dayjs.locale('fr');
 
-const EventsComponent = ({ orgaId, orgEvents }) => {
-  console.log(orgEvents)
+const EventsComponent = ({ orgaId, orgEvents, createEvent }) => {
+  console.log(orgEvents);
   // React hook form
   const {
     control,
@@ -64,15 +63,8 @@ const EventsComponent = ({ orgaId, orgEvents }) => {
   };
 
   const handleNewEventSubmit = (data) => {
-    console.log(data, eventDate);
-    api.post(`/events/${orgaId}`, {
-      eventName: data.eventName,
-      eventDate: eventDate,
-    })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((err) => console.trace(err));
+    console.log(data, eventDate, orgaId);
+    createEvent(data, eventDate, orgaId);
   };
 
   return (
