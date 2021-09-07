@@ -1,0 +1,21 @@
+@import 'src/styles/_vars';
+
+.addTaskBtnFilled {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 60px;
+  min-height: 60px;
+  border-radius: 100%;
+  background: $mainColor;
+  color: white;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-left: 1rem;
+  transition: 300ms ease-in-out;
+
+  &:hover {
+    transform: rotate(270deg);
+    transform-origin: center;
+  }
+}

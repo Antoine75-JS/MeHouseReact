@@ -11,6 +11,7 @@ const mapStateToProps = (state) => ({
   orgUsers: state.organizations.orgUsers,
   orgCategories: state.organizations.orgCategories,
   orgShoppingList: state.organizations.orgShoppingList,
+  orgEvents: state.organizations.orgEvents,
   orgaId: state.organizations.orgaId,
 });
 

@@ -68,9 +68,11 @@ const shoppingMiddleware = (store) => (next) => (action) => {
       store.dispatch(startLoading());
       api.delete(`/shopping/${action.shopItemId}`)
         .then((response) => {
-          store.dispatch(openToast('Item supprimé'));
-          store.dispatch(getOrgaDetails(response.data.orgaId));
-          next(action);
+          if (response.status === 200) {
+            store.dispatch(openToast('Item supprimé'));
+            store.dispatch(getOrgaDetails(response.data.orgaId));
+            next(action);
+          }
         })
         .catch((err) => {
           console.trace(err);
