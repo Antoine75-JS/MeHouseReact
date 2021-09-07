@@ -1,6 +1,6 @@
 import api from 'src/api';
 
-import { CREATE_EVENT } from 'src/actions/events';
+import { CREATE_EVENT, DELETE_EVENT } from 'src/actions/events';
 
 // To refresh orga after edit
 import { getOrgaDetails } from 'src/actions/organizations';
@@ -28,6 +28,25 @@ const eventsMiddleware = (store) => (next) => (action) => {
         })
         .catch((err) => console.trace(err))
         .finally(() => store.dispatch(stopLoading()));
+      break;
+    }
+    case DELETE_EVENT: {
+      store.dispatch(startLoading());
+      api.delete(`/events/${action.eventId}`)
+        .then((response) => {
+          console.log(response);
+          if (response.status === 200) {
+            store.dispatch(openToast('Item supprimé'));
+            store.dispatch(getOrgaDetails(response.data.orgaId));
+            next();
+          }
+        })
+        .catch((err) => {
+          console.trace(err);
+        })
+        .finally(() => {
+          store.dispatch(stopLoading());
+        });
       break;
     }
     default: next(action);

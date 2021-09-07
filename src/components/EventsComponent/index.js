@@ -39,7 +39,7 @@ dayjs.extend(relativeTime);
 dayjs.extend(duration);
 dayjs.locale('fr');
 
-const EventsComponent = ({ orgaId, orgEvents, createEvent }) => {
+const EventsComponent = ({ orgaId, orgEvents, createEvent, deleteEvent }) => {
   console.log(orgEvents);
   // React hook form
   const {
@@ -108,7 +108,7 @@ const EventsComponent = ({ orgaId, orgEvents, createEvent }) => {
             }
             </div>
             <ExpirationChip expireDate={event.eventDate} />
-            <FiTrash className="eventsComponent-events_event--delete" color="#dc143c" size="25px" strokeWidth="2.5px" />
+            <FiTrash className="eventsComponent-events_event--delete" color="#dc143c" size="25px" strokeWidth="2.5px" onClick={() => deleteEvent(event._id)} />
           </div>
         </div>
       ))}
