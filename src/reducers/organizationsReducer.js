@@ -6,6 +6,7 @@ export const initialState = {
   orgCategories: [],
   catTasks: [],
   orgShoppingList: [],
+  orgEvents: [],
   orgUsers: [],
   orgaId: null,
   catId: null,
@@ -28,6 +29,7 @@ const reducer = (state = initialState, action = {}) => {
         orgUsers: action.payload.orgUsers,
         orgaId: action.payload._id,
         orgShoppingList: action.payload.orgShoppingList,
+        orgEvents: action.payload.orgEvents,
       };
     case GET_CATEGORY_TASKS:
       return {

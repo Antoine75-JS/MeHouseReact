@@ -23,8 +23,10 @@ const OrgaHome = ({
   orgUsers,
   orgCategories,
   orgShoppingList,
-  isToastOpen,
+  orgEvents,
+  isToastOpen
 }) => {
+  // console.log(orgEvents);
   // Local states
   const [tasksCpt, setTasksCpt] = useState(null);
   // const [isOpen, setIsOpen] = useState(false);
@@ -93,7 +95,7 @@ const OrgaHome = ({
                 </Link>
               ))}
               {/* Events */}
-              <EventsComponent />
+              <EventsComponent orgEvents={orgEvents} orgaId={id} />
               {/* Shopping List */}
               <ShoppingList orgShoppingList={orgShoppingList} orgaId={id} />
               {/* Members */}
@@ -128,6 +130,7 @@ OrgaHome.propTypes = {
   orgUsers: PropTypes.array,
   orgShoppingList: PropTypes.array.isRequired,
   orgCategories: PropTypes.array.isRequired,
+  orgEvents: PropTypes.array.isRequired,
 };
 
 OrgaHome.defaultProps = {

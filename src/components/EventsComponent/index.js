@@ -1,5 +1,14 @@
 import React, { useState } from 'react';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
+
+// api
+import api from 'src/api';
+
+// Dayjs
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+import duration from 'dayjs/plugin/duration';
+import 'dayjs/locale/fr';
 
 // Validation props
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -26,14 +35,28 @@ const eventSchema = yup.object().shape({
   // eventDate: yup.date().required().typeError("La date de l'événement doit être coorecte"),
 });
 
-const EventsComponent = () => {
+// Config dayjs
+dayjs.extend(relativeTime);
+dayjs.extend(duration);
+dayjs.locale('fr');
+
+const EventsComponent = ({ orgaId, orgEvents }) => {
+  console.log(orgEvents)
   // React hook form
-  const { control, register, handleSubmit, formState: { errors } } = useForm({
+  const {
+    control,
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     resolver: yupResolver(eventSchema),
   });
 
   // Local states
   const [eventDate, setEventDate] = useState(new Date());
+
+  // Get today
+  const today = dayjs();
 
   const handleEventDateChange = (date) => {
     setEventDate(date);
@@ -42,6 +65,14 @@ const EventsComponent = () => {
 
   const handleNewEventSubmit = (data) => {
     console.log(data, eventDate);
+    api.post(`/events/${orgaId}`, {
+      eventName: data.eventName,
+      eventDate: eventDate,
+    })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => console.trace(err));
   };
 
   return (
@@ -67,31 +98,29 @@ const EventsComponent = () => {
           <input type="submit" value="+" className="eventsComponent-addEventForm-form_btn" />
         </form>
       </div>
-      <div className="eventsComponent-events">
-        <div className="eventsComponent-events_event">
-          <div className="eventsComponent-events_event--title">Concert</div>
-          <div className="eventsComponent-events_event--date">01/01/2021</div>
-          <ExpirationChip expireDate={"01/01/2021"} />
-          <FiTrash className="eventsComponent-events_event--delete" color="#dc143c" size="25px" strokeWidth="2.5px" />
+      {orgEvents?.map((event) => (
+        <div key={event._id} className="eventsComponent-events">
+          <div className="eventsComponent-events_event">
+            <div className="eventsComponent-events_event--title">{event.eventName}</div>
+            {/* If event is in < 24h, set today, else set event's date */}
+            <div className="eventsComponent-events_event--date">{
+              dayjs(event.eventDate).diff(today, 'hours') > 24 ? (
+                dayjs(event.eventDate).format('DD MMMM YYYY')
+              ) : (
+                dayjs(event.eventDate).diff(today, 'hours') < 0 ? (
+                  <p>Il y a</p>
+                ) : (
+                  <p>Aujourd'hui</p>
+                )
+              )
+            }
+            </div>
+            <ExpirationChip expireDate={event.eventDate} />
+            <FiTrash className="eventsComponent-events_event--delete" color="#dc143c" size="25px" strokeWidth="2.5px" />
+          </div>
         </div>
-      </div>
-      <div className="eventsComponent-events">
-        <div className="eventsComponent-events_event">
-          <div className="eventsComponent-events_event--title">Concert</div>
-          <div className="eventsComponent-events_event--date">01/01/2021</div>
-          <ExpirationChip expireDate={"01/01/2021"} />
-          <FiTrash className="eventsComponent-events_event--delete" color="#dc143c" size="25px" strokeWidth="2.5px" />
-        </div>
-      </div>
-      <div className="eventsComponent-events">
-        <div className="eventsComponent-events_event">
-          <div className="eventsComponent-events_event--title">Concert</div>
-          <div className="eventsComponent-events_event--date">01/01/2021</div>
-          <ExpirationChip expireDate={"01/01/2021"} />
-          <FiTrash className="eventsComponent-events_event--delete" color="#dc143c" size="25px" strokeWidth="2.5px" />
-        </div>
-      </div>
-    </div >
+      ))}
+    </div>
   );
 };
 
