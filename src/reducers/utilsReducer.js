@@ -1,5 +1,6 @@
 import {
   REDIRECT_TO,
+  RESET_REDIRECT_URL,
 } from 'src/actions/utils';
 
 export const initialState = {
@@ -9,10 +10,14 @@ export const initialState = {
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
     case REDIRECT_TO:
-      console.log(action.url);
       return {
         ...state,
         redirectUrl: action.url,
+      };
+    case RESET_REDIRECT_URL:
+      return {
+        ...state,
+        redirectUrl: '',
       };
     default:
       return state;

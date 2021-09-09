@@ -32,6 +32,7 @@ const CatDetails = ({
   catName,
   deleteCategory,
   redirectUrl,
+  resetRedirectUrl
 }) => {
   if (!isLogged) {
     return <Redirect to="/login" />;
@@ -39,6 +40,8 @@ const CatDetails = ({
 
   // redirectUrl triggered when category is deleted
   if (redirectUrl) {
+    console.log(redirectUrl);
+    resetRedirectUrl();
     return <Redirect to={`/${redirectUrl}`} />;
   }
 

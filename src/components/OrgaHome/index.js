@@ -1,7 +1,12 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useState, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
 import { Link, useParams, Redirect } from 'react-router-dom';
+
+// Yup validation form
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 
 // Containers
 import Header from 'src/containers/Header';
@@ -14,6 +19,13 @@ import Loading from 'src/components/Utils/Loading';
 import ExpirationChip from 'src/components/ExpirationChip';
 
 import './styles.scss';
+import { createCategory } from '../../actions/categories';
+
+// Yup validation schema
+const categorySchema = yup.object().shape({
+  // eslint-disable-next-line newline-per-chained-call
+  categoryName: yup.string().required().typeError('Le nom dela catégorie doit contenir entre 3 et 30 caractères alphanumériques').min(3).max(30),
+});
 
 const OrgaHome = ({
   isLogged,
@@ -25,8 +37,14 @@ const OrgaHome = ({
   orgShoppingList,
   orgEvents,
   isToastOpen,
+  createCategory,
+  resetRedirectUrl
 }) => {
-  // console.log(orgEvents);
+  // RHF controlled components
+  const { register, handleSubmit, formState: { errors } } = useForm({
+    resolver: yupResolver(categorySchema),
+  });
+
   // Local states
   const [tasksCpt, setTasksCpt] = useState(null);
   // const [isOpen, setIsOpen] = useState(false);
@@ -54,6 +72,11 @@ const OrgaHome = ({
     setTasksCpt(cpt);
   }, [orgCategories]);
 
+  const handleCreateCategory = (data) => {
+    createCategory(data, id);
+    console.log(data);
+  };
+
   return (
     <>
       <Header />
@@ -66,6 +89,11 @@ const OrgaHome = ({
               <h1 className="orgaHome-title">{orgName}</h1>
               {/* Tasks cpt */}
               <div className="orgaHome-taskCpt">{tasksCpt} tâches enregistées</div>
+              {/* Form */}
+              <form onSubmit={handleSubmit(handleCreateCategory)} className="orgaHome-form">
+                <input {...register('categoryName')} type="text" name="categoryName" className="orgaHome-form--input" placeholder="Ajouter une catégorie" />
+                <input type="submit" value="+" className="orgaHome-form--btn" />
+              </form>
               {/* Cards tasks */}
               {orgCategories?.map((category) => (
                 <Link
@@ -73,7 +101,6 @@ const OrgaHome = ({
                   className="orgaHome-categories-category"
                   key={category._id}
                 >
-
                   <div className="orgaHome-taskCard--header">
                     <span className="orgaHome-categories-category--title">{category.catName} : </span>
                     <span className="orgaHome-categories-category--tasks">{category.catTasks.length} tâches enregistées</span>
@@ -125,6 +152,7 @@ const OrgaHome = ({
 OrgaHome.propTypes = {
   isLogged: PropTypes.bool,
   getOrgaDetails: PropTypes.func.isRequired,
+  isToastOpen: PropTypes.bool.isRequired,
   isLoading: PropTypes.bool.isRequired,
   orgName: PropTypes.string.isRequired,
   orgUsers: PropTypes.array,

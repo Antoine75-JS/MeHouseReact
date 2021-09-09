@@ -3,7 +3,7 @@ import CatDetails from 'src/components/CatDetails';
 
 // Actions
 import { openToast } from 'src/actions/toast';
-import { redirectTo } from 'src/actions/utils';
+import { redirectTo, resetRedirectUrl } from 'src/actions/utils';
 import { deleteTask, getCatTasks, resetTask } from 'src/actions/tasks';
 import { openModal, closeModal } from 'src/actions/modal';
 import { createCategory, deleteCategory } from 'src/actions/categories';
@@ -27,6 +27,7 @@ const mapDispatchToProps = (dispatch) => ({
   setErrMessage: (message) => {
     dispatch(openToast(message));
   },
+  redirectTo: (url) => dispatch(redirectTo(url)),
 
   // Tasks
   deleteTask: (catId, taskId) => dispatch(deleteTask(catId, taskId)),
@@ -36,7 +37,7 @@ const mapDispatchToProps = (dispatch) => ({
   // categories
   createCategory: (data, orgaId) => dispatch(createCategory(data, orgaId)),
   deleteCategory: (catId) => dispatch(deleteCategory(catId)),
-  redirectTo: (url) => dispatch(redirectTo(url)),
+  resetRedirectUrl: () => dispatch(resetRedirectUrl()),
 
 });
 

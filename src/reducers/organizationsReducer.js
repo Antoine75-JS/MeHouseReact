@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import { GET_ORGA_DETAILS, SET_ORGA_DETAILS } from 'src/actions/organizations';
 import { GET_CATEGORY_TASKS, SET_CATEGORY_TASKS } from 'src/actions/tasks';
-import { DELETE_CATEGORY } from 'src/actions/categories';
+import { DELETE_CATEGORY, CREATE_CATEGORY } from 'src/actions/categories';
 
 export const initialState = {
   orgCategories: [],
@@ -47,6 +47,10 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         isCatDeleted: true,
+      };
+    case CREATE_CATEGORY:
+      return {
+        ...state,
       };
     default:
       return state;
