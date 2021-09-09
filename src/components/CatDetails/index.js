@@ -30,9 +30,16 @@ const CatDetails = ({
   getCatTasks,
   catTasks,
   catName,
+  deleteCategory,
+  redirectUrl,
 }) => {
   if (!isLogged) {
     return <Redirect to="/login" />;
+  }
+
+  // redirectUrl triggered when category is deleted
+  if (redirectUrl) {
+    return <Redirect to={`/${redirectUrl}`} />;
   }
 
   // Get category Id
@@ -45,6 +52,10 @@ const CatDetails = ({
   const handleAddTask = () => {
     openModal();
     window.scroll(0, 0);
+  };
+
+  const handleDeleteCategory = () => {
+    deleteCategory(id);
   };
 
   return (
@@ -75,6 +86,10 @@ const CatDetails = ({
         <div className={isModalOpen ? 'addTaskBtn-open' : 'addTaskBtn'} onClick={handleAddTask}>
           {!isModalOpen && <p>+</p>}
         </div>
+        <div className="catDetails-delete" onClick={handleDeleteCategory}>
+          <p className="catDetails-delete--text">Delete Category</p>
+          <FiTrash className="catDetails-delete--icon" color="#dc143c" size="25px" strokeWidth="2.5px" />
+        </div>
       </div>
       {isModalOpen && <CreateTaskModal />}
       {open && <Toast />}
@@ -91,8 +106,10 @@ CatDetails.propTypes = {
   resetTask: PropTypes.func.isRequired,
   deleteTask: PropTypes.func.isRequired,
   getCatTasks: PropTypes.func.isRequired,
+  deleteCategory: PropTypes.func.isRequired,
   catTasks: PropTypes.array.isRequired,
   catName: PropTypes.string.isRequired,
+  redirectUrl: PropTypes.string,
 };
 
 CatDetails.defaultProps = {
@@ -100,6 +117,7 @@ CatDetails.defaultProps = {
   isLoading: false,
   open: false,
   isLogged: false,
+  redirectUrl: null,
 };
 
 export default CatDetails;

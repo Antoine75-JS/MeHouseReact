@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import OrgaHome from 'src/components/OrgaHome';
-import { getOrgaDetails } from 'src/actions/organizations';
+import { getOrgaDetails, setOrgaDetails } from 'src/actions/organizations';
 import { openToast } from 'src/actions/toast';
 
 const mapStateToProps = (state) => ({
@@ -18,6 +18,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   getOrgaDetails: (orgaId) => {
     dispatch(getOrgaDetails(orgaId));
+  },
+  setOrgaDetails: (data) => {
+    dispatch(setOrgaDetails(data));
   },
   setToastMessage: (message) => {
     dispatch(openToast(message));
