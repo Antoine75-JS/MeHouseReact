@@ -12,6 +12,7 @@ import menuReducer from './menuReducer';
 import shoppingReducer from './shoppingReducer';
 import sliderReducer from './sliderReducer';
 import eventsReducer from './eventsReducer';
+import utilsReducer from './utilsReducer';
 
 const rootReducer = combineReducers({
   user: userReducer,
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   shopping: shoppingReducer,
   slider: sliderReducer,
   events: eventsReducer,
+  utils: utilsReducer,
 });
 
 export default rootReducer;
