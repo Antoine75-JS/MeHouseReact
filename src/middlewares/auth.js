@@ -5,6 +5,7 @@ import {
   SUBMIT_LOGIN,
   CHECK_LOGGED,
   loginUser,
+  setInvitationList,
 } from 'src/actions/user';
 import { openToast } from 'src/actions/toast';
 import { startLoading, stopLoading } from 'src/actions/loading';
@@ -48,6 +49,7 @@ const signupMiddleware = (store) => (next) => (action) => {
         .then((response) => {
           if (response.status === 200) {
             const payload = response.data.user;
+            console.log("logged user is", payload);
             store.dispatch(loginUser(payload));
           }
         })
@@ -68,6 +70,18 @@ const signupMiddleware = (store) => (next) => (action) => {
           if (response.status === 200) {
             store.dispatch(loginUser(response.data.user));
             store.dispatch(openToast('Vous êtes bien connecté'));
+
+            // Check si user a des invits
+            if (response.data.orgInvitationId) {
+              const inviteList = [];
+              const orgas = response.data.orgInvitationId;
+              // Pour chaque orga
+              orgas?.forEach((orga) => (
+                inviteList.push(orga._id)
+              ));
+              console.log('user is invited to ', inviteList);
+              store.dispatch(setInvitationList(inviteList));
+            }
             next(action);
           }
         })

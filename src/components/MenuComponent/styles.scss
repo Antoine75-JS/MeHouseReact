@@ -1,12 +1,39 @@
+@import 'src/styles/_vars';
+
 .menuComponent {
   z-index: 99999;
   position: fixed;
-  height: 100vh;
-  top: 4.5rem;
-  background: rgba($color: white, $alpha: 0.8);
+  height: 92.5vh;
+  top: 4.3rem;
+  background: hsla(0,0%,100%,.8);
   width: 60%;
   max-width: 450px;
-  transition: 300ms ease-in-out;
+  -webkit-transition: .3s ease-in-out;
+  transition: .3s ease-in-out;
+  padding: 1rem;
+  overflow: auto;
+  
+  &-list {
+    display: flex;
+    flex-direction: column;
+    
+    &--category {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: $mainColor;
+      text-transform: uppercase;
+    }
+    
+    &--item {
+      margin: 2rem 1rem;
+      font-size: 1.3rem;
+
+      &:hover {
+        color: $mainColor;
+      }
+    }
+    
+  }
 }
 
 .open {

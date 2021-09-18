@@ -22,6 +22,12 @@ const OrgasListComponent = ({
   setErrmessage,
 }) => {
   // Local states
+  const [orgas, setOrgas] = useState([]);
+
+  useEffect(() => {
+    console.log(userOrgas)
+    setOrgas(userOrgas);
+  }, [userOrgas]);
 
   // Open form for Adding Orga
   const handleAddOrganization = () => {
@@ -33,8 +39,8 @@ const OrgasListComponent = ({
     <>
       <div className="organisations">
         {isLoading && <Loading />}
-        {!isLoading && userOrgas?.length > 1 ? (
-          userOrgas.map((organisation) => (
+        {!isLoading && orgas?.length > 0 ? (
+          orgas.map((organisation) => (
             <OrgaCard
               id={organisation._id}
               key={organisation._id}

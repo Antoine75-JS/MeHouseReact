@@ -7,6 +7,7 @@ const mapStateToProps = (state) => ({
   isLogged: state.user.isLogged,
   username: state.user.username,
   isMenuOpen: state.menu.isMenuOpen,
+  hasInvitesInOrgas: state.user.hasInvitesInOrgas,
 });
 
 const mapDispatchToProps = (dispatch) => ({

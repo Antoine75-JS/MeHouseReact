@@ -13,6 +13,7 @@ import Header from 'src/containers/Header';
 import ShoppingList from 'src/containers/ShoppingList';
 import EventsComponent from 'src/containers/EventsComponent';
 import Toast from 'src/containers/Toast';
+import InviteMemberToOrgaModal from 'src/containers/InviteUserToOrgaModal';
 
 // Components
 import Loading from 'src/components/Utils/Loading';
@@ -32,13 +33,16 @@ const OrgaHome = ({
   getOrgaDetails,
   isLoading,
   orgName,
+  orgaId,
   orgUsers,
   orgCategories,
   orgShoppingList,
   orgEvents,
   isToastOpen,
   createCategory,
-  resetRedirectUrl
+  resetRedirectUrl,
+  isModalOpen,
+  openModal,
 }) => {
   // RHF controlled components
   const { register, handleSubmit, formState: { errors } } = useForm({
@@ -47,7 +51,7 @@ const OrgaHome = ({
 
   // Local states
   const [tasksCpt, setTasksCpt] = useState(null);
-  // const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   // Get orga id from url params
   const { id } = useParams();
@@ -56,10 +60,10 @@ const OrgaHome = ({
     return <Redirect to="/login" />;
   }
 
-  // Get orga details from id
+  // Get orga details from id and refresh when url changes
   useEffect(() => {
     getOrgaDetails(id);
-  }, []);
+  }, [id]);
 
   // Set number of tasks
   useEffect(() => {
@@ -72,9 +76,17 @@ const OrgaHome = ({
     setTasksCpt(cpt);
   }, [orgCategories]);
 
+  // Create category
   const handleCreateCategory = (data) => {
     createCategory(data, id);
     console.log(data);
+  };
+
+  // Add Member
+  const handleAddMember = () => {
+    openModal();
+    window.scroll(0, 0);
+    console.log('Add member to orga n°:', id);
   };
 
   return (
@@ -132,11 +144,17 @@ const OrgaHome = ({
                 ) : (
                   <span className="orgaHome-users--title">{orgUsers.length} membres</span>
                 )}
-                <div className="orgaHome-users--user">
+                <div className="orgaHome-users--container">
                   {orgUsers?.map((user) => (
                     // Set first 2 letters of user
-                    <span className="orgaHome-users--user_username" key={user._id}>{user.username.slice(0, 2)}</span>
+                    <div key={user._id} className="orgaHome-users--container_user">
+                      <span className="orgaHome-users--container_user-username">{user.username.slice(0, 2)}</span>
+                    </div>
                   ))}
+                  <div className={isModalOpen ? 'inviteUserBtn-open' : 'inviteUserBtn'} onClick={handleAddMember}>
+                    {!isModalOpen && <p>+</p>}
+                  </div>
+
                 </div>
               </div>
             </div>
@@ -144,6 +162,7 @@ const OrgaHome = ({
         </div>
       )}
       {/* Toast & Co */}
+      {isModalOpen && <InviteMemberToOrgaModal />}
       {isToastOpen && <Toast />}
     </>
   );

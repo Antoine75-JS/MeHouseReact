@@ -1,20 +1,22 @@
 import { connect } from 'react-redux';
-import CreateOrgaModal from 'src/components/CreateOrgaModal';
+import InviteMemberToOrgaModal from 'src/components/InviteMemberToOrgaModal';
 import { openToast } from 'src/actions/toast';
 import { openModal, closeModal } from 'src/actions/modal';
-import { createOrga } from 'src/actions/organizations';
+import { inviteUserToOrga } from 'src/actions/organizations';
 
 const mapStateToProps = (state) => ({
-  userId: state.user.userId,
+  orgaId: state.organizations.orgaId,
   isModalOpen: state.modal.isModalOpen,
   isLoading: state.loading.isLoading,
   open: state.toast.open,
   toastMessage: state.toast.message,
+  userName: state.user.username,
+  orgaName: state.organizations.orgName,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  createOrga: (userId, payload) => {
-    dispatch(createOrga(userId, payload));
+  inviteUserToOrga: (orgaId, payload) => {
+    dispatch(inviteUserToOrga(orgaId, payload));
   },
   openModal: () => dispatch(openModal()),
   closeModal: () => dispatch(closeModal()),
@@ -24,4 +26,4 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateOrgaModal);
+export default connect(mapStateToProps, mapDispatchToProps)(InviteMemberToOrgaModal);

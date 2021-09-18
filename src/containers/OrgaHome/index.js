@@ -2,8 +2,8 @@ import { connect } from 'react-redux';
 import OrgaHome from 'src/components/OrgaHome';
 import { getOrgaDetails, setOrgaDetails } from 'src/actions/organizations';
 import { openToast } from 'src/actions/toast';
+import { openModal, closeModal } from 'src/actions/modal';
 import { createCategory } from 'src/actions/categories';
-import { resetRedirectUrl } from 'src/actions/utils';
 
 const mapStateToProps = (state) => ({
   isToastOpen: state.toast.open,
@@ -15,6 +15,7 @@ const mapStateToProps = (state) => ({
   orgShoppingList: state.organizations.orgShoppingList,
   orgEvents: state.organizations.orgEvents,
   orgaId: state.organizations.orgaId,
+  isModalOpen: state.modal.isModalOpen,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -27,7 +28,7 @@ const mapDispatchToProps = (dispatch) => ({
   setToastMessage: (message) => {
     dispatch(openToast(message));
   },
-
+  openModal: () => dispatch(openModal()),
   createCategory: (data, orgaId) => dispatch(createCategory(data, orgaId)),
 });
 

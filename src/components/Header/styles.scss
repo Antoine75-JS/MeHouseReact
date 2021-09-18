@@ -21,8 +21,33 @@
     text-transform: uppercase;
     text-align: center;
   }
+
+  &-menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &--notifications {
+      width: 1rem;
+      height: 1rem;
+      border-radius: 100%;
+      background: $darkRedColor;
+      position: relative;
+      inset: -.5rem 0 0 -.5rem;
+      animation: breathing_notif 1s infinite alternate ;
+    }
+  }
   
   &-menuClose {
     transform: rotate(45deg);
+  }
+}
+
+@keyframes breathing_notif {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.2);
   }
 }

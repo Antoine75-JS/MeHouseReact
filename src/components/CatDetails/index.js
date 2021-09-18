@@ -32,7 +32,7 @@ const CatDetails = ({
   catName,
   deleteCategory,
   redirectUrl,
-  resetRedirectUrl
+  resetRedirectUrl,
 }) => {
   if (!isLogged) {
     return <Redirect to="/login" />;
@@ -113,6 +113,7 @@ CatDetails.propTypes = {
   catTasks: PropTypes.array.isRequired,
   catName: PropTypes.string.isRequired,
   redirectUrl: PropTypes.string,
+  resetRedirectUrl: PropTypes.func.isRequired,
 };
 
 CatDetails.defaultProps = {

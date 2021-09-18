@@ -4,6 +4,19 @@ export const SUBMIT_LOGIN = 'SUBMIT_LOGIN';
 export const SUBMIT_LOGOUT = 'SUBMIT_LOGOUT';
 export const LOGIN_USER = 'LOGIN';
 export const CHECK_LOGGED = 'CHECK_LOGGED';
+export const SET_INVITATION_LIST = 'SET_INVITATION_LIST';
+export const UPDATE_USER_ORGAS = 'UPDATE_USER_ORGAS';
+
+export const updateUserOrgas = (userId, payload) => ({
+  type: UPDATE_USER_ORGAS,
+  userId,
+  payload,
+});
+
+export const setInvitationList = (payload) => ({
+  type: SET_INVITATION_LIST,
+  payload,
+});
 
 export const checkLogged = () => ({
   type: CHECK_LOGGED,

@@ -24,12 +24,11 @@ const orgaSchema = yup.object().shape({
 const CreateOrgaModal = ({
   isLoading,
   open,
-  toastMessage,
   setErrMessage,
   closeModal,
   userId,
+  createOrga,
 }) => {
-  console.log(isLoading, open, toastMessage);
   // Local state for css animation
   const [isOpen, setIsOpen] = useState(false);
 
@@ -57,20 +56,7 @@ const CreateOrgaModal = ({
 
   const handleCreateOrga = (data) => {
     console.log(data);
-    api.post(`/orgas/${userId}`, {
-      orgName: data.orgName,
-    })
-      .then((response) => {
-        console.log(response);
-        if (response.status === 201) {
-          closeModal();
-          setErrMessage('Organisation créee !');
-        }
-      })
-      .catch((err) => {
-        console.trace(err);
-      }).finally(() => {
-      });
+    createOrga(userId, data);
   };
 
   // Handle button close modal

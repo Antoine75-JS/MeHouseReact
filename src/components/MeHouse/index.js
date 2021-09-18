@@ -14,6 +14,9 @@ import SignupPage from 'src/containers/SignupPage';
 import OrgaHome from 'src/containers/OrgaHome';
 import MenuComponent from 'src/containers/Menu';
 
+// Components
+import JoinOrga from 'src/containers/JoinOrga';
+
 /* Create pictograms library */
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
@@ -54,6 +57,9 @@ const MeHouse = ({ checkLogged }) => {
           </Route>
           <Route path="/signup" exact>
             <SignupPage />
+          </Route>
+          <Route path="/orgas/:id/join" exact>
+            <JoinOrga />
           </Route>
         </Switch>
       </div>

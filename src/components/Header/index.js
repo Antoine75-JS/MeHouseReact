@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { FiMenu, FiLogIn, FiUser, FiPlus } from 'react-icons/fi';
@@ -6,7 +6,10 @@ import { FiMenu, FiLogIn, FiUser, FiPlus } from 'react-icons/fi';
 // Components & styles
 import './styles.scss';
 
-const Header = ({ isLogged, submitLogout, openMenu, closeMenu, isMenuOpen }) => {
+const Header = ({ isLogged, submitLogout, openMenu, closeMenu, isMenuOpen, hasInvitesInOrgas }) => {
+  const [hasNotifications, seHasNotifications] = useState(false);
+  console.log(hasInvitesInOrgas);
+
   const handleLogout = () => {
     submitLogout();
     console.log(isLogged);
@@ -27,7 +30,10 @@ const Header = ({ isLogged, submitLogout, openMenu, closeMenu, isMenuOpen }) => 
       {isMenuOpen ? (
         <FiPlus color="white" onClick={handleCloseMenu} className="header-menuClose" />
       ) : (
-        <FiMenu color="white" onClick={handleOpenMenu} className="header-menu" />
+        <div className="header-menu">
+          <FiMenu color="white" onClick={handleOpenMenu} />
+          {hasInvitesInOrgas?.length > 0 && <span className="header-menu--notifications" />}
+        </div>
       )}
       <Link to="/">
         <h1 className="header-title">MeHouse</h1>
