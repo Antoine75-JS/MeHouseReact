@@ -9,8 +9,9 @@
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   padding: 1rem;
+  overflow: hidden;
 
   &-closeModal {
     position: absolute;
@@ -61,7 +62,11 @@
       color: $mainColor;
       border: none;
       font-weight: bold;
-      font-size: .9rem;
+
+      &:hover {
+        background: $mainColor;
+        color: white;
+      }
 
       &:active {
         font-size: .7rem;

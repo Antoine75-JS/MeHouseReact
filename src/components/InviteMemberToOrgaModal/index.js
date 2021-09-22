@@ -30,8 +30,9 @@ const InviteMemberToOrgaModal = ({
   orgaId,
   orgaName,
   userName,
+  inviteUserToOrga,
 }) => {
-  console.log(orgaId);
+  console.log("orgaName", orgaName, 'userName', userName, "OrgaId", orgaId);
   // Local state for css animation
   const [isOpen, setIsOpen] = useState(false);
 
@@ -62,19 +63,7 @@ const InviteMemberToOrgaModal = ({
 
   const handleInviteUser = (data) => {
     console.log(data, orgaId, orgaName, userName);
-    api.post(`/invite/${orgaId}`, {
-      inviteEmail: data.invitedUserEmail,
-      inviteName: data.invitedUserName,
-      orgaName: orgaName,
-      userName: userName,
-    })
-      .then((response) => {
-        //////////////////////////////////////////// 
-        // Handle user not invited
-        //////////////////////////////////////////// 
-        console.log(response);
-      })
-      .catch((err) => console.trace(err));
+    inviteUserToOrga(orgaId, orgaName, userName, data);
   };
 
   // Handle button close modal
@@ -111,7 +100,7 @@ const InviteMemberToOrgaModal = ({
             <label htmlFor="invitedUserEmail" className="inviteUser-form--title">Adresse email de la personne
               <input {...register('invitedUserEmail')} type="text" name="invitedUserEmail" className="inviteUser-form--input" />
             </label>
-            <input type="submit" value="Créer" className="inviteUser-form--btn" />
+            <input type="submit" value="Envoyer l'invitation" className="inviteUser-form--btn" />
           </form>
         </div>
       )}

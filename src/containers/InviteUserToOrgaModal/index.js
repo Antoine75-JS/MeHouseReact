@@ -15,8 +15,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  inviteUserToOrga: (orgaId, payload) => {
-    dispatch(inviteUserToOrga(orgaId, payload));
+  inviteUserToOrga: (orgaId, orgaName, userName, payload) => {
+    dispatch(inviteUserToOrga(orgaId, orgaName, userName, payload));
   },
   openModal: () => dispatch(openModal()),
   closeModal: () => dispatch(closeModal()),

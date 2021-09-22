@@ -3,25 +3,21 @@ import api from 'src/api';
 import React, { useEffect } from 'react';
 import { useParams, Link, Redirect } from 'react-router-dom';
 
+import Toast from 'src/containers/Toast';
 import Header from 'src/containers/Header';
 import './styles.scss';
 
-const JoinOrga = ({ isLogged, hasInvitesInOrgas, userId }) => {
+const JoinOrga = ({ isLogged, hasInvitesInOrgas, userId, joinOrgaFromInvite, toastOpen }) => {
+  // If no invites in organizations, return home
+  if (hasInvitesInOrgas.length < 1) {
+    return <Redirect to={"/"} />;
+  }
+
+  // Get id from params
   const { id } = useParams();
 
   const handleJoinOrga = (orgaId) => {
-    console.log('joining orga', orgaId, 'userId:', userId);
-    // api.get(`/invite/${id}/join`)
-    api.patch(`/users/${userId}/${orgaId}/add`, {
-      organizations: orgaId,
-    })
-      .then((response) => {
-        console.log(response);
-        <Redirect to={`/orgas/${orgaId}`} />
-      })
-      .catch((err) => {
-        console.trace(err);
-      });
+    joinOrgaFromInvite(userId, orgaId);
   };
 
   return (
@@ -39,6 +35,7 @@ const JoinOrga = ({ isLogged, hasInvitesInOrgas, userId }) => {
           <Link to={'/login'}>Veuillez vous connecter</Link>
         )}
       </div>
+      {toastOpen && <Toast />}
     </>
   );
 };
