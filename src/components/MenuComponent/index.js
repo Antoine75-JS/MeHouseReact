@@ -44,10 +44,10 @@ const MenuComponent = ({ isMenuOpen, userOrgas, hasInvitesInOrgas, closeMenu }) 
       {invitesList.length > 0 && <span className="menuComponent-list--category">Invitations :</span>}
       <ul className="menuComponent-list">
         {
-          invitesList.length > 0 && invitesList.map((inviteId) => (
-            <li key={inviteId} className="menuComponent-list--item">
-              <NavLink onClick={closeMenu} to={`/orgas/${inviteId}/join`}>
-                {inviteId}
+          invitesList.length > 0 && invitesList.map((invite) => (
+            <li key={invite._id} className="menuComponent-list--item">
+              <NavLink onClick={closeMenu} to={`/orgas/${invite._id}/join`}>
+                {invite.orgName}
               </NavLink>
             </li>
           ))

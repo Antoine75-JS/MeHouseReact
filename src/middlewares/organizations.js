@@ -47,7 +47,7 @@ const orgasMiddleware = (store) => (next) => (action) => {
           if (response.status === 200) {
             // Dispatch update user & orga
             store.dispatch(closeModal());
-            store.dispatch(openToast('User added to organization'));
+            store.dispatch(openToast('User added to invite list !'));
           }
           // If user is already invited to organization
           else if (response.status === 202) {
