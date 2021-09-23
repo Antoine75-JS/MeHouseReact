@@ -14,6 +14,8 @@
     
     &-form {
       display: flex;
+      flex-direction: column;
+      gap: 1rem;
       align-items: center;
 
       &_input {
@@ -22,11 +24,13 @@
         border-radius: .5rem;
         width: 100%;
       }
-  
+      
       &_date {
         padding: 1rem;
         border: 3px solid $mainColor;
         border-radius: .5rem;
+        font-size: .8rem;
+        width: 100%;
       }
 
       &_btn {
@@ -101,5 +105,21 @@
           justify-self: end;
         }
       }
+  }
+}
+
+// Make datepicker fit content
+.react-datepicker {
+  width: max-content;
+}
+
+// Responsive shit
+@media screen and (max-width: 350px) {
+  .eventsComponent-events_event--date {
+    display: none;
+  }
+
+  .expirationChip {
+    grid-column: 5;
   }
 }

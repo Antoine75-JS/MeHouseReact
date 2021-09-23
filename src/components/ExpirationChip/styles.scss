@@ -2,15 +2,15 @@
 
 .expirationChip {
   max-width: 4.5rem;
-  width: 100%;
-  margin-left: .5rem;
+  width: max-content;
+  margin: 0 auto;
   color: white;
   border-radius: 2rem;
   padding: .4rem;
   text-align: center;
   font-size: .7rem;
-  font-weight: bold;
-  background: green;
+  font-weight: 500;
+  background: $mainGreenColor;
 }
 
 .urgent {

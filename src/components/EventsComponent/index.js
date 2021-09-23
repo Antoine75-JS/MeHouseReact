@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -83,6 +84,8 @@ const EventsComponent = ({ orgaId, orgEvents, createEvent, deleteEvent }) => {
           />
           <DatePicker
             onChange={(date) => handleEventDateChange(date)}
+            closeOnScroll={true}
+            wrapperClassName="datePicker"
             className="eventsComponent-addEventForm-form_date"
             showTimeSelect
             selected={eventDate}
@@ -97,7 +100,7 @@ const EventsComponent = ({ orgaId, orgEvents, createEvent, deleteEvent }) => {
             {/* If event is in < 24h, set today, else set event's date */}
             <div className="eventsComponent-events_event--date">{
               dayjs(event.eventDate).diff(today, 'hours') > 24 ? (
-                dayjs(event.eventDate).format('DD MMMM YYYY')
+                dayjs(event.eventDate).format('DD/MM/YY')
               ) : (
                 dayjs(event.eventDate).diff(today, 'hours') < 0 ? (
                   <p>Il y a</p>

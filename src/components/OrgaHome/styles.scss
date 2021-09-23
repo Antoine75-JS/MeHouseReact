@@ -55,6 +55,7 @@
       margin-left: 1rem;
       line-height: 0;
       transition: 300ms ease-in-out;
+      
   
       &:hover {
         transform: rotate(270deg);
@@ -78,9 +79,15 @@
       &_detail {
         display: flex;
         align-items: center;
+        padding: .75rem 0;
+
+        &:not(:last-child) {
+          border-bottom: 1px solid #ccc;
+        }
 
         &-taskName {
-          line-height: 2rem;
+          font-size: .9rem;
+          flex-grow: 1;
         }
       }
 

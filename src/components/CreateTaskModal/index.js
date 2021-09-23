@@ -115,7 +115,7 @@ const CreateTaskModal = ({
             </div>
             <div className="createTask-form--input">
               <label htmlFor="repeatFrequency" className="createTask-form--input_title">Fréquence</label>
-              <input {...register('repeatFrequency')} type="number" name="repeatFrequency" className="createTask-form--input_field" min="0" placeholder="7" value={defaultFreq} />
+              <input {...register('repeatFrequency')} type="number" name="repeatFrequency" className="createTask-form--input_field" min="0" placeholder="0 si pas de répétition" value={defaultFreq} />
             </div>
             <input type="submit" value="Créer" className="createOrga-form--btn" />
           </form>

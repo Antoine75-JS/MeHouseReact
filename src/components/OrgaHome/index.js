@@ -114,14 +114,13 @@ const OrgaHome = ({
                   key={category._id}
                 >
                   <div className="orgaHome-taskCard--header">
-                    <span className="orgaHome-categories-category--title">{category.catName} : </span>
-                    <span className="orgaHome-categories-category--tasks">{category.catTasks.length} tâches enregistées</span>
+                    <span className="orgaHome-categories-category--title">{category.catName}</span>
                   </div>
                   <div className="orgaHome-taskCard--details">
                     {category.catTasks.length > 0 ? (
                       category.catTasks?.map((task) => (
                         <div className="orgaHome-taskCard--details_detail" key={task._id}>
-                          <div className="orgaHome-taskCard--details_detail-taskName">{task.taskName} :</div>
+                          <div className="orgaHome-taskCard--details_detail-taskName">{task.taskName}</div>
                           {task.repeat && (
                             <ExpirationChip expireDate={task.expireDate} />
                           )}

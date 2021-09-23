@@ -54,7 +54,8 @@ const ShoppingComponent = ({
             <div className={shopItem.isShopItemSelected ? "shoppingComponent-list--item_card-selected" : "shoppingComponent-list--item_card"}>
               <div className="shoppingComponent-list--item_card-title">
                 <p>{shopItem.shopItemName}</p>
-                <FiStar className="shoppingComponent-list--item_card-icon--star" />
+                {/* FAVORITES TODO LATER */}
+                {/* <FiStar className="shoppingComponent-list--item_card-icon--star" /> */}
               </div>
               <SliderCheckbox itemId={shopItem._id} isItemSelected={shopItem.isShopItemSelected} />
               <FiTrash className="shoppingComponent-list--item_card-icon--trash" color="#dc143c" size="25px" strokeWidth="2.5px" onClick={() => deleteItemShopList(shopItem._id)} />

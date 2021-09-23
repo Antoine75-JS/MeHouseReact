@@ -75,7 +75,9 @@ const CatDetails = ({
                 {task.repeat && (
                   <>
                     <PercentBar className="catDetails-tasks--task_percentBar" creationDate={task.creationDate} expireDate={task.expireDate} />
-                    <ExpirationChip className="catDetails-tasks--task_expirationDate" expireDate={task.expireDate} />
+                    <div className="catDetails-tasks--task_expirationDate">
+                      <ExpirationChip expireDate={task.expireDate} />
+                    </div>
                   </>
                 )}
                 <div className="catDetails-tasks--task_icons">
