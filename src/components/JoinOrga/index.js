@@ -7,10 +7,25 @@ import Toast from 'src/containers/Toast';
 import Header from 'src/containers/Header';
 import './styles.scss';
 
-const JoinOrga = ({ isLogged, hasInvitesInOrgas, userId, joinOrgaFromInvite, toastOpen }) => {
+const JoinOrga = ({
+  isLogged,
+  hasInvitesInOrgas,
+  userId,
+  joinOrgaFromInvite,
+  toastOpen,
+  redirectUrl,
+  resetRedirectUrl,
+}) => {
   // If no invites in organizations, return home
   if (hasInvitesInOrgas.length < 1) {
     return <Redirect to={"/"} />;
+  }
+
+  // redirectUrl triggered when user join orga
+  if (redirectUrl) {
+    console.log(redirectUrl);
+    resetRedirectUrl();
+    return <Redirect to={`${redirectUrl}`} />;
   }
 
   // Get id from params

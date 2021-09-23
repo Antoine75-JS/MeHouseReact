@@ -3,6 +3,7 @@ import api from 'src/api';
 import {
   SIGNUP,
   SUBMIT_LOGIN,
+  SUBMIT_LOGOUT,
   CHECK_LOGGED,
   loginUser,
   setInvitationList,
@@ -98,6 +99,20 @@ const signupMiddleware = (store) => (next) => (action) => {
         .finally(() => {
           store.dispatch(stopLoading());
         });
+      break;
+    }
+    case SUBMIT_LOGOUT: {
+      store.dispatch(stopLoading());
+      api.post('/logout')
+        .then((response) => {
+          console.log(response);
+          if (response.status === 200) {
+            store.dispatch(openToast('Vous êtes bien déconnecté'));
+          }
+          return next(action);
+        }).catch((err) => {
+          console.trace(err);
+        }).finally(() => store.dispatch(stopLoading()));
       break;
     }
     default: next(action);

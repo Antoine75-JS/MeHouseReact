@@ -1,7 +1,7 @@
 // == Import npm
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Switch, Route } from 'react-router';
+import { Switch, Route, Redirect } from 'react-router';
 
 /* Styles */
 import './styles.scss';
@@ -13,6 +13,7 @@ import LoginPage from 'src/containers/LoginPage';
 import SignupPage from 'src/containers/SignupPage';
 import OrgaHome from 'src/containers/OrgaHome';
 import MenuComponent from 'src/containers/Menu';
+import Logout from 'src/containers/Logout';
 
 // Components
 import JoinOrga from 'src/containers/JoinOrga';
@@ -53,7 +54,7 @@ const MeHouse = ({ checkLogged }) => {
             <LoginPage />
           </Route>
           <Route path="/logout" exact>
-            <HomePage />
+            <Logout />
           </Route>
           <Route path="/signup" exact>
             <SignupPage />

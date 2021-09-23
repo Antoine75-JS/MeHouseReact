@@ -4,6 +4,7 @@ import MeHouse from 'src/components/MeHouse';
 import { checkLogged } from 'src/actions/user';
 
 const mapStateToProps = (state) => ({
+  isLogged: state.user.isLogged,
 });
 
 const mapDispatchToProps = (dispatch) => ({
