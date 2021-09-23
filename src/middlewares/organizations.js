@@ -77,6 +77,9 @@ const orgasMiddleware = (store) => (next) => (action) => {
             // Add redirect to orga
             // Dispatch message
             store.dispatch(openToast('Bienvenue !'));
+            next(
+              redirectTo(`/orgas/${response.data.orgaId}`),
+            );
           }
         })
         .catch((err) => {
@@ -142,7 +145,7 @@ const orgasMiddleware = (store) => (next) => (action) => {
             store.dispatch(openToast('Catégorie supprimée'));
             // setOrgaDetails(response.updatedOrga);
             next(
-              redirectTo(`orgas/${response.data.updatedOrga._id}`),
+              redirectTo(`/orgas/${response.data.updatedOrga._id}`),
             );
           }
         })

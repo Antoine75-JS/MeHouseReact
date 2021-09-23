@@ -27,16 +27,15 @@ const mapDispatchToProps = (dispatch) => ({
   setErrMessage: (message) => {
     dispatch(openToast(message));
   },
-  redirectTo: (url) => dispatch(redirectTo(url)),
-
   // Tasks
   deleteTask: (catId, taskId) => dispatch(deleteTask(catId, taskId)),
   resetTask: (catId, taskId) => dispatch(resetTask(catId, taskId)),
   getCatTasks: (catId) => dispatch(getCatTasks(catId)),
-
   // categories
   createCategory: (data, orgaId) => dispatch(createCategory(data, orgaId)),
   deleteCategory: (catId) => dispatch(deleteCategory(catId)),
+  // Redirect
+  redirectTo: (url) => dispatch(redirectTo(url)),
   resetRedirectUrl: () => dispatch(resetRedirectUrl()),
 
 });

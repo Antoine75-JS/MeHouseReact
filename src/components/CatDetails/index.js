@@ -42,7 +42,7 @@ const CatDetails = ({
   if (redirectUrl) {
     console.log(redirectUrl);
     resetRedirectUrl();
-    return <Redirect to={`/${redirectUrl}`} />;
+    return <Redirect to={`${redirectUrl}`} />;
   }
 
   // Get category Id
@@ -58,6 +58,7 @@ const CatDetails = ({
   };
 
   const handleDeleteCategory = () => {
+    console.log('clicked to be deleted')
     deleteCategory(id);
   };
 
@@ -91,10 +92,12 @@ const CatDetails = ({
         <div className={isModalOpen ? 'addTaskBtn-open' : 'addTaskBtn'} onClick={handleAddTask}>
           {!isModalOpen && <p>+</p>}
         </div>
-        <div className="catDetails-delete" onClick={handleDeleteCategory}>
-          <p className="catDetails-delete--text">Delete Category</p>
-          <FiTrash className="catDetails-delete--icon" color="#dc143c" size="25px" strokeWidth="2.5px" />
-        </div>
+        {!isModalOpen && (
+          <div className="catDetails-delete" onClick={handleDeleteCategory}>
+            <p className="catDetails-delete--text">Delete Category</p>
+            <FiTrash className="catDetails-delete--icon" color="#dc143c" size="25px" strokeWidth="2.5px" />
+          </div>
+        )}
       </div>
       {isModalOpen && <CreateTaskModal />}
       {open && <Toast />}

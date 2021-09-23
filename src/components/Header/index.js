@@ -7,7 +7,6 @@ import { FiMenu, FiLogIn, FiUser, FiPlus } from 'react-icons/fi';
 import './styles.scss';
 
 const Header = ({ isLogged, submitLogout, openMenu, closeMenu, isMenuOpen, hasInvitesInOrgas }) => {
-  const [hasNotifications, seHasNotifications] = useState(false);
   console.log(hasInvitesInOrgas);
 
   const handleLogout = () => {
