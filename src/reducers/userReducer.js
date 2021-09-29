@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import {
   SIGNUP,
   LOGIN_USER,
@@ -24,7 +25,6 @@ const reducer = (state = initialState, action = {}) => {
         isSigned: true,
       };
     case LOGIN_USER:
-      console.log('LOGIN ACTION', action.payload);
       return {
         ...state,
         isLogged: true,
@@ -34,13 +34,11 @@ const reducer = (state = initialState, action = {}) => {
         hasInvitesInOrgas: action.payload.isInvitedTo,
       };
     case UPDATE_USER_ORGAS:
-      console.log('REDUCER UPDATE USER', action);
       return {
         ...state,
         userOrgas: action.payload.organizations,
       };
     case UPDATE_USER_INVITES:
-      console.log('USER INVITES:', action);
       return {
         ...state,
         hasInvitesInOrgas: action.payload.isInvitedTo,

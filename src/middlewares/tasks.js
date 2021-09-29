@@ -30,7 +30,10 @@ const tasksMiddleware = (store) => (next) => (action) => {
           }
           next(action);
         })
-        .catch((err) => console.trace(err))
+        .catch((err) => {
+          console.trace(err);
+          store.dispatch(openToast('Une erreur est survenue'));
+        })
         .finally(() => {
           store.dispatch(stopLoading());
         });
@@ -38,22 +41,22 @@ const tasksMiddleware = (store) => (next) => (action) => {
     }
     case RESET_TASK: {
       store.dispatch(startLoading());
-      console.log('Reseting task');
       api.patch(`/tasks/${action.taskId}/reset`, {})
         .then((response) => {
           if (response.status === 200) {
-            console.log(response);
             store.dispatch(openToast('Tâche remise à zéro'));
             store.dispatch(getCatTasks(response.data._id));
           }
         })
-        .catch((err) => console.trace(err))
+        .catch((err) => {
+          console.trace(err);
+          store.dispatch(openToast('Une erreur est survenue'));
+        })
         .finally(() => store.dispatch(stopLoading()));
       break;
     }
     case CREATE_TASK: {
       store.dispatch(startLoading());
-      console.log('Creating task');
       api.post(`/tasks/${action.orgaId}`, {
         taskName: action.payload.taskName,
         repeat: action.payload.taskRepeat,
@@ -61,9 +64,7 @@ const tasksMiddleware = (store) => (next) => (action) => {
         catId: action.catId,
       })
         .then((response) => {
-          console.log(response);
           if (response.status === 201) {
-            console.log(response.data);
             store.dispatch(openToast('Tâche ajoutée à l\'organisation'));
             store.dispatch(getCatTasks(response.data.updatedCategory._id));
             store.dispatch(closeModal());
@@ -83,7 +84,6 @@ const tasksMiddleware = (store) => (next) => (action) => {
       store.dispatch(startLoading());
       api.delete(`/tasks/${action.taskId}`)
         .then((response) => {
-          console.log(response);
           if (response.status === 200) {
             store.dispatch(openToast('Tâche supprimée'));
             store.dispatch(getCatTasks(action.catId));

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
@@ -55,15 +56,15 @@ const LoginForm = ({
       <div className="login">
         {isLoading && <Loading />}
         <form onSubmit={handleSubmit(handleLogin)} className="login-form">
-          <label htmlFor='email'>Adresse Email</label>
+          <label htmlFor="email">Adresse Email</label>
           <input {...register('email')} name="email" className="login-form--input" />
           <p className="login-form--errors">{errors.email?.message}</p>
 
-          <label htmlFor='password'>Mot de passe</label>
+          <label htmlFor="password">Mot de passe</label>
           <input {...register('password')} name="password" type="password" className="login-form--input" />
           <p className="login-form--errors">{errors.password?.message}</p>
 
-          <label htmlFor='repeat_password'>Répétez le mot de passe</label>
+          <label htmlFor="repeat_password">Répétez le mot de passe</label>
           <input {...register('repeat_password')} name="repeat_password" type="password" className="login-form--input" />
           <p className="login-form--errors">{errors.repeat_password?.message}</p>
 

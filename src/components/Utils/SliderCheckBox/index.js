@@ -19,7 +19,6 @@ const SliderCheckbox = ({
 
   const handleSelected = () => {
     const slider = sliderRef.current;
-    console.log();
     if (slider.className === 'sliderCheckbox-slider') {
       selectShopItem(itemId);
       slider.className = 'slidrCheckbox-slider selected';
