@@ -21,7 +21,6 @@ const PercentBar = ({ creationDate, expireDate }) => {
   const expire = dayjs(expireDate);
 
   const percent = Math.round(((today - created) / (expire - created)) * 100);
-  // console.log('percent:', percent, 'left:', (99 - percent), '%');
 
   // If not expired and > 0, display bar, else display expired since
   return (

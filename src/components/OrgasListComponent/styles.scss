@@ -6,6 +6,10 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-evenly;
+
+  &-empty {
+    margin-bottom: 1rem;
+  }
 }
 
 .addOrganizationBtn {

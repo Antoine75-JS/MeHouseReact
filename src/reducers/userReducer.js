@@ -1,4 +1,11 @@
-import { SIGNUP, LOGIN_USER, SUBMIT_LOGOUT, SET_INVITATION_LIST, UPDATE_USER_ORGAS } from 'src/actions/user';
+import {
+  SIGNUP,
+  LOGIN_USER,
+  SUBMIT_LOGOUT,
+  SET_INVITATION_LIST,
+  UPDATE_USER_ORGAS,
+  UPDATE_USER_INVITES,
+} from 'src/actions/user';
 
 export const initialState = {
   isSigned: false,
@@ -17,6 +24,7 @@ const reducer = (state = initialState, action = {}) => {
         isSigned: true,
       };
     case LOGIN_USER:
+      console.log('LOGIN ACTION', action.payload);
       return {
         ...state,
         isLogged: true,
@@ -30,6 +38,12 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         userOrgas: action.payload.organizations,
+      };
+    case UPDATE_USER_INVITES:
+      console.log('USER INVITES:', action);
+      return {
+        ...state,
+        hasInvitesInOrgas: action.payload.isInvitedTo,
       };
     case SUBMIT_LOGOUT:
       return {

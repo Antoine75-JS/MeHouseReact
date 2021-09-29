@@ -1,6 +1,5 @@
-import api from 'src/api';
-
-import React, { useEffect } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { useParams, Link, Redirect } from 'react-router-dom';
 
 import Toast from 'src/containers/Toast';
@@ -18,12 +17,11 @@ const JoinOrga = ({
 }) => {
   // If no invites in organizations, return home
   if (hasInvitesInOrgas.length < 1) {
-    return <Redirect to={"/"} />;
+    return <Redirect to="/" />;
   }
 
   // redirectUrl triggered when user join orga
   if (redirectUrl) {
-    console.log(redirectUrl);
     resetRedirectUrl();
     return <Redirect to={`${redirectUrl}`} />;
   }
@@ -47,12 +45,27 @@ const JoinOrga = ({
             </div>
           </>
         ) : (
-          <Link to={'/login'}>Veuillez vous connecter</Link>
+          <Link to="/login">Veuillez vous connecter</Link>
         )}
       </div>
       {toastOpen && <Toast />}
     </>
   );
+};
+
+JoinOrga.propTypes = {
+  isLogged: PropTypes.bool.isRequired,
+  hasInvitesInOrgas: PropTypes.array.isRequired,
+  userId: PropTypes.string,
+  joinOrgaFromInvite: PropTypes.func.isRequired,
+  toastOpen: PropTypes.bool.isRequired,
+  redirectUrl: PropTypes.string,
+  resetRedirectUrl: PropTypes.func.isRequired,
+};
+
+JoinOrga.defaultProps = {
+  userId: '',
+  redirectUrl: '',
 };
 
 export default JoinOrga;

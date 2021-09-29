@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-
-// API TEMP
-import api from 'src/api';
 
 // Validation props
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -81,6 +79,14 @@ const LoginForm = ({
       </div>
     </>
   );
+};
+
+LoginForm.propTypes = {
+  submitLogin: PropTypes.func.isRequired,
+  setErrMessage: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  toastOpen: PropTypes.bool.isRequired,
+  toastMessage: PropTypes.string.isRequired,
 };
 
 export default LoginForm;

@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
+import PropTypes from 'prop-types';
 
 import './styles.scss';
 
@@ -38,6 +39,13 @@ const SliderCheckbox = ({
       <div className="sliderCheckbox-background" />
     </div>
   );
+};
+
+SliderCheckbox.propTypes = {
+  isItemSelected: PropTypes.bool.isRequired,
+  selectShopItem: PropTypes.func.isRequired,
+  deselectShopItem: PropTypes.func.isRequired,
+  itemId: PropTypes.string.isRequired,
 };
 
 export default SliderCheckbox;

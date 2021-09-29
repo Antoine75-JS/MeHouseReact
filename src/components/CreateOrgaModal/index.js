@@ -6,9 +6,6 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-// API
-import api from 'src/api';
-
 // Components
 import Toast from 'src/containers/Toast';
 import Loading from 'src/components/Utils/Loading';
@@ -55,7 +52,6 @@ const CreateOrgaModal = ({
   }, [errors]);
 
   const handleCreateOrga = (data) => {
-    console.log(data);
     createOrga(userId, data);
   };
 
@@ -105,6 +101,7 @@ CreateOrgaModal.propTypes = {
   toastMessage: PropTypes.string,
   setErrMessage: PropTypes.func.isRequired,
   closeModal: PropTypes.func.isRequired,
+  createOrga: PropTypes.func.isRequired,
   userId: PropTypes.string.isRequired,
 };
 

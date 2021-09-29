@@ -1,9 +1,8 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable no-nested-ternary */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
-
-// api
-import api from 'src/api';
 
 // Dayjs
 import dayjs from 'dayjs';
@@ -21,6 +20,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 // Components
 import ExpirationChip from 'src/components/ExpirationChip';
+import Toast from 'src/containers/Toast';
 
 import {
   FiTrash,
@@ -32,7 +32,6 @@ import './styles.scss';
 const eventSchema = yup.object().shape({
   // eslint-disable-next-line newline-per-chained-call
   eventName: yup.string().required().typeError("Le nom de l'événement doit contenir entre 3 et 30 caractères alphanumériques").min(3).max(30),
-  // eventDate: yup.date().required().typeError("La date de l'événement doit être coorecte"),
 });
 
 // Config dayjs
@@ -40,8 +39,14 @@ dayjs.extend(relativeTime);
 dayjs.extend(duration);
 dayjs.locale('fr');
 
-const EventsComponent = ({ orgaId, orgEvents, createEvent, deleteEvent }) => {
-  console.log(orgEvents);
+const EventsComponent = ({
+  orgaId,
+  orgEvents,
+  createEvent,
+  deleteEvent,
+  isToastOpen,
+  setToastMessage,
+}) => {
   // React hook form
   const {
     control,
@@ -52,6 +57,13 @@ const EventsComponent = ({ orgaId, orgEvents, createEvent, deleteEvent }) => {
     resolver: yupResolver(eventSchema),
   });
 
+  // Gestion errors
+  useEffect(() => {
+    if (errors.eventName) {
+      setToastMessage(errors.eventName.message);
+    }
+  }, [errors]);
+
   // Local states
   const [eventDate, setEventDate] = useState(new Date());
 
@@ -60,11 +72,9 @@ const EventsComponent = ({ orgaId, orgEvents, createEvent, deleteEvent }) => {
 
   const handleEventDateChange = (date) => {
     setEventDate(date);
-    console.log(date, eventDate);
   };
 
   const handleNewEventSubmit = (data) => {
-    console.log(data, eventDate, orgaId);
     createEvent(data, eventDate, orgaId);
   };
 
@@ -79,12 +89,15 @@ const EventsComponent = ({ orgaId, orgEvents, createEvent, deleteEvent }) => {
             name="eventName"
             rules={{ required: true }}
             type="text"
+            error={errors.eventName}
             className="eventsComponent-addEventForm-form_input"
             placeholder="Nom de l'évènement"
           />
           <DatePicker
             onChange={(date) => handleEventDateChange(date)}
-            closeOnScroll={true}
+            closeOnScroll
+            name="eventDate"
+            error={errors.eventDate}
             wrapperClassName="datePicker"
             className="eventsComponent-addEventForm-form_date"
             showTimeSelect
@@ -92,6 +105,7 @@ const EventsComponent = ({ orgaId, orgEvents, createEvent, deleteEvent }) => {
           />
           <input type="submit" value="+" className="eventsComponent-addEventForm-form_btn" />
         </form>
+        {isToastOpen && <Toast />}
       </div>
       {orgEvents?.map((event) => (
         <div key={event._id} className="eventsComponent-events">
@@ -117,6 +131,20 @@ const EventsComponent = ({ orgaId, orgEvents, createEvent, deleteEvent }) => {
       ))}
     </div>
   );
+};
+
+EventsComponent.propTypes = {
+  orgaId: PropTypes.string,
+  orgEvents: PropTypes.array,
+  createEvent: PropTypes.func.isRequired,
+  deleteEvent: PropTypes.func.isRequired,
+  isToastOpen: PropTypes.bool.isRequired,
+  setToastMessage: PropTypes.func.isRequired,
+};
+
+EventsComponent.defaultProps = {
+  orgaId: '',
+  orgEvents: [],
 };
 
 export default EventsComponent;

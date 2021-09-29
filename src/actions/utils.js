@@ -5,10 +5,7 @@ export const resetRedirectUrl = () => ({
   type: RESET_REDIRECT_URL,
 });
 
-export const redirectTo = (url) => {
-  console.log('new url:', url);
-  return {
-    type: REDIRECT_TO,
-    url,
-  };
-};
+export const redirectTo = (url) => ({
+  type: REDIRECT_TO,
+  url,
+});

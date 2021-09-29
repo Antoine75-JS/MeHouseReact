@@ -1,5 +1,7 @@
+/* eslint-disable no-underscore-dangle */
 import React, { useState, useEffect } from 'react';
-import { NavLink, Redirect, Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { NavLink, Link } from 'react-router-dom';
 
 import './styles.scss';
 
@@ -10,7 +12,6 @@ const MenuComponent = ({
   closeMenu,
   isLogged,
 }) => {
-  console.log(hasInvitesInOrgas);
   const [orgasList, setOrgasList] = useState([]);
   const [invitesList, setInvitesList] = useState([]);
 
@@ -27,7 +28,6 @@ const MenuComponent = ({
   useEffect(() => {
     const invites = [];
     hasInvitesInOrgas?.forEach((invite) => {
-      console.log(invite)
       invites.push(invite);
     });
     setInvitesList(invites);
@@ -51,10 +51,10 @@ const MenuComponent = ({
             ))}
           </ul>
           {/* User Invitations */}
-          {invitesList.length > 0 && <span className="menuComponent-list--category">Invitations :</span>}
+          {invitesList?.length > 0 && <span className="menuComponent-list--category">Invitations :</span>}
           <ul className="menuComponent-list">
             {
-              invitesList.length > 0 && invitesList.map((invite) => (
+              invitesList?.length > 0 && invitesList?.map((invite) => (
                 <li key={invite._id} className="menuComponent-list--item">
                   <NavLink onClick={closeMenu} to={`/orgas/${invite._id}/join`}>
                     {invite.orgName}
@@ -73,6 +73,19 @@ const MenuComponent = ({
       )}
     </div>
   );
+};
+
+MenuComponent.propTypes = {
+  isMenuOpen: PropTypes.bool.isRequired,
+  userOrgas: PropTypes.array,
+  hasInvitesInOrgas: PropTypes.array,
+  closeMenu: PropTypes.func.isRequired,
+  isLogged: PropTypes.bool.isRequired,
+};
+
+MenuComponent.defaultProps = {
+  userOrgas: [],
+  hasInvitesInOrgas: [],
 };
 
 export default MenuComponent;

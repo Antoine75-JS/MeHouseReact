@@ -37,7 +37,8 @@ const CreateTaskModal = ({
 
   // Local state for css animation
   const [isOpen, setIsOpen] = useState(false);
-  const [defaultFreq, setDefaultFreq] = useState(undefined);
+  // Default value for repetition frequency
+  const [defaultFreq] = useState(undefined);
 
   // Delay for css animation
   useEffect(() => {
@@ -75,7 +76,6 @@ const CreateTaskModal = ({
 
   // Submit Form
   const handlecreateTask = (data) => {
-    console.log(data, catId, orgaId);
     createTask(data, catId, orgaId);
   };
 
@@ -88,10 +88,6 @@ const CreateTaskModal = ({
       setErrMessage('La répétition de la tâche rencontre un problème');
     }
     if (errors.repeatFrequency) {
-      // if (errors.repeatFrequency.type === "typeError") {
-      //   req.body.repeatFrequency = 0;
-      // }
-      // console.log(errors.repeatFrequency);
       setErrMessage('La fréquence maximale est de 365 jours');
     }
   }, [errors]);

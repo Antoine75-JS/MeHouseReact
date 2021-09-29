@@ -4,7 +4,7 @@ import { openToast } from 'src/actions/toast';
 import { redirectTo } from 'src/actions/utils';
 import { CREATE_ORGA, GET_ORGA_DETAILS, INVITE_USER_TO_ORGA, JOIN_ORGA_FROM_INVITE, setOrgaDetails, getOrgaDetails } from 'src/actions/organizations';
 import { startLoading, stopLoading } from 'src/actions/loading';
-import { updateUserOrgas } from 'src/actions/user';
+import { updateUserOrgas, updateUserInvites } from 'src/actions/user';
 import { CREATE_CATEGORY, DELETE_CATEGORY } from 'src/actions/categories';
 import { closeModal } from 'src/actions/modal';
 
@@ -75,7 +75,7 @@ const orgasMiddleware = (store) => (next) => (action) => {
           console.log(response);
           if (response.status === 201) {
             // Add redirect to orga
-            // Dispatch message
+            // Dispatch message and update user invites list & organizations
             store.dispatch(openToast('Bienvenue !'));
             next(
               redirectTo(`/orgas/${response.data.orgaId}`),

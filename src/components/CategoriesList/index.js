@@ -1,9 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-/* Temp data */
-import categoriesData from 'src/data/categories.json';
-
 /* Styles */
 import './styles.scss';
 
@@ -18,9 +15,7 @@ import {
 } from 'react-icons/fi';
 
 const CategoriesList = () => {
-  const isEmpty = true;
-
-  return (
+  (
     <div className="categories">
 
       <Link to="/categories/house">

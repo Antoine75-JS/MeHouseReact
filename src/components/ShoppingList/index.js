@@ -1,9 +1,10 @@
-import React from 'react';
+/* eslint-disable no-underscore-dangle */
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 
 // Icons
 import {
-  FiStar,
   FiTrash,
 } from 'react-icons/fi';
 
@@ -27,11 +28,17 @@ const ShoppingComponent = ({
   orgShoppingList,
   deleteItemShopList,
   createItemShopList,
+  setErrMessage,
 }) => {
   // RHF controlled components
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(shoppingItemSchema),
   });
+
+  // Handle Form Errors
+  useEffect(() => {
+    if (errors.shopItemName) setErrMessage(errors.shopItemName.message);
+  }, [errors]);
 
   const handleCreateShopItem = (data) => {
     createItemShopList(data, orgaId);
@@ -51,7 +58,7 @@ const ShoppingComponent = ({
         {orgShoppingList && orgShoppingList.map((shopItem) => (
 
           <li key={shopItem._id} className="shoppingComponent-list--item">
-            <div className={shopItem.isShopItemSelected ? "shoppingComponent-list--item_card-selected" : "shoppingComponent-list--item_card"}>
+            <div className={shopItem.isShopItemSelected ? 'shoppingComponent-list--item_card-selected' : 'shoppingComponent-list--item_card'}>
               <div className="shoppingComponent-list--item_card-title">
                 <p>{shopItem.shopItemName}</p>
                 {/* FAVORITES TODO LATER */}
@@ -65,6 +72,18 @@ const ShoppingComponent = ({
       </ul>
     </div>
   );
+};
+
+ShoppingComponent.propTypes = {
+  orgaId: PropTypes.string.isRequired,
+  orgShoppingList: PropTypes.array,
+  deleteItemShopList: PropTypes.func.isRequired,
+  createItemShopList: PropTypes.func.isRequired,
+  setErrMessage: PropTypes.func.isRequired,
+};
+
+ShoppingComponent.defaultProps = {
+  orgShoppingList: [],
 };
 
 export default ShoppingComponent;
