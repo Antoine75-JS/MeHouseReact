@@ -1,7 +1,7 @@
 // == Import npm
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Switch, Route, Redirect } from 'react-router';
+import { Switch, Route } from 'react-router';
 
 /* Styles */
 import './styles.scss';
@@ -14,9 +14,10 @@ import SignupPage from 'src/containers/SignupPage';
 import OrgaHome from 'src/containers/OrgaHome';
 import MenuComponent from 'src/containers/Menu';
 import Logout from 'src/containers/Logout';
+import JoinOrga from 'src/containers/JoinOrga';
 
 // Components
-import JoinOrga from 'src/containers/JoinOrga';
+import FourOhFour from 'src/components/FourOhFour';
 
 /* Create pictograms library */
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -61,6 +62,9 @@ const MeHouse = ({ checkLogged }) => {
           </Route>
           <Route path="/orgas/:id/join" exact>
             <JoinOrga />
+          </Route>
+          <Route>
+            <FourOhFour />
           </Route>
         </Switch>
       </div>

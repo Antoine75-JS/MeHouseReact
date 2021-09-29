@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
+import PropTypes from 'prop-types';
 
 import './styles.scss';
 
@@ -18,7 +19,6 @@ const SliderCheckbox = ({
 
   const handleSelected = () => {
     const slider = sliderRef.current;
-    console.log();
     if (slider.className === 'sliderCheckbox-slider') {
       selectShopItem(itemId);
       slider.className = 'slidrCheckbox-slider selected';
@@ -38,6 +38,13 @@ const SliderCheckbox = ({
       <div className="sliderCheckbox-background" />
     </div>
   );
+};
+
+SliderCheckbox.propTypes = {
+  isItemSelected: PropTypes.bool.isRequired,
+  selectShopItem: PropTypes.func.isRequired,
+  deselectShopItem: PropTypes.func.isRequired,
+  itemId: PropTypes.string.isRequired,
 };
 
 export default SliderCheckbox;

@@ -6,9 +6,6 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-// API
-import api from 'src/api';
-
 // Components
 import Toast from 'src/containers/Toast';
 import Loading from 'src/components/Utils/Loading';
@@ -17,8 +14,13 @@ import './styles.scss';
 
 // Yup validation schema
 const userInviteSchema = yup.object().shape({
-  invitedUserEmail: yup.string().email().required().typeError("Merci de renseigner une adresse email correcte").matches(/^([a-zA-Z0-9-]+.)*[a-zA-Z0-9-]+@([a-zA-Z0-9_-])+([.])+([a-z]{2,8})$/),
-  invitedUserName: yup.string().required().typeError("Le nom de la personne doit contenir entre 3 et 30 caractères alphanumériques").matches(/^[a-zA-Z0-9]{3,30}$/),
+  invitedUserEmail: yup
+    .string()
+    .email()
+    .required()
+    .typeError('Merci de renseigner une adresse email correcte')
+    .matches(/^([a-zA-Z0-9-]+.)*[a-zA-Z0-9-]+@([a-zA-Z0-9_-])+([.])+([a-z]{2,8})$/),
+  invitedUserName: yup.string().required().typeError('Le nom de la personne doit contenir entre 3 et 30 caractères alphanumériques').matches(/^[a-zA-Z0-9]{3,30}$/),
 });
 
 // Component
@@ -32,7 +34,6 @@ const InviteMemberToOrgaModal = ({
   userName,
   inviteUserToOrga,
 }) => {
-  console.log("orgaName", orgaName, 'userName', userName, "OrgaId", orgaId);
   // Local state for css animation
   const [isOpen, setIsOpen] = useState(false);
 
@@ -61,8 +62,8 @@ const InviteMemberToOrgaModal = ({
     }
   }, [errors]);
 
+  // We send names for custom email content
   const handleInviteUser = (data) => {
-    console.log(data, orgaId, orgaName, userName);
     inviteUserToOrga(orgaId, orgaName, userName, data);
   };
 
@@ -116,6 +117,9 @@ InviteMemberToOrgaModal.propTypes = {
   setErrMessage: PropTypes.func.isRequired,
   closeModal: PropTypes.func.isRequired,
   orgaId: PropTypes.string.isRequired,
+  orgaName: PropTypes.string.isRequired,
+  userName: PropTypes.string.isRequired,
+  inviteUserToOrga: PropTypes.func.isRequired,
 };
 
 InviteMemberToOrgaModal.defaultProps = {

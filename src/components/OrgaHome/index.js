@@ -20,7 +20,6 @@ import Loading from 'src/components/Utils/Loading';
 import ExpirationChip from 'src/components/ExpirationChip';
 
 import './styles.scss';
-import { createCategory } from '../../actions/categories';
 
 // Yup validation schema
 const categorySchema = yup.object().shape({
@@ -33,25 +32,28 @@ const OrgaHome = ({
   getOrgaDetails,
   isLoading,
   orgName,
-  orgaId,
   orgUsers,
   orgCategories,
   orgShoppingList,
   orgEvents,
   isToastOpen,
   createCategory,
-  resetRedirectUrl,
   isModalOpen,
   openModal,
+  setToastMessage,
 }) => {
   // RHF controlled components
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(categorySchema),
   });
 
+  // Handle form errors
+  useEffect(() => {
+    if (errors.categoryName) setToastMessage('Le nom de la catégorie doit contenir entre 3 et 30 caractères sans espaces ni accents');
+  }, [errors]);
+
   // Local states
   const [tasksCpt, setTasksCpt] = useState(null);
-  const [isOpen, setIsOpen] = useState(false);
 
   // Get orga id from url params
   const { id } = useParams();
@@ -79,14 +81,12 @@ const OrgaHome = ({
   // Create category
   const handleCreateCategory = (data) => {
     createCategory(data, id);
-    console.log(data);
   };
 
   // Add Member
   const handleAddMember = () => {
     openModal();
     window.scroll(0, 0);
-    console.log('Add member to orga n°:', id);
   };
 
   return (
@@ -177,6 +177,10 @@ OrgaHome.propTypes = {
   orgShoppingList: PropTypes.array.isRequired,
   orgCategories: PropTypes.array.isRequired,
   orgEvents: PropTypes.array.isRequired,
+  createCategory: PropTypes.func.isRequired,
+  isModalOpen: PropTypes.bool.isRequired,
+  openModal: PropTypes.func.isRequired,
+  setToastMessage: PropTypes.func.isRequired,
 };
 
 OrgaHome.defaultProps = {

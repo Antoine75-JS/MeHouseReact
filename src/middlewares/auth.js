@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import api from 'src/api';
 
 import {
@@ -11,6 +12,8 @@ import {
 import { openToast } from 'src/actions/toast';
 import { startLoading, stopLoading } from 'src/actions/loading';
 
+// Avoid lint weird error on no return...
+// eslint-disable-next-line consistent-return
 const signupMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
     // SIGNUP
@@ -29,10 +32,9 @@ const signupMiddleware = (store) => (next) => (action) => {
           }
         })
         .catch((err) => {
-          console.log(err);
+          store.dispatch(openToast(err.message));
           // Handle email if already exists
           if (err.response.status === 422) {
-            console.log(err.response.data.message);
             store.dispatch(openToast(err.response.data.message));
           }
           else {
@@ -50,12 +52,12 @@ const signupMiddleware = (store) => (next) => (action) => {
         .then((response) => {
           if (response.status === 200) {
             const payload = response.data.user;
-            console.log("logged user is", payload);
             store.dispatch(loginUser(payload));
           }
         })
         .catch((err) => {
           console.trace(err);
+          store.dispatch(openToast("Vous n'êtes pas connecté"));
         });
       return next(action);
     }
@@ -80,16 +82,14 @@ const signupMiddleware = (store) => (next) => (action) => {
               orgas?.forEach((orga) => (
                 inviteList.push(orga._id)
               ));
-              console.log('user is invited to ', inviteList);
               store.dispatch(setInvitationList(inviteList));
             }
             next(action);
           }
         })
         .catch((err) => {
-          console.log(err);
+          store.dispatch(openToast(err.message));
           if (err.response.status === 401) {
-            console.trace(err.response.data.message);
             store.dispatch(openToast(err.response.data.message));
           }
           else {
@@ -105,13 +105,12 @@ const signupMiddleware = (store) => (next) => (action) => {
       store.dispatch(stopLoading());
       api.post('/logout')
         .then((response) => {
-          console.log(response);
           if (response.status === 200) {
             store.dispatch(openToast('Vous êtes bien déconnecté'));
           }
           return next(action);
         }).catch((err) => {
-          console.trace(err);
+          store.dispatch(openToast(err.message));
         }).finally(() => store.dispatch(stopLoading()));
       break;
     }

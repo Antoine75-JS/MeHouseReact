@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
@@ -33,7 +34,6 @@ const SignupForm = ({
 
   // Check if passwords match before signup method
   const handleSignup = (data) => {
-    console.log(data);
     if (data.password !== data.repeat_password) {
       setErrMessage('Les mots de passe ne correspondent pas');
     }
@@ -59,19 +59,19 @@ const SignupForm = ({
     <>
       {isLoading && <Loading />}
       <form onSubmit={handleSubmit(handleSignup)} className="signup-form">
-        <label htmlFor='username'>Nom d'utilisateur</label>
+        <label htmlFor="username">Nom d'utilisateur</label>
         <input {...register('username')} name="username" className="signup-form--input" />
         <p className="signup-form--errors">{errors.username?.message}</p>
 
-        <label htmlFor='email'>Adresse Email</label>
+        <label htmlFor="email">Adresse Email</label>
         <input {...register('email')} name="email" className="signup-form--input" />
         <p className="signup-form--errors">{errors.email?.message}</p>
 
-        <label htmlFor='password'>Mot de passe</label>
+        <label htmlFor="password">Mot de passe</label>
         <input {...register('password')} name="password" type="password" className="signup-form--input" />
         <p className="signup-form--errors">{errors.password?.message}</p>
 
-        <label htmlFor='repeat_password'>Répétez le mot de passe</label>
+        <label htmlFor="repeat_password">Répétez le mot de passe</label>
         <input {...register('repeat_password')} name="repeat_password" type="password" className="signup-form--input" />
         <p className="signup-form--errors">{errors.repeat_password?.message}</p>
 

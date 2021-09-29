@@ -5,8 +5,6 @@ import {
   CREATE_ITEM_SHOP_LIST,
   SELECT_SHOP_ITEM,
   DESELECT_SHOP_ITEM,
-  setSliderOn,
-  setSliderOff,
 } from 'src/actions/shopping';
 import { getOrgaDetails } from 'src/actions/organizations';
 // Utils
@@ -21,7 +19,6 @@ const shoppingMiddleware = (store) => (next) => (action) => {
         shopItemName: action.payload.shopItemName,
       })
         .then((response) => {
-          console.log(response);
           if (response.status === 201) {
             store.dispatch(openToast('Item ajouté'));
             store.dispatch(getOrgaDetails(action.orgaId));
@@ -30,6 +27,7 @@ const shoppingMiddleware = (store) => (next) => (action) => {
         })
         .catch((err) => {
           console.trace(err);
+          store.dispatch(err.message);
         })
         .finally(() => {
           store.dispatch(stopLoading());
@@ -47,6 +45,7 @@ const shoppingMiddleware = (store) => (next) => (action) => {
         })
         .catch((err) => {
           console.trace(err);
+          store.dispatch(err.message);
         });
       break;
     }
@@ -76,6 +75,7 @@ const shoppingMiddleware = (store) => (next) => (action) => {
         })
         .catch((err) => {
           console.trace(err);
+          store.dispatch(err.message);
         })
         .finally(() => {
           store.dispatch(stopLoading());

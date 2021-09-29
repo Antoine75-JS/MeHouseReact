@@ -1,4 +1,12 @@
-import { SIGNUP, LOGIN_USER, SUBMIT_LOGOUT, SET_INVITATION_LIST, UPDATE_USER_ORGAS } from 'src/actions/user';
+/* eslint-disable no-underscore-dangle */
+import {
+  SIGNUP,
+  LOGIN_USER,
+  SUBMIT_LOGOUT,
+  SET_INVITATION_LIST,
+  UPDATE_USER_ORGAS,
+  UPDATE_USER_INVITES,
+} from 'src/actions/user';
 
 export const initialState = {
   isSigned: false,
@@ -26,10 +34,14 @@ const reducer = (state = initialState, action = {}) => {
         hasInvitesInOrgas: action.payload.isInvitedTo,
       };
     case UPDATE_USER_ORGAS:
-      console.log('REDUCER UPDATE USER', action);
       return {
         ...state,
         userOrgas: action.payload.organizations,
+      };
+    case UPDATE_USER_INVITES:
+      return {
+        ...state,
+        hasInvitesInOrgas: action.payload.isInvitedTo,
       };
     case SUBMIT_LOGOUT:
       return {

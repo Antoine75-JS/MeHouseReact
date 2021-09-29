@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // Import dayjs
 import dayjs from 'dayjs';
@@ -20,10 +21,15 @@ const ExpirationChip = ({ expireDate }) => {
   const expiresIn = expire.fromNow(true);
 
   return (
+    // eslint-disable-next-line no-nested-ternary
     <div className={expireDiff > 24 ? ('expirationChip') : (expireDiff <= 0 ? ('expirationChip expiredColor') : ('expirationChip urgent'))}>
       <h1>{expiresIn}</h1>
     </div>
   );
+};
+
+ExpirationChip.propTypes = {
+  expireDate: PropTypes.string.isRequired,
 };
 
 export default ExpirationChip;

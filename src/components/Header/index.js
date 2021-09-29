@@ -1,22 +1,29 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { FiMenu, FiLogIn, FiPlus, FiLogOut } from 'react-icons/fi';
+import {
+  FiMenu,
+  FiLogIn,
+  FiPlus,
+  FiLogOut,
+} from 'react-icons/fi';
 
 // Components & styles
 import './styles.scss';
 
-const Header = ({ isLogged, openMenu, closeMenu, isMenuOpen, hasInvitesInOrgas }) => {
-  console.log(hasInvitesInOrgas);
-
+const Header = ({
+  isLogged,
+  openMenu,
+  closeMenu,
+  isMenuOpen,
+  hasInvitesInOrgas,
+}) => {
   const handleOpenMenu = () => {
     openMenu();
-    console.log('menu state: ', isMenuOpen);
   };
 
   const handleCloseMenu = () => {
     closeMenu();
-    console.log('menu state: ', isMenuOpen);
   };
 
   return (
@@ -26,7 +33,7 @@ const Header = ({ isLogged, openMenu, closeMenu, isMenuOpen, hasInvitesInOrgas }
       ) : (
         <div className="header-menu">
           <FiMenu color="white" onClick={handleOpenMenu} />
-          {hasInvitesInOrgas?.length > 0 && <span className="header-menu--notifications" />}
+          {(hasInvitesInOrgas?.length > 0 && isLogged) && <span className="header-menu--notifications" />}
         </div>
       )}
       <Link to="/">
@@ -47,11 +54,16 @@ const Header = ({ isLogged, openMenu, closeMenu, isMenuOpen, hasInvitesInOrgas }
 
 Header.propTypes = {
   isLogged: PropTypes.bool,
-  submitLogout: PropTypes.func.isRequired,
+  openMenu: PropTypes.func.isRequired,
+  closeMenu: PropTypes.func.isRequired,
+  isMenuOpen: PropTypes.bool,
+  hasInvitesInOrgas: PropTypes.array,
 };
 
 Header.defaultProps = {
   isLogged: false,
+  isMenuOpen: false,
+  hasInvitesInOrgas: [],
 };
 
 export default Header;

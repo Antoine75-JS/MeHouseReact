@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import OrgaHome from 'src/components/OrgaHome';
 import { getOrgaDetails, setOrgaDetails } from 'src/actions/organizations';
 import { openToast } from 'src/actions/toast';
-import { openModal, closeModal } from 'src/actions/modal';
+import { openModal } from 'src/actions/modal';
 import { createCategory } from 'src/actions/categories';
 
 const mapStateToProps = (state) => ({

@@ -6,6 +6,13 @@ export const LOGIN_USER = 'LOGIN';
 export const CHECK_LOGGED = 'CHECK_LOGGED';
 export const SET_INVITATION_LIST = 'SET_INVITATION_LIST';
 export const UPDATE_USER_ORGAS = 'UPDATE_USER_ORGAS';
+export const UPDATE_USER_INVITES = 'UPDATE_USER_INVITES';
+
+export const updateUserInvites = (userId, payload) => ({
+  type: UPDATE_USER_INVITES,
+  userId,
+  payload,
+});
 
 export const updateUserOrgas = (userId, payload) => ({
   type: UPDATE_USER_ORGAS,

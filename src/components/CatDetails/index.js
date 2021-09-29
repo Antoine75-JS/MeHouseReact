@@ -40,7 +40,6 @@ const CatDetails = ({
 
   // redirectUrl triggered when category is deleted
   if (redirectUrl) {
-    console.log(redirectUrl);
     resetRedirectUrl();
     return <Redirect to={`${redirectUrl}`} />;
   }
@@ -58,7 +57,6 @@ const CatDetails = ({
   };
 
   const handleDeleteCategory = () => {
-    console.log('clicked to be deleted')
     deleteCategory(id);
   };
 

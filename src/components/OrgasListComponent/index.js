@@ -1,4 +1,6 @@
+/* eslint-disable no-underscore-dangle */
 import React, { useEffect, useState } from 'react';
+import { PropTypes } from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import CreateOrgaModal from 'src/containers/CreateOrgaModal';
@@ -15,17 +17,12 @@ const OrgasListComponent = ({
   isLoading,
   open,
   isLogged,
-  userId,
-  username,
   userOrgas,
-  toastMessage,
-  setErrmessage,
 }) => {
   // Local states
   const [orgas, setOrgas] = useState([]);
 
   useEffect(() => {
-    console.log(userOrgas)
     setOrgas(userOrgas);
   }, [userOrgas]);
 
@@ -39,6 +36,7 @@ const OrgasListComponent = ({
     <>
       <div className="organisations">
         {isLoading && <Loading />}
+        {/* Si orgas */}
         {!isLoading && orgas?.length > 0 ? (
           orgas.map((organisation) => (
             <OrgaCard
@@ -48,11 +46,18 @@ const OrgasListComponent = ({
               categories={organisation.orgCategories}
             />
           ))
+          // Sinon si not logged, lien pour connection
         ) : (
-          <div>
-            <h2>Connectez vous pour accéder à vos organisations</h2>
-            <Link to="/login">Connexion</Link>
-          </div>
+          !isLogged && (
+            <div className="organisations-empty">
+              <h2>Connectez vous pour accéder à vos organisations</h2>
+              <Link to="/login">Connexion</Link>
+            </div>
+          ),
+          // Si log mais pas d'orga
+          isLogged && (
+            <h2 className="organisations-empty">Vous n'avez pas encore d'organisation</h2>
+          )
         )}
       </div>
       {/* Check if user is logged to display button */}
@@ -67,6 +72,15 @@ const OrgasListComponent = ({
     </>
 
   );
+};
+
+OrgasListComponent.propTypes = {
+  isModalOpen: PropTypes.bool.isRequired,
+  openModal: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  open: PropTypes.bool.isRequired,
+  isLogged: PropTypes.bool.isRequired,
+  userOrgas: PropTypes.array.isRequired,
 };
 
 export default OrgasListComponent;

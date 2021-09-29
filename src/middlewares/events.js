@@ -19,14 +19,13 @@ const eventsMiddleware = (store) => (next) => (action) => {
         eventDate: action.eventDate,
       })
         .then((response) => {
-          console.log(response);
           if (response.status === 201) {
             store.dispatch(openToast('Event ajouté !'));
             store.dispatch(getOrgaDetails(action.orgaId));
             next(action);
           }
         })
-        .catch((err) => console.trace(err))
+        .catch((err) => store.dispatch(err.message))
         .finally(() => store.dispatch(stopLoading()));
       break;
     }
@@ -34,7 +33,6 @@ const eventsMiddleware = (store) => (next) => (action) => {
       store.dispatch(startLoading());
       api.delete(`/events/${action.eventId}`)
         .then((response) => {
-          console.log(response);
           if (response.status === 200) {
             store.dispatch(openToast('Item supprimé'));
             store.dispatch(getOrgaDetails(response.data.orgaId));
@@ -42,7 +40,7 @@ const eventsMiddleware = (store) => (next) => (action) => {
           }
         })
         .catch((err) => {
-          console.trace(err);
+          store.dispatch(err.message);
         })
         .finally(() => {
           store.dispatch(stopLoading());

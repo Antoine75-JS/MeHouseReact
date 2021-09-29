@@ -1,8 +1,16 @@
+/* eslint-disable no-underscore-dangle */
 import api from 'src/api';
 
 import { openToast } from 'src/actions/toast';
 import { redirectTo } from 'src/actions/utils';
-import { CREATE_ORGA, GET_ORGA_DETAILS, INVITE_USER_TO_ORGA, JOIN_ORGA_FROM_INVITE, setOrgaDetails, getOrgaDetails } from 'src/actions/organizations';
+import {
+  CREATE_ORGA,
+  GET_ORGA_DETAILS,
+  INVITE_USER_TO_ORGA,
+  JOIN_ORGA_FROM_INVITE,
+  setOrgaDetails,
+  getOrgaDetails,
+} from 'src/actions/organizations';
 import { startLoading, stopLoading } from 'src/actions/loading';
 import { updateUserOrgas } from 'src/actions/user';
 import { CREATE_CATEGORY, DELETE_CATEGORY } from 'src/actions/categories';
@@ -16,11 +24,12 @@ const orgasMiddleware = (store) => (next) => (action) => {
         orgName: action.payload.orgName,
       })
         .then((response) => {
-          console.log(response);
           if (response.status === 201) {
             store.dispatch(closeModal());
             store.dispatch(openToast('Organisation créee !'));
-            store.dispatch(updateUserOrgas(response.data.userWithOrgas._id, response.data.userWithOrgas));
+            store.dispatch(
+              updateUserOrgas(response.data.userWithOrgas._id, response.data.userWithOrgas),
+            );
           }
         })
         .catch((err) => {
@@ -33,7 +42,6 @@ const orgasMiddleware = (store) => (next) => (action) => {
       break;
     }
     case INVITE_USER_TO_ORGA: {
-      console.log(action);
       store.dispatch(startLoading());
       api.post(`/invite/${action.orgaId}`, {
         inviteEmail: action.payload.invitedUserEmail,
@@ -51,7 +59,6 @@ const orgasMiddleware = (store) => (next) => (action) => {
           }
           // If user is already invited to organization
           else if (response.status === 202) {
-            console.log('User already invited');
             store.dispatch(openToast(response.data.message));
           }
         })
@@ -66,16 +73,14 @@ const orgasMiddleware = (store) => (next) => (action) => {
       break;
     }
     case JOIN_ORGA_FROM_INVITE: {
-      console.log(action);
       store.dispatch(startLoading());
       api.patch(`/users/${action.userId}/${action.orgaId}/add`, {
         organizations: action.orgaId,
       })
         .then((response) => {
-          console.log(response);
           if (response.status === 201) {
             // Add redirect to orga
-            // Dispatch message
+            // Dispatch message and update user invites list & organizations
             store.dispatch(openToast('Bienvenue !'));
             next(
               redirectTo(`/orgas/${response.data.orgaId}`),
@@ -108,6 +113,7 @@ const orgasMiddleware = (store) => (next) => (action) => {
         })
         .catch((err) => {
           console.log(err);
+          store.dispatch(err.message);
         })
         .finally(() => {
           store.dispatch(stopLoading());
@@ -115,12 +121,10 @@ const orgasMiddleware = (store) => (next) => (action) => {
       break;
     }
     case CREATE_CATEGORY: {
-      console.log('creating category', action.payload, action.orgaId);
       store.dispatch(startLoading());
       api.post(`/categories/${action.orgaId}`, {
         catName: action.payload.categoryName,
       }).then((response) => {
-        console.log(response);
         if (response.status === 201) {
           store.dispatch(openToast('Catégorie ajoutée'));
           store.dispatch(getOrgaDetails(action.orgaId));
@@ -129,6 +133,7 @@ const orgasMiddleware = (store) => (next) => (action) => {
       })
         .catch((err) => {
           console.trace(err);
+          store.dispatch(err.message);
         })
         .finally(() => {
           store.dispatch(stopLoading());
@@ -141,7 +146,6 @@ const orgasMiddleware = (store) => (next) => (action) => {
         .then((response) => {
           console.log(response);
           if (response.status === 200) {
-            console.log('supprimé', response.data);
             store.dispatch(openToast('Catégorie supprimée'));
             // setOrgaDetails(response.updatedOrga);
             next(
